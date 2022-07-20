@@ -18,9 +18,6 @@ const app = createApp(App);
 
 // app.use(store);
 app.use(router); // 사용 설정 하기
-<<<<<<< HEAD
 app.use(store);
-=======
 app.use(BootstrapVue3);
->>>>>>> 25198e3eeda64977dfc2ff36242efd0e30f81d0d
 app.mount('#app');
