@@ -12,7 +12,6 @@ import com.ssafy.api.request.articleReply.ArticleReplyRegisterPostReq;
 import com.ssafy.api.request.articleReply.ArticleReplyUpdatePatchReq;
 import com.ssafy.db.entity.ArticleReply;
 import com.ssafy.db.repository.ArticleReplyRepository;
-import com.ssafy.db.repository.ArticleReplyRepositorySupport;
 
 /**
  *	모집 게시판 댓글 비즈니스 로직 처리를 위한 서비스 구현 정의.
@@ -22,8 +21,6 @@ public class ArticleReplyServiceImpl implements ArticleReplyService {
 	@Autowired
 	ArticleReplyRepository articleReplyRepository;
 	
-	@Autowired
-	ArticleReplyRepositorySupport articleReplyRepositorySupport;
 
 	@Override
 	public ArticleReply createArticleReply(ArticleReplyRegisterPostReq articleReplyRegisterInfo) {

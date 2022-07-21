@@ -23,4 +23,5 @@ public interface ArticleService {
 	Page<Article> getArticles(Specification<Article> spec, Pageable pageable);
 	
 	public int updateHit(Long id);
+	
 }

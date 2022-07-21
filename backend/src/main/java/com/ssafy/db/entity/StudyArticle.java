@@ -11,14 +11,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 모집 게시글 모델 정의.
+ * 스터디 게시판 모델 정의.
  */
 @Entity
 @Getter
 @Setter
 @DynamicInsert
 @DynamicUpdate
-public class Article extends BaseEntity {
+public class StudyArticle extends BaseEntity{
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	long user_pk;
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -29,7 +29,6 @@ public class Article extends BaseEntity {
 	String content;
 	String date;
 	String image;
-	int recruitment;
 	int hit;
 	
 	String name;
