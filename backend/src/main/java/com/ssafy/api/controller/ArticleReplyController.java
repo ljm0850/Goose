@@ -69,9 +69,9 @@ public class ArticleReplyController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<Page<ArticleReply>> getArticles(
-			@RequestParam(required = true) int page,
-			@RequestParam(required = false) Long articlePk,
-            @RequestParam(required = false) Long id) {
+			@RequestParam(required = true, defaultValue = "(int) 페이지  필수") int page,
+			@RequestParam(required = false, defaultValue = "(Long) 게시글PK") Long articlePk,
+            @RequestParam(required = false, defaultValue = "(Long) 댓글PK") Long id) {
 		
 		PageRequest pageRequest = PageRequest.of(page-1, 5);
 		

@@ -12,18 +12,14 @@ import lombok.Setter;
 @Setter
 @ApiModel("UserUpdatePatchRequest")
 public class UserUpdatePatchReq {
-	@ApiModelProperty(name="유저 Password", example="your_password")
+	@ApiModelProperty(name="유저 Password", example="(String) 패스워드")
 	String password;
-	@ApiModelProperty(name="유저 Name", example="your_name")
+	@ApiModelProperty(name="유저 Name", example="(String) 이름")
 	String name;
-	@ApiModelProperty(name="유저 가입일", example="your_joinDate")
-	String joinDate;
-	@ApiModelProperty(name="유저 Email", example="your_email")
+	@ApiModelProperty(name="유저 Email", example="(String) 이메일")
 	String email;
-	@ApiModelProperty(name="유저 프로필 사진", example="your_photo")
+	@ApiModelProperty(name="유저 프로필 사진", example="(String) 사진 사용X")
 	String photo;
-	@ApiModelProperty(name="유저 Authority", example="your_authority")
-	int authority;
-	@ApiModelProperty(name="유저 Interest", example="your_interest")
+	@ApiModelProperty(name="유저 Interest", example="(String) 관심")
 	String interest;
 }

@@ -13,14 +13,14 @@ import lombok.Setter;
 @ApiModel("ArticleUpdatePatchRequest")
 public class ArticleUpdatePatchReq {
 
-	@ApiModelProperty(name="스터디 모집상태", example="article_state")
+	@ApiModelProperty(name="스터디 모집상태", example="(String) 스터디 모집상태")
 	String state;
-	@ApiModelProperty(name="스터디 카테고리", example="article_category")
+	@ApiModelProperty(name="스터디 카테고리", example="(String) 스터디 카테고리  ")
 	String category;
-	@ApiModelProperty(name="게시글 제목", example="article_title")
+	@ApiModelProperty(name="게시글 제목", example="(String) 게시글 제목")
 	String title;
-	@ApiModelProperty(name="게시글 내용", example="article_content")
+	@ApiModelProperty(name="게시글 내용", example="(String) 게시글 내용")
 	String content;
-	@ApiModelProperty(name="스터디 모집 인원", example="article_recruitment")
+	@ApiModelProperty(name="스터디 모집 인원", example="(int) 스터디 모집인원")
 	int recruitment;
 }

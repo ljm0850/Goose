@@ -47,7 +47,7 @@ public class ArticleController {
 
 
 	@PostMapping()
-	@ApiOperation(value = "게시글 작성", notes = "<strong>???</strong>를 통해 게시글을 작성한다.") 
+	@ApiOperation(value = "게시글 작성", notes = "<strong>게시글 정보</strong>를 통해 게시글을 작성한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "인증 실패"),
@@ -73,10 +73,10 @@ public class ArticleController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<Page<Article>> getArticles(
-			@RequestParam(required = true) int page,
-			@RequestParam(required = false) String title,
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) String state) {
+			@RequestParam(required = true, defaultValue = "(int) page 필수") int page,
+			@RequestParam(required = false, defaultValue = "(String) 제목") String title,
+            @RequestParam(required = false, defaultValue = "(String) 카테고리") String category,
+            @RequestParam(required = false, defaultValue = "(String) 모집상태") String state) {
 		
 	
 
