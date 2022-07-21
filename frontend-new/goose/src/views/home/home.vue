@@ -2,6 +2,7 @@
 <div>
     
 <h1>Home</h1>
+<h2>브랜치 테스트</h2>
 
 </div>
 </template>
