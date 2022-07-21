@@ -12,5 +12,6 @@ public interface UserService {
 	User updateUser(UserUpdatePatchReq updateInfo, String userId);
 	User getUserByUserId(String userId);
 	void deleteUserByUserId(String userId);
+	String findName(Long id);
 
 }
