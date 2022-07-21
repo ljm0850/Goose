@@ -30,12 +30,6 @@ public class ArticleServiceImpl implements ArticleService {
 	public Article createArticle(ArticleRegisterPostReq articleRegisterInfo) {
 		Article article = new Article();
 		article.setCategory(articleRegisterInfo.getCategory());
-<<<<<<< HEAD
-		return articleRepository.save(article);
-	}
-	
-	
-=======
 		article.setUser_pk(articleRegisterInfo.getUser_pk());
 		article.setStudy_pk(articleRegisterInfo.getStudy_pk());
 		article.setContent(articleRegisterInfo.getContent());
@@ -91,8 +85,5 @@ public class ArticleServiceImpl implements ArticleService {
 	public int updateHit(Long id) {
 		return  articleRepository.updateHit(id);
 	}
-
-
->>>>>>> kc
 
 }

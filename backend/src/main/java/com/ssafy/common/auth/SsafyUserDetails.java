@@ -38,13 +38,12 @@ public class SsafyUserDetails implements UserDetails {
 	public String getUsername() {
 		return this.user.getUserId();
 	}
-<<<<<<< HEAD
+
 	//id추가
 	public long getUserId() {
 		return this.user.getId();
 	}
-=======
->>>>>>> kc
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return this.accountNonExpired;
