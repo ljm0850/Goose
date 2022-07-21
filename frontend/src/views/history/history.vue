@@ -1,6 +1,10 @@
 <template>
   <el-container>
+<<<<<<< HEAD
     지난 회의 이력 페이지 222
+=======
+    지난 회의 이력 페이지
+>>>>>>> kc
   </el-container>
 </template>
 
