@@ -9,12 +9,17 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 /**
  * 유저 모델 정의.
  */
 @Entity
 @Getter
 @Setter
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "study_user")
 public class User extends BaseEntity{
     String name;

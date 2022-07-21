@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.api.request.UserLoginPostReq;
-import com.ssafy.api.request.UserRegisterPostReq;
-import com.ssafy.api.request.UserUpdatePatchReq;
-import com.ssafy.api.response.UserInfoRes;
-import com.ssafy.api.response.UserLoginPostRes;
-import com.ssafy.api.response.UserRes;
+import com.ssafy.api.request.user.UserLoginPostReq;
+import com.ssafy.api.request.user.UserRegisterPostReq;
+import com.ssafy.api.request.user.UserUpdatePatchReq;
+import com.ssafy.api.response.user.UserInfoRes;
+import com.ssafy.api.response.user.UserLoginPostRes;
+import com.ssafy.api.response.user.UserRes;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -123,6 +123,9 @@ public class UserController {
 		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
 		 */
+		System.out.println(1);
+		System.out.println(authentication);
+		System.out.println(1);
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
 		User user = userService.getUserByUserId(userId);

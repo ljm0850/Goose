@@ -9,23 +9,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 모집 게시글 모델 정의.
+ * 모집 게시글 댓글 모델 정의.
  */
 @Entity
 @Getter
 @Setter
 @DynamicInsert
 @DynamicUpdate
-public class Article extends BaseEntity {
+public class ArticleReply extends BaseEntity{
+	long article_pk;
 	long user_pk;
-	long study_pk;
-	String state;
-	String category;
-	String title;
-	String content;
 	String date;
-	int recruitment;
-	int hit;
+	String re_content;
 	
 	String name;
 }
