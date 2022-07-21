@@ -1,7 +1,7 @@
 package com.ssafy.api.service;
 
-import com.ssafy.api.request.user.UserRegisterPostReq;
-import com.ssafy.api.request.user.UserUpdatePatchReq;
+import com.ssafy.api.request.study_user.UserRegisterPostReq;
+import com.ssafy.api.request.study_user.UserUpdatePatchReq;
 import com.ssafy.db.entity.User;
 
 /**

@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.api.request.user.UserLoginPostReq;
-import com.ssafy.api.request.user.UserRegisterPostReq;
-import com.ssafy.api.request.user.UserUpdatePatchReq;
-import com.ssafy.api.response.user.UserInfoRes;
-import com.ssafy.api.response.user.UserLoginPostRes;
-import com.ssafy.api.response.user.UserRes;
+import com.ssafy.api.request.study_user.UserLoginPostReq;
+import com.ssafy.api.request.study_user.UserRegisterPostReq;
+import com.ssafy.api.request.study_user.UserUpdatePatchReq;
+import com.ssafy.api.response.study_user.UserInfoRes;
+import com.ssafy.api.response.study_user.UserLoginPostRes;
+import com.ssafy.api.response.study_user.UserRes;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
 import com.ssafy.common.model.response.BaseResponseBody;
