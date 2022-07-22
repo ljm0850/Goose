@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 /**
- * 게시글 모델 관련 디비 쿼리 생성을 위한 구현 정의.
+ * 모집 게시글 모델 관련 디비 쿼리 생성을 위한 구현 정의.
  */
 @Repository
 public class ArticleRepositorySupport{
