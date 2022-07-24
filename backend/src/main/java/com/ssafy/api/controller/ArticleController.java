@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,8 +23,10 @@ import com.ssafy.api.response.article.ArticlesInfoRes;
 
 import com.ssafy.api.service.ArticleService;
 import com.ssafy.api.service.UserService;
+import com.ssafy.common.auth.SsafyUserDetails;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.Article;
+import com.ssafy.db.entity.User;
 import com.ssafy.db.specification.ArticleSpecification;
 
 import io.swagger.annotations.Api;
@@ -31,6 +34,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * 게시글 관련 API 요청 처리를 위한 컨트롤러 정의.
@@ -45,7 +49,6 @@ public class ArticleController {
 	@Autowired
 	UserService userService;
 
-
 	@PostMapping()
 	@ApiOperation(value = "게시글 작성", notes = "<strong>게시글 정보</strong>를 통해 게시글을 작성한다.") 
     @ApiResponses({
@@ -56,10 +59,13 @@ public class ArticleController {
     })
 
 	public ResponseEntity<? extends BaseResponseBody> registerArticles(
-			@RequestBody @ApiParam(value="게시글 작성 정보", required = true) ArticleRegisterPostReq registerInfo) {
+			@RequestBody @ApiParam(value="게시글 작성 정보", required = true) ArticleRegisterPostReq registerInfo, @ApiIgnore Authentication authentication) {
 		
 		//임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
-		articleService.createArticle(registerInfo);
+		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+		String userId = userDetails.getUsername();
+		User user = userService.getUserByUserId(userId);
+		articleService.createArticle(user, registerInfo);
 		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
@@ -73,10 +79,10 @@ public class ArticleController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<Page<Article>> getArticles(
-			@RequestParam(required = true, defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "(String) 제목") String title,
-            @RequestParam(required = false, defaultValue = "(String) 카테고리") String category,
-            @RequestParam(required = false, defaultValue = "(String) 모집상태") String state) {
+			@RequestParam(required = true) int page,
+			@RequestParam(required = false) String title,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String state) {
 		
 		System.out.println(page);
 
@@ -94,20 +100,8 @@ public class ArticleController {
 			spec = spec.and(ArticleSpecification.equalState(state));
 		}
 		
-
-//		List<Article> articles= articleService.getArticles();
-//		List<Article> articles = articleService.getArticles(spec);
 		Page<Article> articles = articleService.getArticles(spec, pageRequest);
 
-
-//		
-//		List<ArticlesRes> articlesRes = new ArrayList<ArticlesRes>();
-//		
-		for (Article article : articles) {
-			article.setName(userService.findName(article.getUser_pk()));
-		}
-
-//		return ResponseEntity.status(200).body(articlesRes);
 		return ResponseEntity.status(200).body(articles);
 	}
 	
@@ -124,8 +118,7 @@ public class ArticleController {
 		articleService.updateHit(id);
 		Article articles = articleService.getArticlesById(id);
 		ArticlesInfoRes articleInfoRes = ArticlesInfoRes.of(articles);
-		articleInfoRes.setName(userService.findName(articles.getUser_pk()));
-
+		
 		return ResponseEntity.status(200).body(articleInfoRes);
 	}
 	
@@ -138,10 +131,11 @@ public class ArticleController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<? extends BaseResponseBody> updateArticle(
-			@RequestBody @ApiParam(value="게시글 수정 정보", required = true) ArticleUpdatePatchReq updateInfo, Long id) {
-		
-//		Article article = articleService.updateArticle(id, updateInfo);
-		articleService.updateArticle(id, updateInfo);
+			@RequestBody @ApiParam(value="게시글 수정 정보", required = true) ArticleUpdatePatchReq updateInfo, Long id, @ApiIgnore Authentication authentication) {
+		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+		String userId = userDetails.getUsername();
+		User user = userService.getUserByUserId(userId);
+		articleService.updateArticle(id, user, updateInfo);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 	
@@ -151,8 +145,8 @@ public class ArticleController {
         @ApiResponse(code = 204, message = "성공"),
     })
 	public ResponseEntity<? extends BaseResponseBody> deleteArticle(
-			@RequestBody @ApiParam(value="게시글 id", required = true) Long id) {
-		
+			@RequestBody @ApiParam(value="게시글 id", required = true) Long id, @ApiIgnore Authentication authentication) {
+		authentication.getDetails();
 		articleService.deleteArticlesById(id);
 		
 		return ResponseEntity.status(204).body(BaseResponseBody.of(204, "Success"));

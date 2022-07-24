@@ -15,6 +15,8 @@ public class StudyArticleUpdatePatchReq {
 
 	@ApiModelProperty(name="게시글 제목", example="(String) 게시글 제목")
 	String title;
+	@ApiModelProperty(name="게시글 카테고리", example="(String) 게시글 카테고리")
+	String category;
 	@ApiModelProperty(name="게시글 내용", example="(String) 게시글 내용")
 	String content;
 	@ApiModelProperty(name="게시글 내용", example="(String) 이미지 미사용")

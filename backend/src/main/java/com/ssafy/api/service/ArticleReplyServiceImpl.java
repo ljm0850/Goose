@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.api.request.articleReply.ArticleReplyRegisterPostReq;
 import com.ssafy.api.request.articleReply.ArticleReplyUpdatePatchReq;
 import com.ssafy.db.entity.ArticleReply;
+import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.ArticleReplyRepository;
 
 /**
@@ -23,11 +24,14 @@ public class ArticleReplyServiceImpl implements ArticleReplyService {
 	
 
 	@Override
-	public ArticleReply createArticleReply(ArticleReplyRegisterPostReq articleReplyRegisterInfo) {
+	public ArticleReply createArticleReply(User user, ArticleReplyRegisterPostReq articleReplyRegisterInfo) {
 		ArticleReply articleReply = new ArticleReply();
+		articleReply.setUser_pk(user.getId());
+		articleReply.setName(user.getName());
+		
 		articleReply.setArticle_pk(articleReplyRegisterInfo.getArticle_pk());
-		articleReply.setUser_pk(articleReplyRegisterInfo.getUser_pk());
 		articleReply.setRe_content(articleReplyRegisterInfo.getRe_content());
+
 		
 		return articleReplyRepository.save(articleReply);
 	}
@@ -45,8 +49,9 @@ public class ArticleReplyServiceImpl implements ArticleReplyService {
 	}
 	
 	@Override
-	public ArticleReply updateArticleReply(Long id, ArticleReplyUpdatePatchReq updateInfo) {
+	public ArticleReply updateArticleReply(Long id, User user, ArticleReplyUpdatePatchReq updateInfo) {
 		ArticleReply articleReply = articleReplyRepository.getOne(id);
+		articleReply.setName(user.getName());
 		articleReply.setRe_content(updateInfo.getRe_content());
 		return articleReplyRepository.save(articleReply);
 	}
@@ -55,11 +60,5 @@ public class ArticleReplyServiceImpl implements ArticleReplyService {
 	public void deleteArticleReplyById(Long id) {
 		articleReplyRepository.deleteById(id);
 	}
-
-
-
-
-
-
 
 }

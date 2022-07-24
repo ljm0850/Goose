@@ -9,13 +9,14 @@ import org.springframework.data.jpa.domain.Specification;
 import com.ssafy.api.request.article.StudyArticleRegistPostReq;
 import com.ssafy.api.request.article.StudyArticleUpdatePatchReq;
 import com.ssafy.db.entity.StudyArticle;
+import com.ssafy.db.entity.User;
 
 /**
  *	스터디 게시판 비즈니스 로직 처리를 위한 서비스 인터페이스 정의.
  */
 public interface StudyArticleService {
-	StudyArticle createArticle(StudyArticleRegistPostReq articleRegisterInfo);
-	StudyArticle updateArticle(Long id, StudyArticleUpdatePatchReq updateInfo);
+	StudyArticle createArticle(User user, StudyArticleRegistPostReq articleRegisterInfo);
+	StudyArticle updateArticle(Long id, User user, StudyArticleUpdatePatchReq updateInfo);
 	StudyArticle getArticlesById(Long id);
 	void deleteArticlesById(Long id);
 	List<StudyArticle> getArticles();

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.api.request.article.StudyArticleRegistPostReq;
 import com.ssafy.api.request.article.StudyArticleUpdatePatchReq;
 import com.ssafy.db.entity.StudyArticle;
+import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.StudyArticleRepository;
 
 /**
@@ -25,10 +26,12 @@ public class StudyArticleServiceImpl implements StudyArticleService {
 	StudyArticleRepository studyArticleRepository;
 
 	@Override
-	public StudyArticle createArticle(StudyArticleRegistPostReq articleRegisterInfo) {
+	public StudyArticle createArticle(User user, StudyArticleRegistPostReq articleRegisterInfo) {
 		StudyArticle studyArticle = new StudyArticle();
-
-		studyArticle.setUser_pk(articleRegisterInfo.getUser_pk());
+		studyArticle.setUser_pk(user.getId());
+		studyArticle.setName(user.getName());
+		
+		studyArticle.setCategory(articleRegisterInfo.getCategory());
 		studyArticle.setStudy_pk(articleRegisterInfo.getStudy_pk());
 		studyArticle.setContent(articleRegisterInfo.getContent());
 		studyArticle.setTitle(articleRegisterInfo.getTitle());
@@ -38,8 +41,10 @@ public class StudyArticleServiceImpl implements StudyArticleService {
 	}
 
 	@Override
-	public StudyArticle updateArticle(Long id, StudyArticleUpdatePatchReq articleUpdateInfo) {
+	public StudyArticle updateArticle(Long id, User user, StudyArticleUpdatePatchReq articleUpdateInfo) {
 		StudyArticle studyArticle = studyArticleRepository.getOne(id);
+		studyArticle.setName(user.getName());
+		studyArticle.setCategory(articleUpdateInfo.getCategory());
 		studyArticle.setContent(articleUpdateInfo.getContent());
 		studyArticle.setTitle(articleUpdateInfo.getTitle());
 		studyArticle.setImage(articleUpdateInfo.getImage());
