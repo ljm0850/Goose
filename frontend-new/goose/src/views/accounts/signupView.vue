@@ -3,7 +3,6 @@
         <form @submit.prevent="signupForm">
             <div class="inputBox">
                 <label for="inputname" class="form-label">이름</label>
-<<<<<<< HEAD
                 <input type="text" id="inputname" class="form-control" placeholder="이름" v-model="state.form.name">
             </div>
             <div class="inputBox">
@@ -34,40 +33,11 @@
             </div>
             <div class="inputBox">
               <input type="submit" value="Submit">  
-=======
-                <input type="text" id="inputname" class="form-control" placeholder="이름" v-model="state.name">
-            </div>
-            <div class="inputBox">
-                <label for="inputId" class="form-label">ID</label>
-                <input type="text" id="inputId" class="form-control" placeholder="ID를 입력해주세요" v-model="state.id">
-            </div>
-            <div class="inputBox">
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호를 입력해주세요" aria-describedby="passwordHelpBlock" v-model="state.password1">
-                <div id="passwordHelpBlock" class="form-text">
-                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                </div>
-                <input type="password" id="inputPassword2" class="form-control" placeholder="비밀번호 확인" v-model="state.password2">
-            </div>
-             <div class="inputBox">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail" v-model="state.email">
-            </div>
-            <div class="inputBox">
-                <label for="inputInterest" class="form-label">Interest</label>
-                <input type="text" id="inputInterest" class="form-control" placeholder="취미를 입력해주세요" v-model="state.interest">
-            </div>
-            <div class="inputBox">
-              <input type="submit" value="Submit">
->>>>>>> 2e09ea8d (feat: 스터디 게시판 + 댓글)
               <router-link to="/login" class="btn input-box-btn">Back</router-link>
             </div>
         </form>  
     </div>
-<<<<<<< HEAD
 {{ state.form }}
-=======
->>>>>>> 2e09ea8d (feat: 스터디 게시판 + 댓글)
 </template>
 
 <script>
@@ -81,7 +51,6 @@ export default {
      setup() {
         const store = useStore()
         const state = reactive({
-<<<<<<< HEAD
             form:{
                 name: null,
                 id : null, 
@@ -110,21 +79,6 @@ export default {
             console.log(state.form.id, state.form.password1, state.form.name, state.form.interest, state.form.email  )
             // store.dispatch('signup',{"name": state.form.name, 'id': state.form.id, 'password': state.form.password1, 'email':state.form.email, 'interest': state.form.interest, 'photo':'d'})
             store.dispatch('signup',{"email":state.form.email,"id":state.form.id,"interest":state.form.interest,"name":state.form.name, "password":state.form.password1, "photo": "(String) 사진 사용X"    })
-=======
-            name: '',
-            id : '',
-            password1: '',
-            password2: '',
-            email: '',
-            interest: '',
-        })
-        
-        const signupForm = function(){
-            // dispatch 함수명 바뀔 경우 아래줄 수정
-            console.log(state.id, state.password1, state.name, state.interest, state.email  )
-            // store.dispatch('signup',{"name": state.name, 'id': state.id, 'password': state.password1, 'email':state.email, 'interest': state.interest, 'photo':'d'})
-            store.dispatch('signup',{"email":state.email,"id":state.id,"interest":state.interest,"name":state.name, "password":state.password1, "photo": "(String) 사진 사용X"    })
->>>>>>> 2e09ea8d (feat: 스터디 게시판 + 댓글)
             .then(function (result){
                 // alert('accessToken: ' + result.data.Token)
                 router.push({name :'Login'})
@@ -132,7 +86,6 @@ export default {
             .catch(function(err){
                 alert(err)
             })
-<<<<<<< HEAD
         }
 
         const idValid = function() {
@@ -177,24 +130,14 @@ export default {
             }
         }
 
-=======
-        // const moveToLogin = () => {
-        //     //moveToLogin
-        //     this.$router.replace({name:Login})
-        // }
-        }
->>>>>>> 2e09ea8d (feat: 스터디 게시판 + 댓글)
         return {
             state,
             store,
             signupForm,
-<<<<<<< HEAD
             idValid,
             passwordValid,
             passwordCheckValid,
             emailValid,
-=======
->>>>>>> 2e09ea8d (feat: 스터디 게시판 + 댓글)
         }
     }
 }
