@@ -9,8 +9,9 @@ const User = 'users'
 
 
 export default{
-    auth_login:{
-    login: () => HOST + Auth
+    accounts:{
+        login: () => HOST + Auth,
+        // logout: () =>
     },
     article: {
     article_create: () => HOST + Article,
