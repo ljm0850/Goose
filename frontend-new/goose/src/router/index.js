@@ -45,6 +45,7 @@ const routes = [
   {path: '/article/:id',
   name: ArticleDetail,
   component: ArticleDetail}
+];
 
 const router = createRouter({
   history: createWebHistory(),
