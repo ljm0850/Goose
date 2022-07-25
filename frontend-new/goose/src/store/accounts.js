@@ -16,6 +16,7 @@ export default {
         authError: state => state.authError,
         authHeader: state => ({ Authorization: `Token ${state.token}`}),
         loginUser: state => state.loginUser,
+        getToken: state => state.token,
 
     },
     mutations: {
