@@ -9,25 +9,27 @@ export default {
         authError: null, // 오류 발생 시
         loginUser: {},
         
-        
     },
     getters: {
-        isLoggedIn: state => !!state.token,
-        authError: state => state.authError,
-        authHeader: state => ({ Authorization: `Token ${state.token}`}),
-        loginUser: state => state.loginUser,
-        getToken: state => state.token,
+        isLoggedIn: state => !!state.token,    // 로그인 했는지 확인
+        authError: state => state.authError,   // 인증 에러
+        authHeader: state => ({ Authorization: `Token ${state.token}`}),  // 인증 정보
+        loginUser: state => state.loginUser,  // 현재 로그인한 유저 
 
     },
     mutations: {
         SET_TOKEN: (state, token) => state.token = token,
         SET_LOGIN_USER: (state, user) => state.loginUser = user,
-        SET_AUTH_ERROR: (state, error) => state.authError = error
+        SET_AUTH_ERROR: (state, error) => state.authError = error,
+        LOGOUT: (state,user) => { 
+            localStorage.removeItem('user')
+            location.reload();
+        }
     },
     actions: {
         login({commit, dispatch},credential){
             axios({
-                url: rest.auth_login.login(),
+                url: rest.accounts.login(),
                 method: 'post',
                 data: credential
             })
@@ -54,15 +56,19 @@ export default {
         },
 
         signup({ commit, dispatch}, credentials){
+            console.log("엑시오스 하기 전")
+            console.log(credentials)
             axios({
                 url: rest.user.user_signup(),
                 method: 'post',
                 data: credentials
             })
             .then(res => {
+                console.log("then")
+                console.log('signup')
                 // const token = res.data.accessToken
                 // dispatch('saveToken', token)
-                router.push({ name: 'Home '})
+                // router.push({ name: 'Home '})
             })
             .catch(err => {
                 // console.log(url)
@@ -89,7 +95,7 @@ export default {
                   }
                 })
             }
-      
+        },
 
         // logout({  getters , dispatch}){
         //     axios({
@@ -106,5 +112,8 @@ export default {
         //         console.error(err.response)
         //     })
         // }
-    }}
+        logout({commit, dispatch}) {
+            dispatch('removeToken');
+        }
+    }
 }
