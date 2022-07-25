@@ -99,6 +99,23 @@ export default {
       dispatch('saveCamURL',obj.url_conf)
       dispatch('safeStudyURL',obj.url_page)
     },
+    
+    createStudy({getters},credential){
+      axios({
+        url: rest.study.study_create(),
+        method: 'post',
+        headers: getters.authHeader,
+        data: credential
+      })  
+      .then((res) =>{
+        console.log(res)
+        router.push({ name: 'Home '})
+      })
+      .catch(err => {
+        console.log('catch')
+        console.log(err)
+    })
+    },
 
     deleteStudy({dispatch,getters},studyId){
       axios({

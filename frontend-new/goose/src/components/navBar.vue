@@ -25,6 +25,10 @@
         <router-link to="/articles" class="nav-link active" aria-current="page" href="#">게시판</router-link>
       </li>
       <li class="nav-item">
+        <router-link to="/createStudy" class="nav-link active" aria-current="page" href="#">스터디 만들기</router-link>
+      </li>
+
+      <li class="nav-item">
         <router-link to="/test" class="nav-link" href="#">마이 페이지</router-link>
       </li>
       <li class="nav-item">
