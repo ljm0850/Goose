@@ -4,7 +4,9 @@ import Login from '@/views/accounts/loginView.vue'
 import test from '@/views/home/test.vue'
 import Signup from '@/views/accounts/signupView.vue'
 import ArticleList from '@/views/article/articleList.vue'
-import Newarticle from '@/views/article/newArticle.vue'
+import CreateStudy from '@/views/StudyPage/createStudy'
+import NewArticle from '@/views/article/newArticle.vue'
+import ArticleDetail from '@/views/article/articleDetail.vue'
 
 const routes = [
   {
@@ -26,13 +28,23 @@ const routes = [
     name: 'Signup',
     component: Signup
   },
-  {path: '/article',
+  {path: '/articles',
    name: ArticleList,
   component: ArticleList},
   
-{path: '/newarticle',
-name: Newarticle,
-component: Newarticle}
+  {
+  path: '/createStudy',
+  name: 'createStudy',
+  component: CreateStudy
+  },
+  
+  {path: '/newarticle',
+  name: NewArticle,
+  component: NewArticle},
+
+  {path: '/article/:id',
+  name: ArticleDetail,
+  component: ArticleDetail}
 ];
 
 const router = createRouter({
