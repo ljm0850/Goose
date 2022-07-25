@@ -53,7 +53,7 @@ public class StudyController {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Autowired
+	@Autowired 
 	StudyService studyService;
 	
 	@PostMapping("/create")
