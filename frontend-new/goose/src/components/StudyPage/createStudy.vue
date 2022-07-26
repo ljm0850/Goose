@@ -1,5 +1,5 @@
 <template>
-<div class="modal fade" id="boardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createStudyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-fullscreen modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
