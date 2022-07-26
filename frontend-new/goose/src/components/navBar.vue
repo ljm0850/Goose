@@ -53,7 +53,7 @@
 // import { useRouter } from 'vue-router'
 import { useStore } from "vuex"
 import { computed } from "vue"
-import createStudy from "@/components/StudyPage/createStudy.vue"
+import createStudy from "@/components/StudyPage/studyCreate.vue"
 
 
 export default {
