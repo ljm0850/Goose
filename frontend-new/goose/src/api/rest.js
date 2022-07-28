@@ -16,7 +16,7 @@ export default{
     article: {
     article_create: () => HOST + Article,
     article_rud: id => HOST + Article + `${id}`,
-    article_list: () => HOST + Article + 'list'
+    article_list: page => HOST + Article + 'list' + `?page=${page}`
     },
     articles_reply:{
         reply_cr: () => HOST + ArticleReply,
@@ -35,7 +35,7 @@ export default{
     },
     user: {
         user_signup: () => HOST + User,
-        user_rud: userId => HOST + User + `${userId}`,
+        user_check: userId => HOST + User + `${userId}`,
         user_myprofile: () => HOST + User + 'me'
     }
     
