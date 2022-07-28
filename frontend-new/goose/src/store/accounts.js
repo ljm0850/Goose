@@ -5,7 +5,7 @@ import rest from '@/api/rest'
 export default {
     state: {
         // token 인증 방식
-        token: localStorage.getItem('token') || '.',  
+        token: localStorage.getItem('token') || '',  
         authError: null, // 오류 발생 시
         loginUser: {},
         targetUser: {},
@@ -40,7 +40,7 @@ export default {
                 const token = res.data.accessToken
                 dispatch('saveToken', token)
                 dispatch('fetchLoginUser')
-                
+                dispatch('myStudyList')
                 router.push({name: 'Home'})
             })
             .catch(err => {
@@ -62,7 +62,7 @@ export default {
             console.log("엑시오스 하기 전")
             console.log(credentials)
             axios({
-                url: rest.user.user_signup(),
+                url: rest.user.user(),
                 method: 'post',
                 data: credentials
             })
@@ -134,6 +134,31 @@ export default {
         // }
         logout({commit, dispatch}) {
             dispatch('removeToken');
-        }
+            router.push({name:'Home'})
+        },
+        
+        user_delete({commit, getters, dispatch}) {
+            const Swal = require('sweetalert2')
+            Swal.fire(
+                '정말 탈퇴하실건가요??'
+            )
+            .then((result) => {
+                console.log('then1')
+                if (result.isConfirmed) {
+                    axios({
+                        url : rest.user.user(),
+                        method: 'delete',
+                        headers: getters.authHeader,
+                        // data: userId
+                    })
+                    .then(dispatch('removeToken'))
+                        console.log('then2')
+                        Swal.fire(
+                            '그동안 Goose를 이용해주셔서 감사합니다'
+                        )  
+                    router.push({name:'Home'})
+                }
+            })
+    }
     }
 }
