@@ -96,6 +96,7 @@ export default {
         const createStudy = ()=>{
             console.log(state.credential.category)
             store.dispatch('createStudy',state.credential)
+            store.dispatch('authStudyList')
 
         }
         return { createStudy, state}

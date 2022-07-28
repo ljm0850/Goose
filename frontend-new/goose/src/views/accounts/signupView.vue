@@ -137,10 +137,8 @@ export default {
             passwordValid,
             passwordCheckValid,
             emailValid,
-        }
-
-}
-}
+        }}
+        }}
 </script>
 
 <style>
