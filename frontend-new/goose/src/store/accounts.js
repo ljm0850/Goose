@@ -117,6 +117,7 @@ export default {
         // }
         logout({commit, dispatch}) {
             dispatch('removeToken');
+            // commit('SET_MY_STUDY_LIST',{})
             router.push({name:'Home'})
         },
         
