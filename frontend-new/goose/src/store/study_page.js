@@ -5,6 +5,7 @@ import router from "@/router"
 export default {
   state:{
     myStudyList : [],
+    authStudyList: [],
     studyJoinList : [{"apply_date": "26072022", "id":0, "name": "유저이름", "study_pk":0, "user_id":0} ],
     selectedStudy : {
       "category": "",
@@ -44,6 +45,7 @@ export default {
     defaultStudy : state => state.defaultStudy,
     studyId : state => state.selectedStudy.id,
     myStudyList : state => state.myStudyList,
+    authStudyList : state => state.authStudyList,  // 권한 가지는 스터디들의 목록
     studyName: state => state.selectedStudy.title,
     maxMember: state => state.selectedStudy.maxmember,
     member: state => state.selectedStudy.member,
@@ -70,7 +72,8 @@ export default {
     // 스터디 참가 신청 관련
     SET_JOIN_LIST: (state,joinArray) => state.studyJoinList = joinArray,
     // 참여하고 있는 스터디 조회
-    SET_MY_STUDY_LIST: (state,studyList) => state.myStudyList = studyList
+    SET_MY_STUDY_LIST: (state,studyList) => state.myStudyList = studyList,
+    SET_AUTH_STUDY_LIST: (state, authStudyList) => state.authStudyList = authStudyList,
   },
 
   actions:{
@@ -135,6 +138,16 @@ export default {
       .then(res =>{
         console.log("스터디 리스트")
         commit('SET_MY_STUDY_LIST',res.data)
+      })
+    },
+    authStudyList({getters,commit}){
+      axios({
+        url: rest.study.auth_study_list(),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+      .then(res=> {
+        commit('SET_AUTH_STUDY_LIST',res.data)
       })
     },
 
