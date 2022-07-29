@@ -16,7 +16,7 @@ export default{
     article: {
     article_create: () => HOST + Article,
     article_rud: id => HOST + Article + `${id}`,
-    article_list: () => HOST + Article + 'list'
+    article_list: page => HOST + Article + 'list' + `?page=${page}`
     },
     articles_reply:{
         reply_cr: () => HOST + ArticleReply,
@@ -28,6 +28,8 @@ export default{
         study_remove: id => HOST + Study + 'remove/' + `${id}`,
         study_search: id => HOST + Study + 'search/' + `${id}`,
         study_update: () => HOST + Study + 'update',
+        my_study_list: () => HOST + Study + Member + 'mystudylist',
+        auth_study_list: () => HOST + Study + Member + 'studylistA3',
         study_join: (study_pk) => HOST + Study + Member + 'joinstudy/'+ `${study_pk}`,
         study_join_list: (study_pk) => HOST + Study + Member + 'joinlist/'+ `${study_pk}`,
         study_join_agree: () => HOST + Study + Member + 'joinagree',
@@ -35,7 +37,7 @@ export default{
     },
     user: {
         user_signup: () => HOST + User,
-        user_rud: userId => HOST + User + `${userId}`,
+        user_check: userId => HOST + User + `${userId}`,
         user_myprofile: () => HOST + User + 'me'
     }
     
