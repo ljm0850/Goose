@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <router-link to="/" class="navbar-brand">Goose</router-link>
+    <router-link to="/home" class="navbar-brand">Goose</router-link>
     <!-- 로그인 안되있을 경우 -->
     <ul v-if="!isLoggedIn" class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">

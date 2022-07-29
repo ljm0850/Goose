@@ -16,7 +16,7 @@ import CreateStudy from '@/views/StudyPage/createStudy'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
   },
