@@ -7,6 +7,7 @@ import Login from '@/views/accounts/loginView.vue'
 import Signup from '@/views/accounts/signupView.vue'
 import UserDelete from '@/views/accounts/userDelete.vue'
 import UserProfile from '@/views/accounts/profileView.vue'
+import ProfileUpdate from '@/views/accounts/profileUpdate.vue'
 //Article
 import ArticleList from '@/views/article/articleList.vue'
 import NewArticle from '@/views/article/newArticle.vue'
@@ -44,7 +45,11 @@ const routes = [
     name: 'UserProfile',
     component: UserProfile
   },
-  {},
+  {
+    path: '/:id/profileupdate',
+    name: 'ProfileUpdate',
+    component: ProfileUpdate ,
+  },
   {path: '/articles',
    name: ArticleList,
   component: ArticleList},
