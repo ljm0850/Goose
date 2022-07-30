@@ -65,7 +65,7 @@
   <textarea v-model="state.credential.image" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
   <label for="floatingTextarea">대표 사진 url</label>
 </div>
-  <button @click.prevent="createStudy(state.credential)" type="submit" class="btn btn-primary">Submit</button>
+  <button @click.prevent="createStudy()" type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
 {{ state.credential }}
@@ -77,30 +77,32 @@ import { reactive } from '@vue/reactivity'
 import { useStore } from "vuex"
 
 export default {
-    setup(){
-        const store = useStore()
-        const state = reactive({
-            credential:{
-                category: "",
+  props:{
+  },
+  setup(){
+      const store = useStore()
+      const state = reactive({
+          credential:{
+              category: "",
 
-                image : "",
-                maxmember:1,
-                member: 1,
-                open: 0,
-                password: "",
-                title : "",
-                url_conf:"",
-                url_page:"",
-            }
-        })
-        const createStudy = ()=>{
-            console.log(state.credential.category)
-            store.dispatch('createStudy',state.credential)
-            store.dispatch('authStudyList')
+              image : "",
+              maxmember:1,
+              member: 1,
+              open: 0,
+              password: "",
+              title : "",
+              url_conf:"",
+              url_page:"",
+          }
+      })
+      const createStudy = ()=>{
+          console.log(state.credential.category)
+          store.dispatch('createStudy',state.credential)
+          store.dispatch('authStudyList')
 
-        }
-        return { createStudy, state}
-    }
+      }
+      return { createStudy, state}
+  }
 }
 </script>
 

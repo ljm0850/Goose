@@ -3,7 +3,7 @@
   <div class="modal-fullscreen modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">스터디 업데이트</h5>
+        <h5 class="modal-title" id="exampleModalLabel">스터디 만들기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -24,7 +24,7 @@
             <div class="d-flex">
               <p class="text-capitalize m-3">총원</p>
               <div class="m-3">
-                <select v-model="state.credential.maxMember" class="form-select" aria-label="Default select example">
+                <select v-model="state.credential.maxmember" class="form-select" aria-label="Default select example">
                   <option value="1">1명</option>
                   <option value="2">2명</option>
                   <option value="3">3명</option>
@@ -70,16 +70,17 @@
               <textarea v-model="state.credential.image" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
               <label for="floatingTextarea">대표 사진 url</label>
             </div>
-              <button @click.prevent="createStudy(state.credential)" type="submit" class="btn btn-primary">Submit,create로 함수 적혀있음</button>
+              <button @click.prevent="updateStudy()" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
             </form>
             </div>
             {{ state.credential }}
-            <!-- 업데이트에만 존재 -->
+
+            <!-- 업데이트에만 있는 목록들 -->
+            <hr>
+            <div class="container">
               <p>인원 관리</p>
-              <div>아직 정보가 없음</div>
-
+              <memberListVue />
             </div>
-
           <!-- 모달 바디 끝 -->
       </div>
       <div class="modal-footer">
@@ -87,7 +88,7 @@
       </div>
     </div>
   </div>
-
+</div>
 
 
 
@@ -98,19 +99,26 @@
 <script>
 import { reactive } from '@vue/reactivity'
 import { useStore } from "vuex"
+import { computed } from "vue"
+import memberListVue from '@/components/StudyPage/memberList.vue'
 
 export default {
     props: {
     },
+    components: {
+    memberListVue,
+},
     setup(){
         const store = useStore()
+        const studyId = computed(()=>store.getters.selectedStudy.id)
+
         const state = reactive({
             credential:{
                 category: "",
-
+                id: studyId,
                 image : "",
+                member: store.getters.selectedStudy.member,
                 maxmember:1,
-                member: 1,
                 open: 0,
                 password: "",
                 title : "",
@@ -118,11 +126,10 @@ export default {
                 url_page:"",
             }
         })
-        const createStudy = ()=>{
-            console.log(state.credential.category)
-            store.dispatch('createStudy',state.credential)
+        const updateStudy = ()=>{
+            store.dispatch('updateStudy',state.credential)
         }
-        return { createStudy, state}
+        return { updateStudy, state}
     }
 }
 </script>
