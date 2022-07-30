@@ -1,11 +1,13 @@
 import axios from "axios"
 import rest from '@/api/rest'
 import router from "@/router"
+import _ from "lodash"
+
 
 export default {
     state: {
         articles: [],   // 전체 게시물 조회 시 사용
-        article: {},   // 개별 게시물의 CRUD에 사용
+        article: [],   // 개별 게시물의 CRUD에 사용
         replies: [], // 해당 게시물의 전체 댓글 조회 시 사용
         reply: {}, //개별 댓글의 CRUD
     },
@@ -15,7 +17,6 @@ export default {
         isAuthor: (state,getters) => {return state.article.user_pk == getters.loginUser},     // 게시물 작성자 권한 확인 (fetchCurrentUser 활용)
         replies: state => state.replies,
         reply: state => state.reply,
-        
     },
     mutations: {
         SET_ARTICLES: (state, articles) => state.articles = articles,
@@ -25,16 +26,20 @@ export default {
     },
     actions: {
         // 전체 페이지 조회
-        fetchArticles({commit}){
+        fetchArticles({commit,getters},page){
             axios({
-                url: rest.article.article_list(),
+                url: rest.article.article_list(page),
                 method: 'get',
+                headers: getters.authHeader,
             })
-            .then(res => 
-                commit('SET_ARTICLES',res.data)
+            .then(res => {
+                commit('SET_ARTICLES',res.data.content
+                )
+            
+            })
+                
             .catch(err => 
                 {console.log(err)})
-            )
 
         },
         // 단일 페이지 조회
@@ -44,7 +49,9 @@ export default {
                 method: 'get',
                 headers: getters.authHeader,
             })
-            .then(res => commit('SET_ARTICLE', res.data))
+            .then(res => {
+                commit('SET_ARTICLE', res.data)})
+
             .catch(err => {
                 console.error(err.response)
                 if (err.response.status === 404){
@@ -53,7 +60,6 @@ export default {
             })
         },
         createArticle({commit,getters},form_data){
-            console.log(form_data)
             axios({
                 url: rest.article.article_create(),
                 method: 'post',
@@ -61,18 +67,11 @@ export default {
                 headers: getters.authHeader,
             })
             .then(res => {
-                console.log('성공')
-                commit('SET_ARTICLE',res.data)
-                router.push({
-                    name: 'ArticleDetail',
-                    params: {
-                        id: getters.article.id
-                    }
-            .catch(err => {
-                console.log(err)
-            })        
-                })
-                
+                // post 요청 후 반환 값으로 게시글의 id 줄 수 있나?
+                // detail 페이지로 넘어가려면 id 필요함
+                // 현재는 성공했다는 메세지만 나옴
+                // 다른 api로 id 받아오려면 전체 조회를 해야하고 한다 해도 바로 이동 불가
+                // commit('SET_ARTICLE',res.data) <- 현재는 잘못됨
             })
         },
             updateArticle({  commit, getters  }, {id,form_data} ){

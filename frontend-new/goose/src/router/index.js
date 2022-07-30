@@ -12,12 +12,16 @@ import ProfileUpdate from '@/views/accounts/profileUpdate.vue'
 import ArticleList from '@/views/article/articleList.vue'
 import NewArticle from '@/views/article/newArticle.vue'
 import ArticleDetail from '@/views/article/articleDetail.vue'
+import ArticleEdit from '@/views/article/articleEdit.vue'
 //Study
 import CreateStudy from '@/views/StudyPage/createStudy'
+import StudyHome from '@/views/StudyPage/studyHome.vue'
+
+
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
   },
@@ -53,20 +57,29 @@ const routes = [
   {path: '/articles',
    name: ArticleList,
   component: ArticleList},
-  
+
+  {path: '/articlefix/:id',
+   name: 'article_edit',
+   component: ArticleEdit},
+
+   {path: '/newarticle',
+   name: NewArticle,
+   component: NewArticle},
+ 
+   {path: '/article/:id',
+   name: ArticleDetail,
+   component: ArticleDetail},
   {
   path: '/createStudy',
   name: 'createStudy',
   component: CreateStudy
   },
-  
-  {path: '/newarticle',
-  name: NewArticle,
-  component: NewArticle},
 
-  {path: '/article/:id',
-  name: ArticleDetail,
-  component: ArticleDetail}
+  {
+    path: '/studyHome',
+    name: StudyHome,
+    component: StudyHome
+  },
 ];
 
 const router = createRouter({

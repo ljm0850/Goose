@@ -3,8 +3,8 @@
   <img src="http://encykorea.aks.ac.kr/Contents/GetImage?t=origin&id=da07ff58-06ea-4cb2-a957-0964d192cb14&w=878&h=582" alt="기본사진">
   <div>
     <div class="container d-flex">
-      <div class="m-3">스터디 이름 : {{ studyName }}</div>
-      <div class="m-3">인원 : {{ member }}/ {{ maxMember }} </div>
+      <div class="m-3">스터디 이름 : {{ selectedStudy.title }}</div>
+      <div class="m-3">인원 : {{ selectedStudy.member }}/ {{ selectedStudy.maxmember }} </div>
     </div>
     <div>스터디 소개글 : collume 추가되면 추가할 예정{{ }}</div>
   </div>
@@ -41,25 +41,29 @@ import callender from '@/components/StudyPage/callender'
 import studyUpdate from '@/components/StudyPage/studyUpdate.vue'
 import studyJoinList from '@/components/StudyPage/studyJoinList.vue'
 import { useStore } from "vuex"
-import { computed } from "vue"
+import { computed, watch } from "vue"
 
 export default {
+  name: "StudyHome",
   components:{
       board,callender,studyUpdate,studyJoinList,
   },
 
   setup() {
     const store = useStore()
-    const studyName = computed(() => store.getters.studyName )
-    const member = computed(() => store.getters.member)
-    const maxMember = computed(() => store.getters.maxMember)
-    // const notice = computed(() => store.getters.notice)
-    const camURL = computed(() => store.getters.camURL)
+    const selectedStudy = computed(() => store.getters.selectedStudy )
+    const deleteStudy = () => store.dispatch('deleteStudy',store.getters.studyId)
+    const pageUpdate = () => store.dispatch('selectStudy',store.getters.selectedStudy.id)
+    
 
-    const deleteStudy = () =>{
-      store.dispatch('deleteStudy',store.getters.studyId)
+    return { selectedStudy,deleteStudy, pageUpdate }
+  },
+
+  watch: {
+    selectedStudy (){
+      console.log("빅브라더")
+      this.pageUpdate()
     }
-    return { studyName,member,maxMember,camURL,deleteStudy }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <router-link to="/" class="navbar-brand">Goose</router-link>
+    <router-link to="/home" class="navbar-brand">Goose</router-link>
     <!-- 로그인 안되있을 경우 -->
     <ul v-if="!isLoggedIn" class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
@@ -25,12 +25,12 @@
         <router-link to="/articles" class="nav-link active" aria-current="page" href="#">게시판</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/createStudy" class="nav-link active" aria-current="page" href="#">스터디 만들기</router-link>
+        <router-link to="/createStudy" :page="create" class="nav-link active" aria-current="page" href="#">스터디 만들기</router-link>
       </li>
-      <div>
+      <!-- <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStudyModal">스터디 만들기2</button>
         <createStudy />
-      </div>
+      </div> -->
 
 
       <li class="nav-item">
@@ -56,12 +56,12 @@
 // import { useRouter } from 'vue-router'
 import { useStore } from "vuex"
 import { computed } from "vue"
-import createStudy from "@/components/StudyPage/studyCreate.vue"
+// import createStudy from "@/components/StudyPage/studyCreate.vue"
 
 
 export default {
     components: {
-      createStudy,
+      // createStudy,
     },
 
     setup() {

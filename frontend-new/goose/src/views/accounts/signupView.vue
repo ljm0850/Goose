@@ -87,8 +87,7 @@ export default {
             })
             .catch(function(err){
                 alert(err)
-            })
-        }
+            })}
 
         const idValid = function() {
             if (/^[a-z]+[a-z0-9]{5,19}$/.test(state.form.id)){
@@ -141,9 +140,7 @@ export default {
             passwordCheckValid,
             emailValid,
         }
-
-}
-}
+        }}
 </script>
 
 <style>
