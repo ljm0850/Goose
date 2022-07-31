@@ -11,7 +11,7 @@ import ProfileUpdate from '@/views/accounts/profileUpdate.vue'
 //Article
 import ArticleList from '@/views/article/articleList_2.vue'
 import NewArticle from '@/views/article/newArticle.vue'
-import ArticleDetail from '@/views/article/detailView.vue'
+import ArticleDetail from '@/views/article/articleDetail.vue'
 import ArticleEdit from '@/views/article/articleEdit.vue'
 //Study
 import CreateStudy from '@/views/StudyPage/createStudy'
