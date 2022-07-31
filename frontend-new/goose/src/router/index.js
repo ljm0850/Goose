@@ -9,7 +9,7 @@ import UserDelete from '@/views/accounts/userDelete.vue'
 import UserProfile from '@/views/accounts/profileView.vue'
 import ProfileUpdate from '@/views/accounts/profileUpdate.vue'
 //Article
-import ArticleList from '@/views/article/articleList.vue'
+import ArticleList from '@/views/article/articleList_2.vue'
 import NewArticle from '@/views/article/newArticle.vue'
 import ArticleDetail from '@/views/article/detailView.vue'
 import ArticleEdit from '@/views/article/articleEdit.vue'

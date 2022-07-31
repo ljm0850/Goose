@@ -37,7 +37,7 @@ export default{
         study_member_list: (study_pk) => HOST + Study + Member + 'studymemberlsit/'+`${study_pk}` // 오타 불편
     },
     user: {
-        user_signup: () => HOST + User,
+        user: () => HOST + User,
         user_check: userId => HOST + User + `/{userId}?id=${userId}`,  // pk값이 아닌 로그인 할 때 그 id
         user_myprofile: () => HOST + User + '/me'
     }
