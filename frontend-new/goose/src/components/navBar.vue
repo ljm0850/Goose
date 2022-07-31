@@ -4,6 +4,7 @@
       <router-link to="/home" class="navbar-brand">Goose</router-link>
     <!-- 로그인 안되있을 경우 -->
     <ul v-if="!isLoggedIn" class="navbar-nav me-auto mb-2 mb-lg-0">
+      
       <li class="nav-item">
         <router-link to="/login" class="nav-link active" aria-current="page" href="#">로그인</router-link>
       </li>
@@ -21,8 +22,8 @@
       <li class="nav-item">
         <router-link to="/" class="nav-link active" aria-current="page" href="#">스터디 참여하기</router-link>
       </li>
-            <li class="nav-item">
-              <router-link to="/articles" class="nav-link active" aria-current="page" href="#">게시판</router-link>
+      <li class="nav-item">
+          <router-link to="/articles" class="nav-link active" aria-current="page" href="#">게시판</router-link>
       </li>
       <li class="nav-item">
         <router-link to="/createStudy" :page="create" class="nav-link active" aria-current="page" href="#">스터디 만들기</router-link>
@@ -83,5 +84,8 @@ export default {
 </script>
 
 <style>
-
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+  .nav-item {
+    font-family: 'NanumSquare', sans-serif;
+  }
 </style>
