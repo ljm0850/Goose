@@ -164,10 +164,12 @@ export default {
     .input-Box input[class="form-control"] {
         width: 100%;
         height: 50px;
-        margin-top: 3px;
-        font-family: 'NanumSquare', sans-serif;
+        margin-top: 3px;    
     }
 
+    .input-Box input[type="text"] input[type="email"]:not(#inputPassword #inputPassword2) {
+        font-family: 'NanumSquare', sans-serif;
+    }
     .input-Box div[class="form-text"] {
         font-family: 'NanumSquare', sans-serif;
     }
