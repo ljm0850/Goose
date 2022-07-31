@@ -1,16 +1,15 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
-    
+
 .input-Box {
 width: 100%;
 margin-top: 20px;
 }
 
-.input-Box:nth-child(6) {
+/* .input-Box:nth-child(6) {
 display: flex;
-/* justify-content: space-evenly; */
 justify-content: end;
 
-}
+} */
 
 .input-Box input::placeholder {
 color: #666
@@ -27,13 +26,13 @@ color: #666
     height: 50px;
     margin-top: 3px;    
 }
-
-.input-Box input[type="text"] input[type="email"]:not(#inputPassword #inputPassword2) {
-    font-family: 'NanumSquare', sans-serif;
-}
 .input-Box div[class="form-text"] {
     font-family: 'NanumSquare', sans-serif;
 }
+.input-Box input[type="text"] input[type="email"]:not(#inputPassword #inputPassword2) {
+    font-family: 'NanumSquare', sans-serif;
+}
+
 /* .input-box-btn {
 background: #fff;
 color: #666;
