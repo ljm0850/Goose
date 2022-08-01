@@ -76,7 +76,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .input-Box:nth-child(3) {
     display: flex;
     /* justify-content: space-evenly; */
