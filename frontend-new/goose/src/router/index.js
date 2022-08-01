@@ -3,7 +3,7 @@ import Home from '@/views/home/home.vue'
 import test from '@/views/home/test.vue'
 
 //accounts
-import Login from '@/views/accounts/loginView.vue'
+// import Login from '@/views/accounts/loginView.vue'
 import Signup from '@/views/accounts/signupView.vue'
 import UserDelete from '@/views/accounts/userDelete.vue'
 import UserProfile from '@/views/accounts/profileView.vue'
@@ -25,10 +25,10 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,},
+  // {
+  //   path: '/login',
+  //   name: 'Login',
+  //   component: Login,},
     {
     path: '/test',
     name: 'Test',
