@@ -24,7 +24,6 @@
 
 import { reactive,computed } from "vue";
 import {  useStore  } from 'vuex'
-import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
 import replyList from "./replyList.vue";
 // import replyList from "./replyList.vue";
@@ -33,7 +32,6 @@ export default{
     components: {replyList},
     setup(){
         const store = useStore()
-        const route = useRoute()
         const router = useRouter()
 
         const state = reactive({
