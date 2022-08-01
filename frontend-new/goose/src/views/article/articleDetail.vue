@@ -9,7 +9,7 @@
     <div>{{  article_log.content  }}</div>
     <div>
         <!--스터디 페이지와 연결 // 스터디 페이지 완성 되었을 때 연결 -->
-        <button>참여 신청</button>
+        <button @click.prevent="joinStudy(article_log.study_pk)">참여 신청</button>
         <router-link to="/articles">   <button>게시글 목록</button>  </router-link>
         <button @click="article_edit">수정</button>
         <!-- 삭제 백엔드에 url 물어보기 -->
@@ -17,9 +17,6 @@
 
     </div>
     <reply-list/>
-
-<!-- 댓글의 외래키인 article_pk 이용해서 해당 댓글의 게시글과 연동 -->
-    <!-- <reply-list :replies:""></reply-list> -->
 
 </template>
 
@@ -50,7 +47,9 @@ export default{
             },
             componentkey: 0
         })
-        
+
+        const joinStudy = (studyId) => store.dispatch('joinStudy',studyId)
+      
         const article_info = function(){
             state.form.id = store.getters.article.id,
             state.form.title = store.getters.article.title,
@@ -71,7 +70,7 @@ export default{
         }
         const article_log = computed(() => store.getters.article)
 
-        return {article_info,store,state,article_delete,article_edit,article_log}
+        return {article_info,store,state,article_delete,article_edit,article_log,joinStudy}
     },
     
 }
