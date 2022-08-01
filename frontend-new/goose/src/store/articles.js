@@ -50,7 +50,6 @@ export default {
             })
             .then(res => {
                 commit('SET_ARTICLE', res.data)})
-                
 
             .catch(err => {
                 console.error(err.response)
