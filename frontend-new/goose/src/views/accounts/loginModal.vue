@@ -13,16 +13,22 @@
           <div class="modal-body">
             <div class="container">
             <form>
-      <div class="mb-3">
+  <div class="mb-3 container">
+    <div class="input-Box">
         <label for="IdInput" class="form-label">Id</label>
         <input type="text" class="form-control" id="IdInput" v-model="state.form.id">
       </div>
+          </div>
       <div class="mb-3">
+                <div class="input-Box">
         <label for="passwordInput" class="form-label">Password</label>
         <input type="password" class="form-control" id="passwordInput" v-model="state.form.password">
       </div>
+      </div>
+          <div class="input-Box">
       <button type="submit" @click.prevent="clickLogin" data-bs-dismiss="modal" class="btn btn-primary">로그인</button>
       <button type="submit" @click.prevent="clickSignup" data-bs-dismiss="modal" class="btn btn-secondary">회원가입</button>
+      </div>
     </form>
           </div>
           <div class="modal-footer">
