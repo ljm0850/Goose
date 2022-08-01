@@ -115,21 +115,6 @@ export default {
             })
         },
 
-        // logout({  getters , dispatch}){
-        //     axios({
-        //         url: rest.user.,
-        //         method: 'post',
-        //         headers: getters.authHeader,
-        //     })
-        //     .then( () => {
-        //         dispatch('removeToken')
-        //         alert('로그아웃 완료')
-        //         router.push({ name: 'Home'})
-        //     })
-        //     .catch(err => {
-        //         console.error(err.response)
-        //     })
-        // }
         logout({commit, dispatch}) {
             dispatch('removeToken');
             // commit('SET_MY_STUDY_LIST',{})
@@ -158,6 +143,7 @@ export default {
                     router.push({name:'Home'})
                 }
             })
-    }
+
+        }
     }
 }
