@@ -58,7 +58,7 @@ export default {
             localStorage.setItem('token','')
         },
 
-        signup({ commit, dispatch}, credentials){
+        signup({ commit}, credentials){
             console.log("엑시오스 하기 전")
             console.log(credentials)
             axios({
@@ -121,7 +121,7 @@ export default {
             router.push({name:'Home'})
         },
         
-        user_delete({commit, getters, dispatch}) {
+        user_delete({getters, dispatch}) {
             const Swal = require('sweetalert2')
             Swal.fire(
                 '정말 탈퇴하실건가요??'
