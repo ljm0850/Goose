@@ -1,7 +1,6 @@
 import axios from "axios"
 import rest from '@/api/rest'
 import router from "@/router"
-import _ from "lodash"
 
 
 export default {
@@ -60,15 +59,12 @@ export default {
                 }
             })
         },
-        createArticle({commit,getters},form_data){
+        createArticle({getters},form_data){
             axios({
                 url: rest.article.article_create(),
                 method: 'post',
                 data: form_data,
                 headers: getters.authHeader,
-            })
-            .then(res => {
-                // 일단 동작 문제 없어서 비워놓음
             })
         },
             updateArticle({  commit, getters  }, {id,form_data} ){
@@ -91,7 +87,7 @@ export default {
                     console.log('시도'),
                     axios({
                         url: rest.article.article_delete(),
-                        method: 'delete',
+                        method: 'post',
                         data: id,
                         headers: getters.authHeader,
                     })
@@ -148,7 +144,7 @@ export default {
             .catch(err => console.error(err.response))
         },
 
-        fetchReplies({  commit, getters  }, {article_pk,reply_page}){
+        fetchReplies({  commit }, {article_pk,reply_page}){
             axios.get(rest.articles_reply.reply_cr(),{
                 params:{
                     articlePk:article_pk,
