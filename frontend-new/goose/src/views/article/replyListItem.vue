@@ -1,5 +1,5 @@
 <template>
-  <ol class="list-group list-group-horizontal mx-auto">
+  <ol>
     <li class="list-group-item py-1">
             <ol v-for = "reply in replies.content" :key="reply">
             <!-- 댓글 api에 댓글 작성자도 받게 부탁? -->
@@ -19,7 +19,6 @@
     <button @click="deleteReply(payload)">삭제</button>
     </span> -->
   </ol>
-  <p>asd</p>
 </template>
 
 <script>
