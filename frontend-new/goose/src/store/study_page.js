@@ -65,8 +65,6 @@ export default {
     },
 
     selectStudy({ commit, getters, dispatch }, id) {
-      console.log("스터디 pk:")
-      console.log(id)
       axios({
         url: rest.study.study_search(id),
         method: "get",
@@ -79,8 +77,6 @@ export default {
         })
         .then(() => {
           dispatch("joinList");
-          console.log("변화된 값")
-          console.log(getters.selectedStudy)
         })
         .catch((err) => {
           console.log("스터디 선택 실패");
