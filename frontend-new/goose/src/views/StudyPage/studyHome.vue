@@ -147,7 +147,10 @@ export default {
       router.push({name: 'studyArticles', params: {studyPk:store.getters.selectedStudy.id}})
     }
     const loginUser = computed(()=> store.getters.loginUser)
-    const dropOutStudy = (user_pk)=> store.dispatch("dropOutStudy",user_pk)
+    const dropOutStudy = (user_pk)=> {
+      store.dispatch("dropOutStudy",user_pk)
+      router.push({ name: "Home" })
+    }
     return { selectedStudy, deleteStudy, pageUpdate,fetchStudyHome,moveArticles,dropOutStudy,loginUser };
   },
 };

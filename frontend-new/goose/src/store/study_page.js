@@ -258,7 +258,6 @@ export default {
         method: "delete",
         headers: ({ Authorization: getters.token, study_pk: getters.selectedStudy.id, user_pk: user_pk}),
       })
-      router.push({ name: "Home" });
     }
   },
 };
