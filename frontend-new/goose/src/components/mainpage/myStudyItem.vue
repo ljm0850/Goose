@@ -8,7 +8,7 @@
 
 <script>
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 export default {
   props: {
     item: Object,
