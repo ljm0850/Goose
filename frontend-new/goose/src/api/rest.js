@@ -43,6 +43,7 @@ export default {
   studyArticle:{
     studyArticles :() => HOST + "studyArticles",
     studyArticleList : () => HOST + StudyArticles + "list",
+    studyArticleReply : () => HOST + "studyArticlesReply",
   },
   user: {
     user: () => HOST + User,
