@@ -16,6 +16,7 @@ import ArticleEdit from "@/views/article/articleEdit.vue";
 //Study
 import CreateStudy from "@/views/StudyPage/createStudy";
 import StudyHome from "@/views/StudyPage/studyHome.vue";
+import StudyArticles from "@/views/studyArticles/studyArticles.vue"
 
 const routes = [
   {
@@ -66,10 +67,16 @@ const routes = [
   },
 
   {
-    path: "/studyHome",
+    path: "/studyHome/:studyPk",
     name: "StudyHome",
     component: StudyHome,
   },
+
+  {
+    path: "/studyHome/:studyPk/Articles",
+    name: "studyArticles",
+    component: StudyArticles,
+  }
 ];
 
 const router = createRouter({

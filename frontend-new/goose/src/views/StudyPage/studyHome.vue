@@ -29,15 +29,8 @@
     >
   </div>
   <div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#boardModal"
-    >
-      전체보기
-    </button>
-    <board />
+    <!-- 게시판 -->
+    <button @click.prevent="moveArticles" class="btn btn-primary">게시판</button>
   </div>
   <div>
     <button
@@ -52,7 +45,8 @@
   </div>
   <div class="container d-flex">
     <button @click.prevent="deleteStudy">스터디 터트리기</button>
-    <button @click.prevent="">스터디 탈퇴하기</button>
+    {{ loginUser.id }}
+    <button @click.prevent="dropOutStudy(loginUser.id)">스터디 탈퇴하기</button>
     <div>
       <button
         type="button"
@@ -114,17 +108,18 @@
 </template>
 
 <script>
-import board from "@/components/StudyPage/board.vue";
 import callender from "@/components/StudyPage/callender";
 import studyUpdate from "@/components/StudyPage/studyUpdate.vue";
 import studyJoinList from "@/components/StudyPage/studyJoinList.vue";
 import { useStore } from "vuex";
-import { computed, watch } from "vue";
+import { computed, watch,onMounted } from "vue";
+import { useRoute,useRouter } from "vue-router";
 
 export default {
+  
   name: "StudyHome",
   components: {
-    board,
+    
     callender,
     studyUpdate,
     studyJoinList,
@@ -132,20 +127,31 @@ export default {
 
   setup() {
     const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
     const selectedStudy = computed(() => store.getters.selectedStudy);
     const deleteStudy = () =>
       store.dispatch("deleteStudy", store.getters.studyId);
     const pageUpdate = () =>
       store.dispatch("selectStudy", store.getters.selectedStudy.id);
 
-    return { selectedStudy, deleteStudy, pageUpdate };
-  },
+    const fetchStudyHome = () =>{
+      console.log("패치 스터디 홈 작동")
+      store.dispatch("selectStudy",route.params.studyPk)
+    };
+    onMounted(()=>{
+      fetchStudyHome()
+    })
 
-  watch: {
-    selectedStudy() {
-      console.log("빅브라더");
-      this.pageUpdate();
-    },
+    const moveArticles = ()=>{
+      router.push({name: 'studyArticles', params: {studyPk:store.getters.selectedStudy.id}})
+    }
+    const loginUser = computed(()=> store.getters.loginUser)
+    const dropOutStudy = (user_pk)=> {
+      store.dispatch("dropOutStudy",user_pk)
+      router.push({ name: "Home" })
+    }
+    return { selectedStudy, deleteStudy, pageUpdate,fetchStudyHome,moveArticles,dropOutStudy,loginUser };
   },
 };
 </script>

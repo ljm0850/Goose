@@ -58,9 +58,6 @@ import { useRouter } from 'vue-router'
 export default {
     setup(){
         // 추후 게시판 연결 후 ref값 변경 - 페이지네이션 관련 코드
-        const currentPage = 1
-        const Rows = 10
-        const PerPage = 10
         const Router = useRouter()
 
         const store = useStore()
@@ -76,6 +73,7 @@ export default {
               text: '',
             }
         })
+        
 
         const articles_set = function(){
           store.dispatch('fetchArticles',1) 
@@ -93,7 +91,7 @@ export default {
         const articles = computed(() => store.getters.articles)
 
     
-    return {currentPage,Rows,PerPage,state,onMounted,articles_set,isList,onclick,articles}
+    return {state,onMounted,articles_set,isList,onclick,articles}
 
 
     }
@@ -101,7 +99,23 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .input-Box:nth-child(3) {
+    display: flex;
+    /* justify-content: space-evenly; */
+    justify-content: end;
 
+    }
+    .input-Box button{
+    background: #ffd700;
+    color: #000000;
+    cursor: pointer;
+    width: 100px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 80px 40px;
+    margin-right: 30px;
+  }
 
 </style>

@@ -2,12 +2,13 @@ const HOST = "http://localhost:8080/api/v1/";
 const COMP = "https://api.jdoodle.com/v1/";
 
 const Article = "articles/";
-const ArticleReply = "articlesReply/";
+const ArticleReply = "articlesReply";
 const Auth = "auth/login";
 const Study = "study/";
 const User = "users";
 const Member = "member/";
 const Calendar = "calendar/";
+const StudyArticles = "studyArticles/"
 
 export default {
   accounts: {
@@ -20,8 +21,7 @@ export default {
     article_list: (page) => HOST + Article + "list" + `?page=${page}`,
   },
   articles_reply: {
-    reply_cr: () => HOST + ArticleReply,
-    reply_ud: (id) => HOST + ArticleReply + `${id}`,
+    reply_crud: () => HOST + ArticleReply,
   },
   study: {
     study_create: () => HOST + Study + "create",
@@ -38,7 +38,12 @@ export default {
     study_join_delete: (id) => HOST + Study + Member + "joindelete/" + `${id}`,
     study_member_list: (study_pk) =>
       HOST + Study + Member + "studymemberlsit/" + `${study_pk}`, // 오타 불편
-    compile: () => COMP + "/execute",
+    study_member_out:()=> HOST + Study + Member + "studymemberout"
+  },
+  studyArticle:{
+    studyArticles :() => HOST + "studyArticles",
+    studyArticleList : () => HOST + StudyArticles + "list",
+    studyArticleReply : () => HOST + "studyArticlesReply",
   },
   user: {
     user: () => HOST + User,
