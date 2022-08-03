@@ -25,6 +25,10 @@ export default {
     choiceImg: "",
     events: [], // 전체 캘린더
     event: [], // 개별 캘린더
+    studyManager: { 
+      // id:0,
+      // name:""
+    }
   },
 
   getters: {
@@ -38,6 +42,8 @@ export default {
     choiceImg: (state) => state.choiceImg,
     events: (state) => state.events,
     event: (state) => state.event,
+    studyManager: (state) => state.studyManager,
+    isStudyManager: (state,getters) => state.studyManager.id == getters.loginUser.id
   },
 
   mutations: {
@@ -53,6 +59,7 @@ export default {
     SET_CHOICE_IMG: (state, img) => (state.choiceImg = img),
     SET_EVENTS: (state, events) => (state.events = events),
     SET_EVENT: (state, event) => (state.event = event),
+    SET_STUDY_MANAGER: (state,manager) => state.studyManager = manager,
   },
 
   actions: {
@@ -73,6 +80,7 @@ export default {
         .then((res) => {
           commit("SET_SELECTED_STUDY", res.data);
           dispatch("saveStudyMemberList", res.data.id);
+          dispatch("findStudyManager");
           // router.push({ path: "/studyHome" });
         })
         .then(() => {
@@ -100,7 +108,7 @@ export default {
         });
     },
 
-    createStudy({ getters }, credential) {
+    createStudy({ getters,dispatch }, credential) {
       axios({
         url: rest.study.study_create(),
         method: "post",
@@ -109,6 +117,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
+          dispatch('myStudyList')
           router.push({ name: "Home" });
         })
         .catch((err) => {
@@ -130,7 +139,7 @@ export default {
       });
     },
 
-    deleteStudy({ commit, getters }) {
+    deleteStudy({ commit, getters,dispatch }) {
       console.log(getters.selectedStudy);
       console.log(rest.study.study_remove(getters.selectedStudy.id));
       axios({
@@ -140,6 +149,7 @@ export default {
       })
         .then(() => {
           console.log("삭제 완료");
+          dispatch('myStudyList')
           commit("SET_SELECTED_STUDY", {});
           router.push({ name: "Home" });
         })
@@ -286,5 +296,16 @@ export default {
           console.log(res);
         });
     },
+
+    findStudyManager({getters,commit}){
+      console.log(getters.studyMemberList)
+      getters.studyMemberList.forEach((member)=>{
+        if(member.authority==5){
+          console.log("매니저 찾음")
+          console.log(member)
+          commit('SET_STUDY_MANAGER',{id:member.user_pk, name:member.user_id})
+        }
+      })
+    }
   },
 };
