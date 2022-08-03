@@ -8,7 +8,7 @@
 
 <script>
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 export default {
   props: {
     item: Object,
@@ -19,7 +19,7 @@ export default {
 
     const selectStudy = () => {
       store.dispatch("selectStudy", props.item.id);
-      router.push({name: "StudyHome", params: {id:props.item.id}})
+      router.push({name: "StudyHome", params: {studyPk:props.item.id}})
     };
 
     return { selectStudy };
@@ -27,4 +27,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

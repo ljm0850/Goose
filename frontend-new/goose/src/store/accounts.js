@@ -1,6 +1,6 @@
-import router from '@/router'
-import axios from 'axios'
-import rest from '@/api/rest'
+import router from "@/router";
+import axios from "axios";
+import rest from "@/api/rest";
 
 export default {
     state: {
@@ -9,6 +9,7 @@ export default {
         authError: null, // 오류 발생 시
         loginUser: {},
         targetUser: {},
+        profileDetail: {},
         
     },
     getters: {
@@ -16,8 +17,9 @@ export default {
         authError: state => state.authError,   // 인증 에러
         authHeader: state => ({ Authorization: state.token}),  // 인증 정보
         loginUser: state => state.loginUser,  // 현재 로그인한 유저
-        targetUser: state => state.targetUser, // 다른 유저 정보 
-        
+        targetUser: state => state.targetUser, // 다른 유저 정보
+        profileDetail: state => state.profileDetail, 
+        token: state=> state.token
     },
     mutations: {
         SET_TOKEN: (state, token) => state.token = token,
@@ -27,94 +29,50 @@ export default {
         LOGOUT: () => { 
             localStorage.removeItem('user')
             location.reload();
-        }
+        },
+        SET_PROFILE_DETAIL : (state, data) => state.profileDetail = data,
     },
-    actions: {
-        login({commit, dispatch},credential){
-            axios({
-                url: rest.accounts.login(),
-                method: 'post',
-                data: credential
-            })
-            .then(res => {
-                const token = res.data.accessToken
-                dispatch('saveToken', token)
-                dispatch('fetchLoginUser')
-                dispatch('myStudyList')
-                router.push({name: 'Home'})
-            })
-            .catch(err => {
-                console.log("catch")
-                console.error(err.response.data)
-                commit('SET_AUTH_ERROR', err.response.data)
-            })
-        },
-        saveToken({  commit  }, token) {
-            commit('SET_TOKEN', token)
-            localStorage.setItem('token', token)
-        },
-        removeToken({  commit  }){
-            commit('SET_TOKEN', '')
-            localStorage.setItem('token','')
-        },
 
-        signup({ commit}, credentials){
-            console.log("엑시오스 하기 전")
-            console.log(credentials)
-            axios({
-                url: rest.user.user(),
-                method: 'post',
-                data: credentials
-            })
-            .then(res => {
-                console.log("then")
-                console.log('signup')
-                // const token = res.data.accessToken
-                // dispatch('saveToken', token)
-                // router.push({ name: 'Home '})
-            })
-            .catch(err => {
-                // console.log(url)
-                console.log('catch')
-                console.log(err)
-                // console.error(err.response.data)
-                commit('SET_AUTH_ERROR', err.response.data)
-            })
-        },
-        // 현재 접속중인 이용자
-        fetchLoginUser({ commit, getters, dispatch }) {
-            if (getters.isLoggedIn) {
-              axios({
-                url: rest.user.user_myprofile(), 
-                method: 'get',
-                headers: getters.authHeader,
-              })
-                .then(res =>
-                    commit('SET_LOGIN_USER', res.data)
-                )
-                .catch(err => {
-                  if (err.response.status === 401) {
-                    dispatch('removeToken')
-                    router.push({ name: 'login' })
-                  }
-                })
+    signup({ commit }, credentials) {
+      console.log("엑시오스 하기 전");
+      console.log(credentials);
+      axios({
+        url: rest.user.user(),
+        method: "post",
+        data: credentials,
+      })
+        .then((res) => {
+          console.log("then");
+          console.log("signup");
+          // const token = res.data.accessToken
+          // dispatch('saveToken', token)
+          // router.push({ name: 'Home '})
+        })
+        .catch((err) => {
+          // console.log(url)
+          console.log("catch");
+          console.log(err);
+          // console.error(err.response.data)
+          commit("SET_AUTH_ERROR", err.response.data);
+        });
+    },
+    // 현재 접속중인 이용자
+    fetchLoginUser({ commit, getters, dispatch }) {
+      if (getters.isLoggedIn) {
+        axios({
+          url: rest.user.user_myprofile(),
+          method: "get",
+          headers: getters.authHeader,
+        })
+          .then((res) => commit("SET_LOGIN_USER", res.data))
+          .catch((err) => {
+            if (err.response.status === 401) {
+              dispatch("removeToken");
+              router.push({ name: "login" });
             }
-        },
-        
-        // id값을 통해 해당 유저 정보 획득 (다른 유저 아이디 및 외래키를 통한 정보 접근용)
-        fetchUserInfo({  commit, getters  }, user_pk){
-            axios({
-                url: rest.user.user_check(user_pk),
-                method: 'get',
-                headers: getters.authHeader,
-            })
-            .then(res => {
-                commit('SET_TARGET_USER', res.data)
-            })
-            .catch(err => {
-                console.log( err,'오류')
-            })
-        },
+          });
+      }
+    },
 
         logout({commit, dispatch}) {
             dispatch('removeToken');
@@ -133,7 +91,6 @@ export default {
                 console.log(password)
                 if (result.isConfirmed) {
                     axios({
-                        
                         url : rest.user.user(),
                         method: 'delete',
                         headers: {'Authorization' : getters.authHeader.Authorization, 'password': password},
@@ -143,11 +100,32 @@ export default {
                         console.log('then2')
                         Swal.fire(
                             '그동안 Goose를 이용해주셔서 감사합니다'
-                        )  
+                        )
                     router.push({name:'Home'})
                 }
             })
-
+        },
+        profileUpdate({getters,dispatch, commit},userform_data) {
+            console.log('액시오스 전')
+            axios({
+                url: rest.user.user(),
+                method: 'patch',
+                data: userform_data,
+                headers: getters.authHeader
+            })
+            .then(res=>{
+                // console.log(res.config.data)
+                dispatch('fetchLoginUser')
+                commit('SET_PROFILE_DETAIL', res.config.data)
+                router.push({
+                    name: "UserProfile"
+                })
+            })
+            .catch(err=> {
+                console.log(err)
+            })
         }
-    }
-}
+      });
+    },
+  },
+};

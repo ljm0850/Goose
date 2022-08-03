@@ -215,7 +215,8 @@ export default {
 
     // 스터디 가입신청 승락
     joinAgree({ getters, dispatch }, credential) {
-      console.log("승락");
+      console.log("승락 신청");
+      console.log(rest.study.study_join_agree());
       axios({
         url: rest.study.study_join_agree(),
         method: "post",
@@ -224,7 +225,11 @@ export default {
       }).then((res) => {
         console.log(res);
         dispatch("joinList");
-      });
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+      
     },
 
     // 스터디 가입신청 거절
@@ -244,5 +249,15 @@ export default {
       console.log(imgurl);
       commit("SET_CHOICE_IMG", imgurl);
     },
+
+    dropOutStudy({getters},user_pk){
+      console.log("스토어에는 도착")
+      console.log(getters.token)
+      axios({
+        url:rest.study.study_member_out(),
+        method: "delete",
+        headers: ({ Authorization: getters.token, study_pk: getters.selectedStudy.id, user_pk: user_pk}),
+      })
+    }
   },
 };
