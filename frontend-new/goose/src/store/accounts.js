@@ -44,9 +44,12 @@ export default {
                 dispatch('saveToken', token)
                 dispatch('fetchLoginUser')
                 dispatch('myStudyList')
+                // alert(`${getters.loginUser}님 환영합니다!`)
                 router.push({name: 'Home'})
+                
             })
             .catch(err => {
+                alert('비밀번호를 확인해주세요')
                 console.log("catch")
                 console.error(err.response.data)
                 commit('SET_AUTH_ERROR', err.response.data)
