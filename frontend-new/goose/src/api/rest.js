@@ -1,4 +1,5 @@
 const HOST = "http://localhost:8080/api/v1/";
+const COMP = "https://api.jdoodle.com/v1/";
 
 const Article = "articles/";
 const ArticleReply = "articlesReply/";
@@ -37,6 +38,7 @@ export default {
     study_join_delete: (id) => HOST + Study + Member + "joindelete/" + `${id}`,
     study_member_list: (study_pk) =>
       HOST + Study + Member + "studymemberlsit/" + `${study_pk}`, // 오타 불편
+    compile: () => COMP + "/execute",
   },
   user: {
     user: () => HOST + User,

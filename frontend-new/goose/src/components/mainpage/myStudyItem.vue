@@ -17,6 +17,7 @@ export default {
 
     const selectStudy = () => {
       store.dispatch("selectStudy", props.item.id);
+      store.dispatch("compile");
     };
 
     return { selectStudy };

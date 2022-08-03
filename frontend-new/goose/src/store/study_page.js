@@ -244,5 +244,29 @@ export default {
       console.log(imgurl);
       commit("SET_CHOICE_IMG", imgurl);
     },
+
+    compile() {
+      console.log("compile");
+      axios({
+        url: "/v1/execute",
+        method: "post",
+        data: {
+          clientId: "683c1c7ad02b383e183ce75fb4258278",
+          clientSecret:
+            "48d14c2f3257a101345589019219ae6a4b94a59502add15eb4bef43c0544ed83",
+          script: "print (30+20)" + "\n" + "print (40+10)",
+          versionIndex: "0",
+          language: "python3",
+        },
+      })
+        .then((res) => {
+          console.log("컴파일 성공");
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log("컴파일 실패");
+          console.log(res);
+        });
+    },
   },
 };
