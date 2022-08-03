@@ -1,21 +1,9 @@
 <template>
   <ul class="pagination justify-content-center">
 
-    <li class="page-item" v-if="prev">
-      <router-link :to="`/articles/${ (state.startPageIndex - 1) * state.listRowCount }`" class="page-link" aria-label="Previous" @click.native="movePage(state.startPageIndex - 1)">
-        <span aria-hidden="true">&laquo;</span>
-      </router-link>
-    </li>
-
     <li v-for="index in state.endPageIndex-state.startPageIndex + 1 " :key="index" class="page-item" :class="{active:( (state.startPageIndex + index - 1) == state.currentPageIndex)}">
-      <router-link :to="`/articles/${ (state.startPageIndex + index - 1) * state.listRowCount }`" class="page-link"  @click.native="movePage(state.startPageIndex + index - 1)">{{ state.startPageIndex + index - 1 }}</router-link>
+      <button class="page-link"  @click.native="movePage(state.startPageIndex + index - 1)">{{ state.startPageIndex + index - 1 }}</button>
       <!-- <a class="page-link" href="javascript:movePage(' + i + ')">' + i + '</a> -->
-    </li>
-
-    <li class="page-item" v-if="next">
-      <router-link :to="`/articles/${ (state.endPageIndex + 1) * state.listRowCount }`" class="page-link" aria-label="Next"  @click.native="movePage(state.endPageIndex + 1)">
-        <span aria-hidden="true">&raquo;</span>
-      </router-link>
     </li>
   </ul>
 </template>
@@ -35,17 +23,37 @@ export default{
             currentPageIndex: 1,
 
             pageCount: 0,
-            startPageIndex: 0,
-            endPageIndex: 0,
-            prev: false,
-            next: false
+            startPageIndex: 1,
+            endPageIndex: 10,
         })
 
         const movePage = function(param){
             state.currentPageIndex = param
-            store.dispatch
+            store.dispatch('fetchArticles',param)
+            
         }
-    
 
-return {state}}}
+        const initUi = function()
+        {
+
+      state.pageCount = Math.ceil(state.totalListItemCount/state.listRowCount);
+
+      if( (state.currentPageIndex % state.pageLinkCount) == 0 ){
+        state.startPageIndex = ((state.currentPageIndex / state.pageLinkCount)-1)*state.pageLinkCount + 1
+      }else{
+        state.startPageIndex = Math.floor(state.currentPageIndex / state.pageLinkCount)*state.pageLinkCount + 1
+      }
+
+      if( (state.currentPageIndex % state.pageLinkCount) == 0 ){ //10, 20...맨마지막
+        state.endPageIndex = ((state.currentPageIndex / state.pageLinkCount)-1)*state.pageLinkCount + state.pageLinkCount
+      }else{
+        state.endPageIndex =  Math.floor(state.currentPageIndex / state.pageLinkCount)*state.pageLinkCount + state.pageLinkCount;
+      }
+
+      if(state.endPageIndex > state.pageCount){
+        state.endPageIndex = state.pageCount
+      }
+    }
+
+return {state,movePage,initUi}}}
 </script>
