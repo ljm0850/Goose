@@ -45,19 +45,20 @@ export default {
     },
     actions: {
         getStudyArticleList({getters,commit},credential){
+            console.log(credential)
             axios({
                 url: rest.studyArticle.studyArticleList(),
                 method:'get',
                 headers: getters.authHeader,
-                params: { "category":credential.category, "page":credential.page, "studyPk":credential.studyPk, "title":credential.title}
+                params: { "category":credential.category, "page":credential.page, "studyPk":getters.selectedStudy.id, "title":credential.title}
             })
             .then((res)=>{
-                // console.log(res.data)
+                console.log(res.data)
                 commit("SET_STUDY_ARTICLES",res.data.content)
             })
         },
         
-        getStudyArticle({getters,commit},articleId){
+        getStudyArticle({getters,commit,dispatch},articleId){
             axios({
                 url: rest.studyArticle.studyArticles(),
                 method: 'get',
@@ -66,6 +67,7 @@ export default {
             })
             .then((res)=>{
                 commit("SET_SELECTED_ARTICLE",res.data)
+                dispatch("getComment",{articlePk:getters.selectedArticle.id ,id:null, page:1})
             })
             // .catch((err)=>{
             //     console.log(err)
@@ -122,14 +124,16 @@ export default {
             data: credential
         })
         .then((res)=>{
+            console.log("hi")
             dispatch('getComment',{articlePk:getters.selectedArticle.id,page:1})
         })
-        // .catch((err)=>{
-        //     console.log(err)
-        // })
+        .catch((err)=>{
+            console.log(err)
+        })
        },
 
        getComment({getters,commit},credential){
+        console.log(credential)
         axios({
             url: rest.studyArticle.studyArticleReply(),
             method: 'get',
@@ -137,11 +141,13 @@ export default {
             params: credential //{articlePk:int ,id:int, page:int}
         })
         .then((res)=>{
+            console.log(res.data.content)
             commit('SET_STUDY_ARTICLE_COMMENT_LIST',res.data.content)
+            console.log("패치 성공")
         })
-        // .catch((err)=>{
-        //     console.log(err)
-        // })
+        .catch((err)=>{
+            console.log(err)
+        })
        },
 
        deleteComment({getters,dispatch},id){
