@@ -33,6 +33,8 @@ export default {
         SET_PROFILE_DETAIL : (state, data) => state.profileDetail = data,
     },
 
+    actions:{
+
     signup({ commit }, credentials) {
       console.log("엑시오스 하기 전");
       console.log(credentials);
@@ -125,7 +127,5 @@ export default {
                 console.log(err)
             })
         }
-      });
-    },
-  },
-};
+      }
+    }
