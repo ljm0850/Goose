@@ -19,7 +19,7 @@
         <!-- 삭제 백엔드에 url 물어보기 -->
         <button @click="article_delete">삭제</button> 
         </div>
-
+    <p>{{article_log}}</p>
     </div>
     </div>
     <reply-list/>
@@ -53,10 +53,10 @@ export default{
             },
             componentkey: 0
         })
-        const article_start = function(){
-        store.dispatch('fetchArticle',route.params.id)
-        }
-        article_start()
+        // const article_start = function(){
+        // store.dispatch('fetchArticle',route.params.id)
+        // }
+        // article_start()
 
 
         const joinStudy = (studyId) => store.dispatch('joinStudy',studyId)
@@ -86,7 +86,7 @@ export default{
         const study_log = computed(() => store.getters.selectedStudy)
         const article_log = computed(() => store.getters.article)
 
-        return {article_info,store,state,article_delete,article_edit,article_log,joinStudy,study_log,article_start}
+        return {article_info,store,state,article_delete,article_edit,article_log,joinStudy,study_log}
     },
     
 }
@@ -97,6 +97,6 @@ export default{
   border: 1px solid black;
   margin-top: 1rem;
   padding-top: 1rem;
-  min-height: 360px;
+  min-height: 720px;
 }
 </style>

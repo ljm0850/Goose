@@ -5,9 +5,8 @@
             <div class="left">
                 <img :src="state.profilephoto" alt="user" width="200">
                 <!-- <img :src="state.photo" alt=""> -->
-                <h4>{{profile.name}}</h4>
-                <p>관심분야: {{profile.interest}}</p>
-                <img src={{profile.photo}} alt="실패">
+                <h4>{{state.name}}</h4>
+                <p>관심분야: {{state.interest}}</p>
                 <div class="change-btn">
                   <input type="button" value="프로필 변경" @click="changeProfile">
                 </div>
@@ -18,11 +17,11 @@
                     <div class="info_data">
                         <div class="data">
                             <h4>Email</h4>
-                            <p>{{profile.email}}</p>
+                            <p>{{state.email}}</p>
                         </div>
                         <div class="data">
                         <h4>자기소개</h4>
-                            <p>{{profile.info}}</p>
+                            <p>{{state.info}}</p>
                     </div>
                     </div>
                 </div>
@@ -93,13 +92,11 @@ export default {
             }
          }
         savePhoto()
-
-        const  profile = computed(() => store.getters.loginUser)
         return {
             store,
             router,
             state,
-            changeProfile,profile
+            changeProfile,
             // savePhoto
             // getImgUrl
             // savePath,
