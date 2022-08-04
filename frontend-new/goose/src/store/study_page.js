@@ -28,7 +28,8 @@ export default {
     studyManager: { 
       // id:0,
       // name:""
-    }
+    },
+    reloadCheck: false,
   },
 
   getters: {
@@ -40,6 +41,7 @@ export default {
     isJoinList: (state) => !!state.saveJoinList,
     studyMemberList: (state) => state.studyMemberList,
     choiceImg: (state) => state.choiceImg,
+    reloadCheck: (state) => state.reloadCheck,
     events: (state) => state.events,
     event: (state) => state.event,
     studyManager: (state) => state.studyManager,
@@ -60,6 +62,7 @@ export default {
     SET_EVENTS: (state, events) => (state.events = events),
     SET_EVENT: (state, event) => (state.event = event),
     SET_STUDY_MANAGER: (state,manager) => state.studyManager = manager,
+    SET_RELOADCHECK: (state, reloadCheck) => state.reloadCheck = reloadCheck,
   },
 
   actions: {
@@ -131,24 +134,28 @@ export default {
         data: credential,
       }).then((res) => {
         dispatch("selectStudy", getters.selectedStudy.id);
+        alert("스터디 정보가 업데이트 되었습니다.")
       });
     },
 
     deleteStudy({ commit, getters,dispatch }) {
-      axios({
-        url: rest.study.study_remove(getters.selectedStudy.id),
-        method: "delete",
-        headers: getters.authHeader,
-      })
-        .then(() => {
-          dispatch('myStudyList')
-          commit("SET_SELECTED_STUDY", {});
-          router.push({ name: "Home" });
+      const check = confirm("정말로 삭제하시겠습니까?")
+      if (check){
+        axios({
+          url: rest.study.study_remove(getters.selectedStudy.id),
+          method: "delete",
+          headers: getters.authHeader,
         })
-        .catch((err) => {
-          alert("스터디 삭제에 실패했습니다.");
-        });
-      router.push({ name: "Home" });
+          .then(() => {
+            dispatch('myStudyList')
+            commit("SET_SELECTED_STUDY", {});
+            router.push({ name: "Home" });
+          })
+          .catch((err) => {
+            alert("스터디 삭제에 실패했습니다.");
+          });
+        router.push({ name: "Home" });
+      }
     },
     myStudyList({ getters, commit }) {
       axios({
@@ -208,18 +215,21 @@ export default {
 
     // 스터디 가입신청 승락
     joinAgree({ getters, dispatch }, credential) {
-      axios({
-        url: rest.study.study_join_agree(),
-        method: "post",
-        headers: getters.authHeader,
-        data: credential,
-      })
+      const check = confirm(`${credential.name}을 받으시겠습니까?`)
+      if (check){
+        axios({
+          url: rest.study.study_join_agree(),
+          method: "post",
+          headers: getters.authHeader,
+          data: credential,
+        })
         .then((res) => {
           dispatch("joinList");
         })
         .catch((err) => {
           console.log(err);
         });
+      }
     },
 
     // 스터디 가입신청 거절
@@ -238,15 +248,21 @@ export default {
     },
 
     dropOutStudy({ getters }, user_pk) {
-      axios({
-        url: rest.study.study_member_out(),
-        method: "delete",
-        headers: {
-          Authorization: getters.token,
-          study_pk: getters.selectedStudy.id,
-          user_pk: user_pk,
-        },
-      });
+      const check = confirm(`${getters.selectedStudy.title}을(를) 탈퇴 하시겠습니까?`)
+      if (check){
+        axios({
+          url: rest.study.study_member_out(),
+          method: "delete",
+          headers: {
+            Authorization: getters.token,
+            study_pk: getters.selectedStudy.id,
+            user_pk: user_pk,
+          },
+        })
+        .then((res)=>{
+          router.push({ name: "Home" });
+        })
+      }
     },
     compile() {
       console.log("compile");
