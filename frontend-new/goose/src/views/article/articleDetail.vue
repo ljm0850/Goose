@@ -16,12 +16,14 @@
         <button @click.prevent="joinStudy(article_log.study_pk)">참여 신청</button>
         <router-link to="/articles">   <button>게시글 목록</button>  </router-link>
         <button @click="article_edit">수정</button>
-        <!-- 삭제 백엔드에 url 물어보기 -->
+
         <button @click="article_delete">삭제</button> 
         </div>
     </div>
     </div>
     <reply-list/>
+
+<!-- 스터디 이미 참여중인 인원은 참여 신청 안보이게 설정 -->
 
 </template>
 
