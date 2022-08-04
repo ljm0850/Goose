@@ -173,5 +173,26 @@ export default {
                 console.log(err)
             })
         }
-    }
+      });
+    },
+    profileUpdate({ getters, dispatch, commit }, userform_data) {
+      console.log("액시오스 전");
+      axios({
+        url: rest.user.user(),
+        method: "patch",
+        data: userform_data,
+        headers: getters.authHeader,
+      })
+        .then((res) => {
+          // console.log(res.config.data)
+          dispatch("fetchLoginUser");
+          commit("SET_PROFILE_DETAIL", res.config.data);
+          router.push({
+            name: "UserProfile",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },}
 }
