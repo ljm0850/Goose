@@ -1,21 +1,22 @@
 <template>
-<h1>스터디 참여하기</h1>
+<h1 class="d-flex justify-content-center">스터디 모집 게시판</h1>
+<div class="container">
 <!-- 검색창 -->
 <div class="input-group mb-3">
-<select class="form-select-line-height" v-model="state.search.status">
-  <option selected>상태</option>
-  <option value="1">모집중</option>
-  <option value="2">진행중</option>
-  <option value="3">모집완료</option>
+<select v-model="state.search.state">
+  <option value=null>상태</option>
+  <option value="모집중">모집중</option>
+  <option value="진행중">진행중</option>
+  <option value="모집완료">모집완료</option>
 </select>
-<select class="form-select-line-height" v-model="state.search.category">
-  <option selected>분류</option>
-  <option value="1">토익</option>
-  <option value="2">면접</option>
-  <option value="3">자유</option>
+<select v-model="state.search.category">
+  <option value=null>분류</option>
+  <option value="토익">토익</option>
+  <option value="면접">면접</option>
+  <option value="알고리즘">자유</option>
 </select>
-  <input type="text" class="form-control" v-model="state.search.text">
-    <button class="btn btn-outline-secondary" type="button">검색</button>
+  <input type="text" class="form-control" v-model="state.search.title">
+    <button class="btn btn-outline-secondary" type="button" @click="filterArticles()">검색</button>
 </div>
 
 <!-- 게시판 -->
@@ -46,7 +47,7 @@
 <pageLink/>
 <!-- 무한 스크롤이랑 카드형 게시글? -->
   <router-link to="/newarticle" class="btn btn-primary">글 작성</router-link>
-
+</div>
 </template>
 
 <script>
@@ -72,12 +73,16 @@ export default {
             headers: ['글번호','상태','분류','제목','작성자','등록일','조회수'],
             articles: [],
             search: {
-              status: '',
-              category: '',
-              text: '',
-            }
+              state: null,
+              category: null,
+              title: null,
+            },
         })
         
+        const filterArticles = function(){
+          store.dispatch('fetchArticles',1)
+          store.dispatch('filterArticles',state.search)
+        }
 
         const articles_set = function(){
           store.dispatch('fetchArticles',1) 
@@ -95,7 +100,7 @@ export default {
         const articles = computed(() => store.getters.articles)
 
     
-    return {state,onMounted,articles_set,isList,onclick,articles}
+    return {state,filterArticles,onMounted,articles_set,isList,onclick,articles}
 
 
     }

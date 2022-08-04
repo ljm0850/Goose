@@ -74,35 +74,4 @@ export default {
 </script>
 
 <style scoped>
-  .notice-item {
-    width : 100%;
-    height: 300px;
-    background-color: #ffd700;
-    border: 1px solid #ffd700;
-    display: flex;
-    justify-content: center;
-  }
-  ul[class="button-links"]{
-    display:flex;
-    margin-top:50px;
-  }
-  .button-links {
-    list-style: none;
-  }
-
-  li .button-study {
-    display: inline-block;
-    /* padding: 0 1.25rem; */
-    cursor: pointer;
-    padding: 9px 20px;
-    border: none;
-    /* border-radius: 50px; */
-    font-family: "NanumSquare", sans-serif;
-    font-weight: bold;
-    font-size: 1.25rem;
-    transition: all 0.5s ease 0s;
-    margin-left: 20px;
-    background: #fff;
-    /* border-radius: 80px 40px; */
-  }
 </style>

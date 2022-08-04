@@ -6,7 +6,6 @@
       <h3 class="card-title">{{ item.title }}</h3>
       <a @click.prevent="selectStudy" class="btn btn-warning">스터디 홈</a>
     </div>
-    
   </div>
 </template>
 
