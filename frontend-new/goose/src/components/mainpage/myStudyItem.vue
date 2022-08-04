@@ -1,11 +1,10 @@
 <template>
   <div class="card">
-    <img :src="item.image" alt="@/src/assets/study1.png" class='card-img-top'/>
+    <img :src="item.image" alt="" class='card-img-top'/>
     <div class="card-body">
       <h3 class="card-title">{{ item.title }}</h3>
       <a @click.prevent="selectStudy" class="btn btn-warning">스터디 홈</a>
     </div>
-    
   </div>
 </template>
 

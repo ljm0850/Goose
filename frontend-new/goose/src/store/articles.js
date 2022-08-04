@@ -10,6 +10,7 @@ export default {
         article: [],   // 개별 게시물의 CRUD에 사용
         replies: [], // 해당 게시물의 전체 댓글 조회 시 사용
         reply: {}, //개별 댓글의 CRUD
+        total: []
     },
     getters: {
         articles: state => state.articles,
@@ -17,12 +18,14 @@ export default {
         isAuthor: (state,getters) => {return state.article.user_pk == getters.loginUser},     // 게시물 작성자 권한 확인 (fetchCurrentUser 활용)
         replies: state => state.replies,
         reply: state => state.reply,
+        total: state => state.total,
     },
     mutations: {
         SET_ARTICLES: (state, articles) => state.articles = articles,
         SET_ARTICLE: (state, article) => state.article = article,
         SET_REPLIES: (state, replies) => state.replies = replies,
         SET_REPLY: (state, reply) => state.reply = reply,
+        SET_TOTALPAGE: (state, total) => state.total = total
     },
     actions: {
         // 전체 페이지 조회
@@ -34,11 +37,37 @@ export default {
                 headers: getters.authHeader,
             })
             .then(res => {
+                commit('SET_TOTALPAGE',res.data.totalPages)
                 commit('SET_ARTICLES',res.data.content
                 )
             
             })
                 
+            .catch(err => 
+                {console.log(err)})
+
+        },
+
+        filterArticles({commit,getters}, form){
+            console.log(form)
+            axios({
+                // 필터 된 상황에서의 페이지 네이션 생각해보기
+                url: rest.article.article_list(1),
+                method: 'get',
+                headers: getters.authHeader,
+                params: {
+                    category:form.category,
+                    state: form.state,
+                    title: form.title,
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                commit('SET_TOTALPAGE',res.data.totalPages)
+                commit('SET_ARTICLES',res.data.content
+                )
+            
+            })
             .catch(err => 
                 {console.log(err)})
 

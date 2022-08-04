@@ -24,7 +24,7 @@ export default{
 
             pageCount: 0,
             startPageIndex: 1,
-            endPageIndex: 10,
+            endPageIndex: store.getters.total,
         })
 
         const movePage = function(param){
