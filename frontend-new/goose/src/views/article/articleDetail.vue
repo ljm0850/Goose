@@ -19,7 +19,6 @@
         <!-- 삭제 백엔드에 url 물어보기 -->
         <button @click="article_delete">삭제</button> 
         </div>
-    <p>{{article_log}}</p>
     </div>
     </div>
     <reply-list/>
@@ -33,7 +32,6 @@ import {  useStore  } from 'vuex'
 import { useRouter } from 'vue-router';
 import replyList from "./replyList.vue";
 import { useRoute } from "vue-router";
-// import replyList from "./replyList.vue";
 
 export default{
     components: {replyList},
@@ -97,6 +95,6 @@ export default{
   border: 1px solid black;
   margin-top: 1rem;
   padding-top: 1rem;
-  min-height: 720px;
+  min-height: 360px;
 }
 </style>

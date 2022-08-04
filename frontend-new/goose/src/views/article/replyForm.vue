@@ -31,7 +31,7 @@ export default {
             if (state.form.re_content !== ''){
             store.dispatch('createReply',{article_pk: state.article.id, re_content: state.form.re_content})
             state.form.re_content = ''
-            router.go()}
+            }
             else if (state.form.re_content == ''){
                 alert('내용을 입력하세요.')
             }
