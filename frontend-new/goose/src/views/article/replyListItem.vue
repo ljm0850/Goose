@@ -48,6 +48,7 @@ export default {
         const reply_list = function(){
             // reply_page 값은 임의로 1 부여
             store.dispatch('fetchReplies', {article_pk:store.getters.article.id,reply_page:1} )
+            console.log(store.getters.replies,'테스트')
         }
         reply_list()
 

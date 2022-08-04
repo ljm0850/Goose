@@ -9,7 +9,8 @@ export default {
         article: [],   // 개별 게시물의 CRUD에 사용
         replies: [], // 해당 게시물의 전체 댓글 조회 시 사용
         reply: {}, //개별 댓글의 CRUD
-        total: []
+        total: [],
+        test: []
     },
     getters: {
         articles: state => state.articles,
@@ -18,13 +19,15 @@ export default {
         replies: state => state.replies,
         reply: state => state.reply,
         total: state => state.total,
+        test: state => state.test
     },
     mutations: {
         SET_ARTICLES: (state, articles) => state.articles = articles,
         SET_ARTICLE: (state, article) => state.article = article,
         SET_REPLIES: (state, replies) => state.replies = replies,
         SET_REPLY: (state, reply) => state.reply = reply,
-        SET_TOTALPAGE: (state, total) => state.total = total
+        SET_TOTALPAGE: (state, total) => state.total = total,
+        SET_TEST: (state, test) => state.test = test,               
     },
     actions: {
         // 전체 페이지 조회
@@ -58,6 +61,7 @@ export default {
                     category:form.category,
                     state: form.state,
                     title: form.title,
+                    
                 }
             })
             .then(res => {
@@ -79,6 +83,7 @@ export default {
                 headers: getters.authHeader,
             })
             .then(res => {
+                console.log(res.data.title)
                 commit('SET_ARTICLE', res.data)})
 
             .catch(err => {
@@ -132,7 +137,6 @@ export default {
             },
         
         createReply({commit, getters}, reply_data){
-            console.log(reply_data)
 
             axios({
                 url: rest.articles_reply.reply_crud(),
@@ -141,6 +145,7 @@ export default {
                 headers: getters.authHeader,
             })
             .then(res => {
+                console.log(res.data)
             })
             .catch(err => console.error(err.response))
         },
@@ -181,7 +186,7 @@ export default {
                     articlePk:article_pk,
                     page: reply_page}})
             .then(res => {
-                commit('SET_REPLIES',res.data)
+                commit('SET_REPLIES',res.data.content)
             })
             .catch(err => console.error(err.response))
         }

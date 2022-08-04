@@ -12,9 +12,6 @@ export default {
         replyForm,
         replyListItem,
     },
-    props: {
-        replies: Array
-    },
 }
 </script>
 

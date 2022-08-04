@@ -35,7 +35,9 @@
                         </div>
                         <div class="data">
                         <h4>댓글 단 글</h4>
-                            <p>dolor sit amet.</p>
+                        <tr v-for="row in replyArticle" :key="row">
+                          <td>{{row}}</td>
+                        </tr>
                     </div>
                     </div>
                 </div>
@@ -74,8 +76,47 @@ export default {
             email : store.getters.loginUser.email,
             photo : store.getters.loginUser.photo,
             interest : store.getters.loginUser.interest,
-            profilephoto : ''
+            profilephoto : '',
+            form: []
         })
+
+
+
+        const myArticles = function(){
+          store.dispatch('fetchArticles',state.id)
+        }
+
+
+
+        // 내가 댓글 단 글 확인
+        // 1. 게시글 및 댓글 리스트를 불러온다.
+        // 2. 댓글의 user_pk와 profile 유저의 id가 일치하면 단일 게시물 정보 api 불러옴
+        // 3. form에 저장된 댓글 데이터의 article_pk와 게시글 리스트의 개별 게시글 article_pk 비교
+        // 4. 같을 경우 저장한다. 
+
+        // 디버깅해야 하는 버그
+        // 1. id 값은 제대로 전달되는데 commit 되는 값이 전부 동일하게 들어감 => 원인 파악도 못함
+        
+        const myReplies = async function(){
+          await store.dispatch('fetchArticles',1) // 임의값으로 1 줌
+          await store.dispatch('fetchReplies',{article_pk:null,reply_page:1})
+
+          var item = null
+          for (item of store.getters.replies){
+            if (item.user_pk == store.getters.loginUser.id){
+              console.log(item.article_pk)
+              store.dispatch('fetchArticle',item.article_pk)
+              console.log(store.getters.article.title)
+              state.form.push(store.getters.article.title)
+            }
+          }
+
+          const set = new Set(state.form)
+          store.commit('SET_TEST',set)
+        }
+        const replyArticle = computed(() => store.getters.test)
+        myReplies()
+
         console.log(state.photo)
         const changeProfile = function() {
             router.push({name:'ProfileUpdate'})
@@ -97,6 +138,8 @@ export default {
             router,
             state,
             changeProfile,
+            myArticles,
+            replyArticle,
             // savePhoto
             // getImgUrl
             // savePath,
