@@ -21,9 +21,10 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <button @click.prevent="hire_study" class="btnn btnn-5 hover-border-11">모집중인 스터디</button>
+
+  <button @click.prevent="hire_study" class="btnn btnn-5 hover-border-11 my-2">모집중인 스터디</button>
 <articleList v-if='state.toggle==1'/>
-<button @click.prevent="me_study" class="btnn btnn-5 hover-border-11">참여중인 스터디</button>
+<button @click.prevent="me_study" class="btnn btnn-5 hover-border-11 my-2">참여중인 스터디</button>
 <myStudyList v-if="state.toggle==2" />
 
 
