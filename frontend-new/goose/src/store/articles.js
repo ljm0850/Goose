@@ -1,7 +1,6 @@
 import axios from "axios"
 import rest from '@/api/rest'
 import router from "@/router"
-import store from "."
 
 
 export default {
