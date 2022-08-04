@@ -1,6 +1,7 @@
 <template>
   <div class="card">
-    <img :src="item.image" alt="@/src/assets/study1.png" class='card-img-top'/>
+    {{ item.image }}
+    <img :src="state.photo" alt="사진" class='card-img-top'/>
     <div class="card-body">
       <h3 class="card-title">{{ item.title }}</h3>
       <a @click.prevent="selectStudy" class="btn btn-warning">스터디 홈</a>
@@ -10,8 +11,12 @@
 </template>
 
 <script>
+import study1 from "@/assets/study1.png"
+import study2 from "@/assets/study2.png"
+import study3 from "@/assets/study3.jpg"
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { reactive } from '@vue/reactivity';
 export default {
   props: {
     item: Object,
@@ -26,8 +31,28 @@ export default {
       router.push({ name: "StudyHome", params: { studyPk: props.item.id } });
     };
 
-    return { selectStudy };
+    const state = reactive({
+      photo : ""
+    })
+
+    const changePhoto = ()=>{
+      console.log(props.item.image)
+      if (props.item.image==='study1'){state.photo = study1}
+      else if (props.item.image==='study2'){state.photo = study2}
+      else if (props.item.image==="study3"){state.photo = study3}
+    }
+    changePhoto()
+
+    return { selectStudy,state,changePhoto };
   },
+
+  // watch:{
+  //   item: {
+  //     handler(){
+  //       this.changePhoto
+  //     }
+  //   }
+  // }
 };
 </script>
 

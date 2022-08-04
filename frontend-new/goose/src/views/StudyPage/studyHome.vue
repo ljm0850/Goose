@@ -1,8 +1,9 @@
 <template>
   <div class="container d-flex">
-    <img :src="selectedStudy.image" alt="기본사진" />
+    <!-- {{ state.photo }} -->
+    <img :src="state.photo" alt="기본사진" />
     <div>
-      <div class="container d-flex">
+      <div class="container d-flex ">
         <div class="m-3">스터디 이름 : {{ selectedStudy.title }}</div>
         <!-- <div class="m-3">
           인원 : {{ selectedStudy.member }}/ {{ selectedStudy.maxmember }}
@@ -175,9 +176,13 @@ import callender from "@/components/StudyPage/callender";
 import studyUpdate from "@/components/StudyPage/studyUpdate.vue";
 import studyJoinList from "@/components/StudyPage/studyJoinList.vue";
 import miniArticles from "@/components/StudyPage/miniArticles.vue"
+// 사진
+import study1 from "@/assets/study1.png"
+import study2 from "@/assets/study2.png"
+import study3 from "@/assets/study3.jpg"
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
-import { computed, watch, onMounted } from "vue";
+import { computed, watch, onMounted, reactive } from "vue";
 // import router from "@/router";
 
 export default {
@@ -207,12 +212,6 @@ export default {
       fetchStudyHome();
     });
 
-    // const moveArticles = () => {
-    //   router.push({
-    //     name: "studyArticles",
-    //     params: { studyPk: store.getters.selectedStudy.id },
-    //   });
-    // };
     const loginUser = computed(() => store.getters.loginUser);
     const dropOutStudy = (user_pk) => {
       store.dispatch("dropOutStudy", user_pk);
@@ -229,6 +228,18 @@ export default {
     onMounted(() => {
       fetchStudyHome();
     });
+    const state = reactive({
+      photo : store.getters.selectedStudy.image
+    })
+
+    const changePhoto = ()=>{
+      if (store.getters.selectedStudy.image==='study1'){state.photo = study1}
+      else if (store.getters.selectedStudy.image==='study2'){state.photo = study2}
+      else if (store.getters.selectedStudy.image==='study3'){state.photo = study3}
+    }
+    changePhoto
+    
+    
     return {
       selectedStudy,
       deleteStudy,
@@ -240,9 +251,22 @@ export default {
       isManager,
       clickbtn,
       clickbtn2,
+      changePhoto,
+      state
     };
   },
+
+  watch: {
+    selectedStudy: {
+      handler(){
+        console.log("빅 브라더")
+        this.changePhoto();
+      }
+    }
+  }
 };
+
+
 </script>
 
 <style></style>
