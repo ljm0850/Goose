@@ -85,12 +85,14 @@
     </div>
     <!-- 입장용 모달 끝 -->
   </div>
-  <div>
     <!-- 게시판 -->
-    <button @click.prevent="moveArticles" class="btn btn-primary">
-      게시판
-    </button>
-  </div>
+    <miniArticles />
+    <!-- <div>
+      <button @click.prevent="moveArticles" class="btn btn-primary">
+        게시판 전체보기
+      </button>
+    </div> -->
+  <hr>
   <div>
     <button
       type="button"
@@ -172,10 +174,11 @@
 import callender from "@/components/StudyPage/callender";
 import studyUpdate from "@/components/StudyPage/studyUpdate.vue";
 import studyJoinList from "@/components/StudyPage/studyJoinList.vue";
+import miniArticles from "@/components/StudyPage/miniArticles.vue"
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { computed, watch, onMounted } from "vue";
-import router from "@/router";
+// import router from "@/router";
 
 export default {
   name: "StudyHome",
@@ -183,6 +186,7 @@ export default {
     callender,
     studyUpdate,
     studyJoinList,
+    miniArticles,
   },
 
   setup() {
@@ -203,12 +207,12 @@ export default {
       fetchStudyHome();
     });
 
-    const moveArticles = () => {
-      router.push({
-        name: "studyArticles",
-        params: { studyPk: store.getters.selectedStudy.id },
-      });
-    };
+    // const moveArticles = () => {
+    //   router.push({
+    //     name: "studyArticles",
+    //     params: { studyPk: store.getters.selectedStudy.id },
+    //   });
+    // };
     const loginUser = computed(() => store.getters.loginUser);
     const dropOutStudy = (user_pk) => {
       store.dispatch("dropOutStudy", user_pk);
@@ -230,7 +234,6 @@ export default {
       deleteStudy,
       pageUpdate,
       fetchStudyHome,
-      moveArticles,
       dropOutStudy,
       loginUser,
       manager,
