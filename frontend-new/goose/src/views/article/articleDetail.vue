@@ -34,7 +34,6 @@ import {  useStore  } from 'vuex'
 import { useRouter } from 'vue-router';
 import replyList from "./replyList.vue";
 import { useRoute } from "vue-router";
-// import replyList from "./replyList.vue";
 
 export default{
     components: {replyList},
@@ -98,6 +97,6 @@ export default{
   border: 1px solid black;
   margin-top: 1rem;
   padding-top: 1rem;
-  min-height: 720px;
+  min-height: 360px;
 }
 </style>
