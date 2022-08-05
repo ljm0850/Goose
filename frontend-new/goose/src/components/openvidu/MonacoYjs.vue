@@ -73,9 +73,11 @@ export default {
   margin-left:20px;
   background-color: #1e1e1e;
   color : #fff;
+  margin-right: 20px;
 }
 #monaco-editor {
-  width: 75%;
+  margin-left:20px;
+  width: 100%;
   height: 93%;
   border: 1px solid #ccc;
 }
