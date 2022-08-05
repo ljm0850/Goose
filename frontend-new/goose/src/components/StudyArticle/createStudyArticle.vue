@@ -45,7 +45,7 @@
 
         <!-- 제출 -->
           <div class="input-Box">
-            <input @click.prevent="createArticle" type="submit" value="Submit">  
+            <input @click.prevent="createArticle" type="submit" value="Submit" data-bs-dismiss="modal">  
           </div>
         </form>
 
@@ -53,7 +53,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
@@ -80,6 +79,9 @@ export default {
     const createArticle = () =>{
       // console.log(credential)
       store.dispatch("createStudyArticle",credential)
+      credential.title = ""
+      credential.content = ""
+      credential.category = ""
     }
     return {createArticle,credential} 
   }
