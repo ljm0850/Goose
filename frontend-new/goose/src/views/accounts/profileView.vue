@@ -102,29 +102,34 @@ export default {
                     state.form.push(store.getters.article.title);
                 }
             }
-            const set = new Set(state.form);
-            store.commit("SET_TEST", set);
-        };
-        const replyArticle = computed(() => store.getters.test);
-        myReplies();
-        console.log(state.photo);
-        const changeProfile = function () {
-            router.push({ name: "ProfileUpdate" });
-            console.log(state.photo);
-        };
-        const savePhoto = function () {
-            if (store.getters.loginUser.photo === "../../assets/profile1.png") {
-                state.profilephoto = profile1;
+          }
+
+          const set = new Set(state.form)
+          store.commit('SET_TEST',set)
+        }
+        const replyArticle = computed(() => store.getters.test)
+        myReplies()
+
+        console.log(state.photo)
+        const changeProfile = function() {
+            router.push({name:'ProfileUpdate'})
+            console.log(state.photo)
+        }
+        const savePhoto = function() {
+            if (store.getters.loginUser.photo === '../../assets/profile1.png') {
+              console.log("야구")
+              state.profilephoto = profile1
+            } 
+            else if (store.getters.loginUser.photo === '../../assets/profile2.jpg') {
+              console.log("커피")
+              state.profilephoto = profile2
+            } else {
+              console.log("노말")
+              state.profilephoto = profile4
             }
-            else if (store.getters.loginUser.photo === "../../assets/profile2.jpg") {
-                state.profilephoto = profile2;
-            }
-            else {
-                state.profilephoto = profile4;
-            }
-        };
-        savePhoto();
-        const photo = computed(() => store.getters.loginUser.photo);
+         }
+        savePhoto()
+        const photo = computed(()=> store.getters.loginUser.photo)
         return {
             store,
             router,
@@ -134,14 +139,14 @@ export default {
             replyArticle,
             // getImgUrl
             // savePath,
-            photo
-        };
+            photo,
+        }
     },
-    watch: {
-        photo: {
-            handler() {
-                this.savePhoto;
-            }
+
+    watch:{
+      photo:{
+        handler(){
+          this.savePhoto()
         }
     },
     components: { MyArticles }
