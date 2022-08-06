@@ -6,7 +6,7 @@
     <div>
       <button id="notice" class="btn btn-3 hover-border-3 active" @click="noticeClick">공지</button>
       <button id="free" class="btn btn-3 hover-border-3" @click="freeClick">자유</button>
-    </div>
+  </div>
     <createStudyArticle />
   </div>
   <!-- 테이블 -->
@@ -117,6 +117,9 @@ export default {
 </script>
 
 <style scoped>
+*{
+  font-family: 'NanumSquare', sans-serif;
+}
 #title {
   font-size: 1.5rem;
   color:#000
@@ -126,7 +129,7 @@ export default {
   border:none;
 }
 .btn.hover-border-3{
-  color: #f0f0f1
+  color: #787c82
 }
 .page-link{
   color: #000
