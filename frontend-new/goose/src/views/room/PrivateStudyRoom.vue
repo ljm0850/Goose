@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="main" @input="handleScroll">
     <div id="main-container" class="d-flex">
       <div id="session-center">
         <div id="session" v-if="session">
@@ -8,52 +8,86 @@
             <!-- 방 제목 -->
             <div
               id="session-timer"
-              class="text-center"
-              style="margin-left: 30%"
+              class="text-center d-flex"
+              style="margin-left: 5%; margin-top: 10px"
             >
               <div>
                 <h3 id="session-time">
                   {{ hours }} : {{ minutes }} : {{ seconds }}
                 </h3>
               </div>
-              <div id="timerBtn" v-if="true">
-                <b-button v-if="!timer" variant="primary" @click="startTimer()"
+
+              <div id="timerBtn" v-if="true" class="d-flex">
+                <b-button
+                  v-if="!timer"
+                  variant="primary"
+                  @click="startTimer()"
+                  style="margin-left: 20px; height: 38px"
                   >시작</b-button
                 >
-                <b-button v-else variant="danger" @click="stopTimer">
+                <b-button
+                  v-else
+                  variant="danger"
+                  @click="stopTimer"
+                  style="height: 38px; margin-left: 20px"
+                >
                   정지
                 </b-button>
                 <b-button
                   v-if="resetButton"
                   variant="success"
                   @click="resetTimer"
+                  style="height: 38px"
                 >
                   종료
                 </b-button>
-                <b-button v-if="!timer" variant="primary" @click="editTimer">
+                <b-button
+                  v-if="!timer"
+                  variant="primary"
+                  @click="editTimer"
+                  style="height: 38px"
+                >
                   시간 설정
                 </b-button>
-                <div v-if="edit" class="d-flex justify-content-center mt-1">
-                  <input
+                <div
+                  v-if="edit"
+                  class="d-flex justify-content-center mt-1 d-flex"
+                >
+                  <b-form-input
                     class="p-3 text-center"
                     type="text"
                     v-model="inputHour"
                     placeholder="시"
-                    style="width: 100px"
+                    style="
+                      width: 80px;
+                      height: 40px;
+                      margin-left: 10px;
+                      margin-top: -5px;
+                    "
                   />
-                  <input
+                  <b-form-input
                     class="p-3 text-center"
                     type="text"
                     v-model="inputMin"
                     placeholder="분"
-                    style="width: 100px"
+                    style="
+                      width: 80px;
+                      height: 40px;
+                      margin-top: -5px;
+                      margin-left: 1px;
+                    "
                   />
-                  <input
+                  <b-form-input
                     class="p-3 text-center"
                     type="text"
                     v-model="inputSec"
                     placeholder="초"
-                    style="width: 100px"
+                    style="
+                      width: 80px;
+                      height: 40px;
+                      margin-top: -5px;
+                      margin-left: 1px;
+                    "
                   />
                 </div>
               </div>
@@ -177,7 +211,7 @@
                   id="buttonLeaveSession"
                   @click="asideRight = true"
                 >
-                  <i class="fa-solid fa-comment-slash"></i>
+                  <i class="fa-solid fa-comment"></i>
                   <span class="footerBtnText">채팅보기</span>
                 </b-button>
               </div>
@@ -188,7 +222,7 @@
                   id="buttonLeaveSession"
                   @click="asideRight = false"
                 >
-                  <i class="fa-solid fa-comment"></i>
+                  <i class="fa-solid fa-comment-slash"></i>
                   <span class="footerBtnText">채팅닫기</span>
                 </b-button>
               </div>
@@ -211,51 +245,151 @@
         </div>
         <!-- #session-footer-wrap -->
       </div>
+
       <!-- #session-center -->
-      <div id="session-aside-right" v-if="session && asideRight">
-        <div class="participant">
-          <div class="right_label_participant">
-            <span>참가자</span>
-          </div>
-          <div class="participant_list">
-            <!-- 참가자 리스트 -->
-            <UserList :stream-manager="publisher" />
-            <UserList
-              v-for="sub in subscribers"
-              :key="sub.stream.connection.connectionId"
-              :stream-manager="sub"
-            />
-          </div>
-        </div>
-
-        <!-- 채팅 시작 -->
-        <div class="user_chat">
-          <div class="right_label">
-            <span>채팅</span>
-          </div>
-          <div class="chat">
-            <div class="messages" v-html="messages" ref="messages"></div>
-
-            <form class="chatFooter" onsubmit="return false">
-              <input
-                class="chat_input"
-                id="msg"
-                type="text"
-                autocomplete="off"
-                placeholder="메세지를 입력하세요."
+      <transition-group name="fade">
+        <div id="session-aside-right" v-if="session && asideRight">
+          <div class="participant">
+            <div class="right_label_participant">
+              <span>참가자</span>
+            </div>
+            <div class="participant_list">
+              <!-- 참가자 리스트 -->
+              <UserList :stream-manager="publisher" />
+              <UserList
+                v-for="sub in subscribers"
+                :key="sub.stream.connection.connectionId"
+                :stream-manager="sub"
               />
-              <button id="submitBtn" type="submit" @click="sendMessage()">
-                Enter
-              </button>
-            </form>
+            </div>
           </div>
+
+          <!-- 채팅 시작 -->
+          <div class="user_chat">
+            <div class="right_label">
+              <span>채팅</span>
+            </div>
+            <div class="chat">
+              <div class="messages" v-html="messages" ref="messages"></div>
+
+              <form class="chatFooter" onsubmit="return false">
+                <input
+                  class="chat_input"
+                  id="msg"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="메세지를 입력하세요."
+                  style="background-color: #fff"
+                />
+                <button id="submitBtn" type="submit" @click="sendMessage()">
+                  전송
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- 채팅 끝 -->
         </div>
-        <!-- 채팅 끝 -->
-      </div>
+      </transition-group>
       <!-- session-right -->
     </div>
-    <MonacoYjs />
+    <MonacoYjs :language="language" @sendResult="setResult" v-bind:propcompile="propcompile" v-bind:propstdin="propstdin" @sendCodestdin="setCodestdin"/>
+    <div v-if="this.scrollPosition > 900" id="monaco-timer" class="d-flex">
+      <div>
+        <h3 id="session-time">{{ hours }} : {{ minutes }} : {{ seconds }}</h3>
+      </div>
+      <div id="timerBtn" v-if="true" class="d-flex">
+        <b-button
+          v-if="!timer"
+          variant="primary"
+          @click="startTimer()"
+          style="margin-left: 20px; height: 38px"
+          >시작</b-button
+        >
+        <b-button
+          v-else
+          variant="danger"
+          @click="stopTimer"
+          style="height: 38px; margin-left: 20px"
+        >
+          정지
+        </b-button>
+        <b-button
+          v-if="resetButton"
+          variant="success"
+          @click="resetTimer"
+          style="height: 38px"
+        >
+          종료
+        </b-button>
+        <b-button
+          v-if="!timer"
+          variant="primary"
+          @click="editTimer"
+          style="height: 38px"
+        >
+          시간 설정
+        </b-button>
+        <div v-if="edit" class="d-flex justify-content-center mt-1 d-flex">
+          <b-form-input
+            class="p-3 text-center"
+            type="text"
+            v-model="inputHour"
+            placeholder="시"
+            style="
+              width: 80px;
+              height: 40px;
+              margin-left: 10px;
+              margin-top: -5px;
+            "
+          />
+          <b-form-input
+            class="p-3 text-center"
+            type="text"
+            v-model="inputMin"
+            placeholder="분"
+            style="
+              width: 80px;
+              height: 40px;
+              margin-top: -5px;
+              margin-left: 1px;
+            "
+          />
+          <b-form-input
+            class="p-3 text-center"
+            type="text"
+            v-model="inputSec"
+            placeholder="초"
+            style="
+              width: 80px;
+              height: 40px;
+              margin-top: -5px;
+              margin-left: 1px;
+            "
+          />
+        </div>
+      </div>
+    </div>
     <!-- #main-container -->
+    <div class="MonacoScroll">
+      <button
+        id="MonacoScroll"
+        class="btn btn-large btn-primary footerBtn"
+        type="button"
+        @click="scrollToDown()"
+        v-if="this.scrollPosition < 500"
+      >
+        공유판서로 이동
+      </button>
+      <button
+        id="MonacoScroll"
+        class="btn btn-large btn-primary footerBtn"
+        type="button"
+        @click="scrollToUp()"
+        v-if="this.scrollPosition > 500"
+      >
+        화상화면으로
+      </button>
+    </div>
   </div>
 </template>
 <style scoped>
@@ -300,14 +434,10 @@ export default {
     const loginUser = computed(() => store.getters.loginUser);
     // const reloadCheck = computed(() => store.getters.reloadCheck);
     const flip = function () {
-      console.log("><><><><><><><>");
       if (state.reloadCheck == false) {
-        console.log(">>>>1", state.reloadCheck);
         state.reloadCheck = true;
-        console.log(">>>>2", state.reloadCheck);
         store.commit("SET_RELOADCHECK", state.reloadCheck);
-        console.log(">>>>3", store.getters.reloadCheck);
-      router.go();
+        router.go();
       }
     };
     console.log(">>>>0");
@@ -338,6 +468,12 @@ export default {
 
   data() {
     return {
+      propstdin: "",
+      propcompile: "",
+      stdin: "",
+      resultCom: "",
+      language: "python",
+      scrollPosition: "",
       reload: false,
       monacococo: true,
       //방정보
@@ -393,14 +529,6 @@ export default {
   },
 
   created() {
-    // this.reload = this.reloadCheck;
-    // if (this.reload == false) {
-    //   console.log("reload");
-    //   this.reloadCheck = true;
-
-    //   this.$router.go();
-    // }
-
     this.roomName = this.selectedStudy.title;
     this.roomUrl = this.selectedStudy.url_conf;
     this.roomStudyNo = this.selectedStudy.id;
@@ -428,12 +556,34 @@ export default {
   },
   mounted() {
     window.addEventListener("beforeunload", this.unLoadEvent);
+    window.addEventListener("scroll", this.updateScroll);
   },
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.unLoadEvent);
   },
   methods: {
+    setCodestdin(stdin) {
+      this.stdin = stdin;
+      // console.log(">>>>emit check");
+      this.sendStdin();
+    },
+    setResult(result) {
+      this.resultCom = result;
+      // console.log(">>>>emit check");
+      this.sendCompile();
+    },
     ...mapMutations(["SET_RELOADCHECK"]),
+    scrollToUp() {
+      window.scrollTo(0, 0);
+    },
+    scrollToDown() {
+      window.scrollTo(0, 10000);
+    },
+    updateScroll() {
+      this.scrollPosition =
+        window.scrollY || document.documentElement.scrollTop;
+      // console.log(this.scrollPosition);
+    },
     unLoadEvent: function (event) {
       if (this.canLeaveSite) return;
 
@@ -530,6 +680,17 @@ export default {
         console.warn(exception);
       });
 
+      //컴파일 결과 전송
+      this.session.on("signal:result-com", (event) => {
+        console.log("session test");
+        var compile = event.data;
+        this.propcompile = compile;
+      });
+      this.session.on("signal:stdin", (event) => {
+        var stdin = event.data;
+        this.propstdin = stdin;
+      });
+
       // 같은 session 내에서 텍스트 채팅을 위한 signal
       this.session.on("signal:my-chat", (event) => {
         var message = event.data.split("&$");
@@ -541,11 +702,11 @@ export default {
             // console.log("나나나>");
             this.messages +=
               '<div align="right">' +
-              '<div style="width: 60%; background-color: #fff; border-radius: 10px; word-wrap: break-word;">' +
-              '<div style="font-weight: 900;">' +
+              '<div style="width: 60%; background-color: #fae100; border-radius: 10px; word-wrap: break-word;">' +
+              '<div style="font-weight: 900; margin-right:10px;">' +
               message[0] +
               " 님의 메시지: </div>" +
-              '<div class="mb-3" style="">' +
+              '<div class="mb-3" style="margin-right:10px;">' +
               message[1] +
               " </div>" +
               "</div>" +
@@ -555,10 +716,10 @@ export default {
             this.messages +=
               '<div align="left">' +
               '<div style="width: 60%; background-color: #fff; color: #000; border-radius: 10px; word-wrap: break-word;">' +
-              '<div style="font-weight: 900;">' +
+              '<div style="font-weight: 900; margin-left:10px;">' +
               message[0] +
               " 님의 메시지: </div>" +
-              '<div class="mb-3">' +
+              '<div class="mb-3" style="margin-left:10px;">' +
               message[1] +
               " </div>" +
               "</div>";
@@ -650,6 +811,38 @@ export default {
           });
       }
     },
+
+    // 컴파일 결과 전송
+    sendCompile() {
+      if (this.resultCom != "") {
+        this.session
+          .signal({
+            data: JSON.stringify(this.resultCom),
+            to: [],
+            type: "result-com",
+          })
+          .then(() => {})
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    },
+    // 컴파일 결과 전송
+    sendStdin() {
+      if (this.stdin != "") {
+        this.session
+          .signal({
+            data: this.stdin,
+            to: [],
+            type: "stdin",
+          })
+          .then(() => {})
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    },
+
 
     muteVideo() {
       this.videoEnabled = !this.videoEnabled;
@@ -875,6 +1068,9 @@ export default {
     },
     time() {
       this.sendTimer();
+    },
+    resultCom() {
+      this.resultCom;
     },
   },
 };

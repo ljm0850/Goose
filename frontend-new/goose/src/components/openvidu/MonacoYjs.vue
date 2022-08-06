@@ -1,57 +1,122 @@
 <template>
-  <div>
-    <head>
-      <meta charset="utf-8" />
-      <title>Yjs Monaco Example</title>
-    </head>
-    <body>
-      <button type="button" id="y-connect-btn">Disconnect</button>
-      <p></p>
-      <p>
-        This is a demo of the <a href="https://github.com/yjs/yjs">Yjs</a> ⇔
-        <a href="https://microsoft.github.io/monaco-editor/">Monaco</a> binding:
-        <a href="https://github.com/yjs/y-monaco">y-monaco</a>.
-      </p>
-      <p>
-        The content of this editor is shared with every client that visits this
-        domain.
-      </p>
-      <div id="monaco-editor" @input="titleUpdate" ref="monaco" />
-      <button @click="ride">fff</button>
-    </body>
+  <div class="session-monaco">
+    <!-- <div id="type">{{ selectedStudy.category }}</div> -->
+    <!-- <div>compiler</div> -->
+    <!-- <button type="button" id="y-connect-btn">Disconnect</button> -->
+    <div id="monoco-top" style="height: 7%"></div>
+    <div class="d-flex" style="height: 93%">
+      <div id="monaco-editor" @input="titleUpdate" ref="monaco"></div>
+      <div id="session-compile">
+        <p>입력 값</p>
+        <textarea id="stdin" rows="5" v-model="code.stdin"></textarea>
+        <b-button variant="primary" @click="ride">컴파일 실행</b-button>
+        <p id="language">{{ compiler }}</p>
+        <!-- <p>실행 결과 집합 : {{ result }}</p> -->
+        <p>실행 결과</p>
+        <textarea v-model="output" rows="5" readonly></textarea>
+        <p>사용 메모리 : {{ memory }}</p>
+        <p>실행 시간 : {{ cpuTime }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { useStore } from "vuex";
 import monaco from "@/util/monaco.js";
-import { useRouter } from "vue-router";
+
 export default {
-    data() {
+  props: ["propcompile", "propstdin"],
+  data() {
+    const store = useStore();
     return {
-      code: "",
-      testv: "",
+      compiler: store.getters.language,
+      code: {
+        script: "",
+        language: "",
+        stdin: "",
+      },
+      result: "",
+      output: "",
+      memory: "",
+      cpuTime: "",
+      resultNew: "",
     };
+  },
+  // moounted() {
+  //   this.resultNew = this.propcompile;
+  // },
+  watch:{
+    propcompile(){
+      this.result = JSON.parse(this.propcompile);
+      this.output = this.result.output;
+      this.memory = this.result.memory + "KB";
+      this.cpuTime = this.result.cpuTime + "s";
+      console.log("<dfjdkfjdkfjdkjfkdjkdjkf");
+      console.log(this.propstdin);
+      this.code.stdin = this.propstdin;
+    },
   },
   methods: {
     titleUpdate(e) {
-      this.code = e.target.value;
-      console.log(this.$refs.monaco.data);
+      this.code.script = e.target.value;
+      console.log(this.code.script);
+      // console.log(this.code.language);
     },
-    ride() {
-      console.log(this.code);
+    async ride() {
+      this.code.language = await this.compiler.toLowerCase();
 
-    this.$store.dispatch("compile", this.code);
+      // let temp = document.getElementById("monaco-editor").innerText;
+      // let cnt = 1;
+      // while (true) {
+      //   if (
+      //     (temp.charAt(cnt) >= 0 && temp.charAt(cnt) <= 9) ||
+      //     temp.charAt(cnt) == "\n"
+      //   ) {
+      //     cnt++;
+      //   } else break;
+      // }
 
+      // this.code.script = temp.substring(cnt);
+      // console.log(temp);
+      // console.log(this.code.script);
+
+      if (this.code.language == "python") this.code.language = "python3";
+      else if (this.code.language == "c++") this.code.language = "cpp";
+      await this.$store.dispatch("compile", this.code);
+      // console.log("ddddddddddd>", this.$store.getters.language);
+      // console.log("ddddddd result>", this.$store.getters.result);
+      this.result = this.$store.getters.result;
+      // this.output = this.result.output;
+      // this.memory = this.result.memory + "KB";
+      // this.cpuTime = this.result.cpuTime + "s";
+
+      this.$emit("sendCodestdin", this.code.stdin);
+      this.$emit("sendResult", this.result);
+      // console.log(this.result);
     },
   },
 };
 </script>
 
 <style>
+.session-monaco {
+  background-color: #fffac7;
+}
+#session-compile {
+  padding: 5px;
+  border-radius: 5px;
+  width: 23%;
+  height: 93%;
+  margin-left: 20px;
+  background-color: #1e1e1e;
+  color: #fff;
+  margin-right: 20px;
+}
 #monaco-editor {
+  margin-left: 20px;
   width: 100%;
-  height: 600px;
+  height: 93%;
   border: 1px solid #ccc;
 }
 .yRemoteSelection {
