@@ -117,6 +117,7 @@ export default {
         const store = useStore()
         const studyId = computed(()=>store.getters.selectedStudy.id)
         const imgUrl = computed(()=>store.getters.choiceImg)
+        const selectedStudy = computed(() => store.getters.selectedStudy);
         const state = reactive({
             credential:{
                 category: store.getters.selectedStudy.category,
@@ -134,7 +135,19 @@ export default {
         const updateStudy = ()=>{
             store.dispatch('updateStudy',state.credential)
         }
-        return { updateStudy, state}
+
+        const fetchCredentail = ()=>{
+          state.credential.category = store.getters.selectedStudy.category
+          state.credential.id = store.getters.selectedStudy.id
+          state.credential.imgUrl = imgUrl
+          state.credential.category = store.getters.selectedStudy.category
+          state.credential.category = store.getters.selectedStudy.category
+          state.credential.category = store.getters.selectedStudy.category
+          state.credential.category = store.getters.selectedStudy.category
+
+        }
+
+        return { updateStudy, state, selectedStudy}
     }
 }
 </script>
