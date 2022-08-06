@@ -80,7 +80,7 @@ export default {
             data: credential
         })
         .then((res)=>{
-            dispatch('getStudyArticleList',{category:null, page:1, studyPk:getters.selectedStudy.id, title:null})
+            dispatch('getStudyArticleList',{category:credential.category, page:1, studyPk:getters.selectedStudy.id, title:null})
         })
         // .catch((err)=>{
         //     console.log(err)
