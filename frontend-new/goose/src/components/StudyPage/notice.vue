@@ -33,14 +33,12 @@ export default {
             })
         }
         const selectedStudy = computed(()=> store.getters.selectedStudy)
-        fetchNoticeList()
         return {state,selectedStudy,fetchNoticeList}
     },
 
     watch:{
         selectedStudy:{
             handler(){
-                console.log("최신 게시글 변경")
                 this.fetchNoticeList();
             }
         },
