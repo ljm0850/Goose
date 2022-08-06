@@ -8,7 +8,7 @@
     </div>
     <div class="container box">
         <ul v-for="article in state.recentlyArticleList" :key="article.id">
-            <ul class="d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#studyArticleDetail" @click="selectArticle" :key="article.id">
+            <ul class="d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#studyArticleDetail" @click="selectArticle">
                 <li class="article" >{{article.title}}</li>
                 <li class="article-author">{{article.name}}</li>
             </ul>
