@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { onMounted, computed } from "vue"
+import { computed } from "vue"
 import { useStore } from "vuex"
 export default {
     setup(){
@@ -38,9 +38,6 @@ export default {
           defaultInput.setAttribute("checked","checked")
         }
 
-        // onMounted(()=>{
-        //   checkDefault()
-        // })
         const selectedStudy = computed(() => store.getters.selectedStudy);
         return {selectImg,selectedStudy,checkDefault}
     },
