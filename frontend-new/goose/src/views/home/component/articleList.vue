@@ -7,8 +7,8 @@
   <img src="#" class="card-img-top" alt="alt">
   <div class="card-body">
     <h5 class="card-title">{{article.title}}</h5>
-    <p class="card-text">{{article.content}}</p>
-    <button @click.prevent="joinStudy(article)" type="button" class="btn btn-primary" >가입신청</button>
+    <p class="card-text">{{article.category}}</p>
+    <button @click.prevent="joinStudy(article.study_pk)" type="button" class="btn btn-primary" >가입신청</button>
   </div>
   </div>
   </div>
@@ -28,6 +28,7 @@ export default {
     const fetchMyStudyList = function(studyId){
       store.dispatch('myStudyList',studyId)
     }
+
     const joinStudy = (studyId) => store.dispatch('joinStudy',studyId)
     return {myStudyList,fetchMyStudyList,articleList,joinStudy}
   },
