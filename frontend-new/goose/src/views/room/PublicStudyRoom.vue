@@ -149,55 +149,60 @@
         <!-- #session-footer-wrap -->
       </div>
       <!-- #session-center -->
-      <div id="session-aside-right" v-if="session && asideRight">
-        <div class="participant">
-          <div class="right_label_participant">
-            <span>참가자</span>
-          </div>
-          <div class="participant_list">
-            <!-- 참가자 리스트 -->
-            <UserList :stream-manager="publisher" />
-            <UserList
-              v-for="sub in subscribers"
-              :key="sub.stream.connection.connectionId"
-              :stream-manager="sub"
-            />
-          </div>
-        </div>
-
-        <!-- 채팅 시작 -->
-        <div class="user_chat">
-          <div class="right_label">
-            <span>채팅</span>
-          </div>
-          <div class="chat">
-            <div class="messages" v-html="messages" ref="messages"></div>
-
-            <form class="chatFooter" onsubmit="return false">
-              <input
-                class="chat_input"
-                id="msg"
-                type="text"
-                autocomplete="off"
-                placeholder="메세지를 입력하세요."
+      <transition-group name="fade">
+        <div id="session-aside-right" v-if="session && asideRight">
+          <div class="participant">
+            <div class="right_label_participant">
+              <span>참가자</span>
+            </div>
+            <div class="participant_list">
+              <!-- 참가자 리스트 -->
+              <UserList :stream-manager="publisher" />
+              <UserList
+                v-for="sub in subscribers"
+                :key="sub.stream.connection.connectionId"
+                :stream-manager="sub"
               />
-              <button id="submitBtn" type="submit" @click="sendMessage()">
-                전송
-              </button>
-            </form>
+            </div>
           </div>
+
+          <!-- 채팅 시작 -->
+          <div class="user_chat">
+            <div class="right_label">
+              <span>채팅</span>
+            </div>
+            <div class="chat">
+              <div class="messages" v-html="messages" ref="messages"></div>
+
+              <form class="chatFooter" onsubmit="return false">
+                <input
+                  class="chat_input"
+                  id="msg"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="메세지를 입력하세요."
+                  style="background-color: #fff"
+                />
+                <button id="submitBtn" type="submit" @click="sendMessage()">
+                  전송
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- 채팅 끝 -->
         </div>
-        <!-- 채팅 끝 -->
-      </div>
+      </transition-group>
       <!-- session-right -->
     </div>
     <!-- #main-container -->
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+@import "@/assets/style/StudyRoom/video.css";
+@import "@/assets/style/style.css";
+@import "@/assets/style/StudyRoom/room.css";
+</style>
 <script>
-import "@/assets/style/style.css";
-import "@/assets/style/StudyRoom/room.css";
 import axios from "axios";
 import http from "@/util/http-common.js";
 import { OpenVidu } from "openvidu-browser";
@@ -207,6 +212,7 @@ import UserList from "@/components/openvidu/UserList";
 import jwt_decode from "jwt-decode";
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -223,10 +229,11 @@ export default {
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     const selectedStudy = computed(() => store.getters.selectedStudy);
     const loginUser = computed(() => store.getters.loginUser);
     const isManager = computed(() => store.getters.isStudyManager);
-    return { selectedStudy, loginUser, isManager };
+    return { selectedStudy, loginUser, isManager, router };
   },
   data() {
     return {
@@ -288,7 +295,7 @@ export default {
     this.roomName = this.selectedStudy.title;
     this.roomUrl = this.selectedStudy.url_conf;
     this.roomStudyNo = this.selectedStudy.id;
-    // this.power = this.participant = this.loginUser.userId;
+    this.power = this.participant = this.loginUser.userId;
 
     // 초기 장치 셋팅
     (this.audioEnabled = this.isaudio), (this.videoEnabled = this.isvideo);
@@ -496,6 +503,7 @@ export default {
     },
 
     async getPublicStudyAuth() {
+      console.log("mmmmmmmmmmmget");
       await http({
         method: "get",
         url: `/study/member/publicstudyAuth/${this.roomStudyNo}`,
@@ -510,13 +518,14 @@ export default {
     },
 
     async removePublicRoom() {
+      console.log("mmmmmmmmmmmremoce");
       if (this.power >= 3) {
         await http({
           method: "delete",
           url: `/study/remove/${this.roomStudyNo}`,
         })
           .then((res) => {
-            console.log(">>>>>7>>", res)
+            console.log(">>>>>7>>", res);
           })
           .catch((err) => {
             console.log(">>>>>>>>>>>err>>>", err);
@@ -525,6 +534,7 @@ export default {
     },
 
     async leaveSession() {
+      console.log("mmmmmmmmmmmleve");
       await this.getPublicStudyAuth();
       await this.removePublicRoom();
       // --- Leave the session by calling 'disconnect' method over the Session object ---
@@ -549,10 +559,7 @@ export default {
         "beforeunload",
         this.leaveSessionForScreenSharing
       );
-      this.$router.push({
-        name: "StudyHome",
-        params: { studyPk: this.roomStudyNo },
-      });
+      this.$router.push("Home");
     },
 
     // 텍스트 채팅을 위한 메세지 전송하기
