@@ -40,6 +40,7 @@ export default {
       HOST + Study + Member + "studymemberlsit/" + `${study_pk}`, // 오타 불편
     study_member_out: () => HOST + Study + Member + "studymemberout",
     compile: () => COMP + "/execute",
+    open_study: () =>HOST + Study + Member + "publicstudylist"
   },
   studyArticle: {
     studyArticles: () => HOST + "studyArticles",
@@ -50,6 +51,7 @@ export default {
     user: () => HOST + User,
     user_check: (userId) => HOST + User + `/{userId}?id=${userId}`, // pk값이 아닌 로그인 할 때 그 id
     user_myprofile: () => HOST + User + "/me",
+    user_passwordupdate: () => HOST + User + '/pw'
   },
 
   calendar: {
