@@ -48,16 +48,16 @@ export default {
       store.dispatch("saveOpenList");
     };
 
-    const fetchStudyHome = function (studyId) {
-      store.dispatch("selectStudy", studyId)
+    const fetchStudyHome = async function (studyId) {
+      await store.dispatch("selectStudy", studyId)
     };
 
     const selectedStudy = computed(() => store.getters.selectedStudy);
 
 
-    const clickbtn = function (studyId) {
+    const clickbtn = async function (studyId) {
       // console.log(">mmm>>>>>>>>>", studyId)
-      fetchStudyHome(studyId);
+      await fetchStudyHome(studyId);
       router.push({ name: "PublicStudyRoom" });
     };
 
