@@ -30,7 +30,7 @@
                 <img :src="state.photo" alt="profilephoto" class="profilephoto">
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">    
-              <router-link to="/:id/profile"><button class="dropdown-tag">마이페이지</button></router-link>
+              <router-link to="/:id/profile"><button class="dropdown-tag">프로필</button></router-link>
               <button class="dropdown-tag" @click="clickLogout">로그아웃</button>
               <hr>
               <router-link to="/:id/updatepassword"><button class="dropdown-tag">비밀번호 수정</button></router-link>
@@ -49,7 +49,7 @@
               <router-link to="/newarticle"><button class="dropdown-tag">모집글쓰기</button></router-link>
               
               <router-link to="/articles"><button class="dropdown-tag">게시판</button></router-link>
-              <router-link to="/:id/profile"><button class="dropdown-tag">마이페이지</button></router-link>
+              <router-link to="/:id/profile"><button class="dropdown-tag">프로필</button></router-link>
               <button class="dropdown-tag" @click="clickLogout">로그아웃</button>
               <hr>
               <router-link to="/:id/updatepassword"><button class="dropdown-tag">비밀번호 수정</button></router-link>

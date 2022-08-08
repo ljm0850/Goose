@@ -2,8 +2,11 @@
   <ol class="m-0 p-0">
     <li class="list-group py-1">
             <ol v-for = "reply in replies" :key="reply.id">
-            
-      <div class="bg-warning">{{reply.name}}</div>
+            <div class="d-flex justify-content-between bg-warning">
+              <div class="px-2">작성자: {{reply.name}}</div>
+              <div class="px-2">{{reply.date}}</div>
+            </div>
+      
     <ul class="list-group-item d-flex justify-content-between">
     {{reply.re_content}}
         <!-- <div v-if="state.isEditing">

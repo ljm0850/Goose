@@ -77,11 +77,11 @@ export default {
      })
         const signupForm = function(){
             if (state.form.name == null || state.form.id == null || state.form.password1 == null || state.form.password2 == null || state.form.email == null || state.form.interest == null) {
-                alert('필수값 누락')
+                alert('필수값을 입력해주세요')
                 return
             }
             if (!state.idValidFlag || !state.passwordValidFlag || !state.passwordCheckFlag || !state.emailValidFlag || state.idCommonFlag == true) {
-                alert('유효성 확인')
+                alert('중복되거나 올바르지 않은 양식이 있습니다.')
                 return
             }
             console.log(state.form.id, state.form.password1, state.form.name, state.form.interest, state.form.email  )

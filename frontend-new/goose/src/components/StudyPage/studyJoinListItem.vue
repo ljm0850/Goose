@@ -27,6 +27,7 @@ export default {
 
     const joinAccept = ()=>{
       store.dispatch('joinAgree',credential)
+      // 신청 확인 후 화면 그대로 유지되는걸해결 위해 임시로 새로고침 넣음
       router.go()
     }
     const joinRefuse = ()=>{

@@ -253,7 +253,7 @@ export default {
           alert('가입신청 완료')
         console.log(res)})
         .catch((err) => {
-          alert('이미 가입신청한 스터디입니다.')
+          alert('이미 가입되거나 가입신청한 스터디입니다.')
           console.log(err);
         });
     },
