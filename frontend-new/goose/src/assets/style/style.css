@@ -170,6 +170,7 @@ a:hover .demo-logo {
   .container-fluid > .navbar-header,
   .container > .navbar-collapse,
   .container > .navbar-header {
+    width: 100%;
     margin-right: 0;
     margin-left: 0;
   }
