@@ -25,17 +25,23 @@
       </div>
     </div>
   </div>
-  <!-- <div
-    data-pym-src="https://www.jdoodle.com/plugin"
-    data-language="java"
-    data-version-index="4"
-    data-libs="mavenlib1, mavenlib2"
-  ></div> -->
+  
   <br>
   <div class="container box">
     <FullCalendar :options="calendarOptionsW" />
   </div>
+  <!-- <div v-if="createModal" >
+    <div >    
+      <h4>상세페이지</h4>
+      <p>상세 페이지 내용</p>
+      <button>닫기</button>
+    </div>
+  </div> -->
 </div>
+    <div id="app">
+      <button type="button" class="btn" @click="showModal">Open Modal!</button>
+      <HelloWorld v-show="isModalVisible" @close="closeModal"/>
+    </div>
 </template>
 
 <script>
@@ -45,38 +51,26 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import koLocale from "@fullcalendar/core/locales/ko";
 import { useStore } from "vuex";
+import HelloWorld from "@/components/StudyPage/HelloWorld.vue"
 
 export default {
-  setup() {
-    const store = useStore();
-    // const events_set = function () {
-    //   store.dispatch("fetchCalendars", 6);
-    //   const events = JSON.parse(JSON.stringify(store.getters.events));
-    //   console.log(events);
-    // };
-    // events_set();
-  },
-  // mounted() {
-  //   let recaptchaScript = document.createElement("script");
-  //   recaptchaScript.setAttribute(
-  //     "src",
-  //     "https://www.jdoodle.com/assets/jdoodle-pym.min.js"
-  //   );
-  //   document.head.appendChild(recaptchaScript);
-  // },
+    name: "App",
   components: {
     FullCalendar, // make the <FullCalendar> tag available
+      HelloWorld: HelloWorld,
   },
   data() {
     const store = useStore();
-    console.log(123, JSON.parse(JSON.stringify(store.getters.events)));
+  
     return {
+      createModal:true,
+         isModalVisible: false,
       calendars: [],
       calendarOptionsW: {
         plugins: [dayGridPlugin, interactionPlugin],
         // initialView: "dayGridWeek",
         initialView: "dayGrid", // the name of a generic view
-        duration: { weeks: 2 },
+        duration: { weeks: 4 },
         selectable: true,
         dateClick: this.handleDateClick,
         eventClick: this.handleEventClick,
@@ -102,11 +96,18 @@ export default {
   methods: {
     handleDateClick: function (arg) {
       alert("date click! " + arg.dateStr);
+      this.createModal=!this.createModal;
     },
     handleEventClick: function (arg) {
       console.log(arg.event);
       alert("event click! " + arg.event.startStr + arg.event.id);
     },
+        showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }
   },
 };
 </script>
