@@ -419,7 +419,7 @@ import { mapMutations } from "vuex";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const OPENVIDU_SERVER_URL = "https://localhost:4443";
-const OPENVIDU_SERVER_SECRET = "MY_PASSWORD";
+const OPENVIDU_SERVER_SECRET = "MY_GOOSEGOOSE";
 
 export default {
   name: "App",
@@ -721,7 +721,7 @@ export default {
             // console.log('너너너>');
             this.messages +=
               '<div align="left">' +
-              '<div style="width: 60%; background-color: #fff; color: #000; border-radius: 10px; word-wrap: break-word;">' +
+              '<div style="width: 60%; background-color: #F2F2F2; color: #000; border-radius: 10px; word-wrap: break-word;">' +
               '<div style="font-weight: 900; margin-left:10px;">' +
               message[0] +
               " 님의 메시지: </div>" +
