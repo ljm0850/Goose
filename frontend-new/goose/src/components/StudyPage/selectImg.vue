@@ -37,7 +37,6 @@ export default {
           if(store.getters.isLoggedIn){
             const defaultInput = document.querySelector(`#${store.getters.selectedStudy.image}`)
             defaultInput.setAttribute("checked","checked")
-
           }
         }
 
