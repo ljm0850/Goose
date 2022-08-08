@@ -23,7 +23,8 @@ import PublicStudyRoom from "@/views/room/PublicStudyRoom.vue";
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
+    alias: ["/home"],
     name: "Home",
     component: Home,
   },
