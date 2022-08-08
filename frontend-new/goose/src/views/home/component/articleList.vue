@@ -8,13 +8,13 @@
             <img :src="article.image" class="card-img-top" alt="alt" />
             <div class="card-body">
               <h5 class="card-title">{{ article.title }}</h5>
-              <p class="card-text">사용 언어: {{}}</p>
+              <p class="card-text">사용 언어: {{article}}</p>
               <div class="d-flex justify-content-end">
                 <button href="#" class="button" @click.prevent="clickbtn(article.id)">
                   스터디 입장하기
                 </button>
               </div>
-            </div>
+            </div> 
             <!-- {{article}} -->
             <!-- <p class="card-text">{{article.content}}</p> -->
             <!-- <button @click.prevent="joinStudy(article)" type="button" class="btn btn-primary" >가입신청</button> -->
