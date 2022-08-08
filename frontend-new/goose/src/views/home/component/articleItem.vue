@@ -7,7 +7,7 @@
             <h5 class="card-title">{{item.title}}</h5>
             <p class="card-text">사용 언어: {{}}</p>
             <div class="d-flex justify-content-end">
-              <button href="#" class="button">스터디 입장하기</button>
+              <button @click="clickbtn(item.id)" class="button" >스터디 입장하기</button>
             </div>
           </div>
             <!-- {{article}} -->
@@ -20,10 +20,12 @@
 <script>
 import { useStore } from "vuex"
 import { computed } from "vue"
+import { useRouter } from "vue-router";
 import study1 from "@/assets/study1.png"
 import study2 from "@/assets/study2.png"
 import study3 from "@/assets/study3.jpg"
 import { reactive } from '@vue/reactivity';
+// import ArticleItem from './articleItem.vue'
 export default {
   props: {
     item:Object,
@@ -32,6 +34,7 @@ export default {
   setup(props){
     const store = useStore()
     const myStudyList = computed(()=> store.getters.myStudyList)
+    const router = useRouter();
     // const openstudyList = computed(()=> store.getters.openstudyList)
     const openstudyList = store.getters.openstudyList
     
@@ -55,10 +58,20 @@ export default {
       store.dispatch('saveOpenList')
     }
     
+    const fetchStudyHome = async function (studyId) {
+      await store.dispatch("selectStudy", studyId)
+    };
+
+     const clickbtn = async function (studyId) {
+      // console.log(">mmm>>>>>>>>>", studyId)
+      await fetchStudyHome(studyId);
+      router.push({ name: "PublicStudyRoom" });
+    };
+
     // open_set()
 
     // const joinStudy = (studyId) => store.dispatch('joinStudy',studyId)
-    return {myStudyList,fetchMyStudyList,openstudyList,open_set, changePhoto,state}
+    return {myStudyList, router, store, fetchMyStudyList,openstudyList,open_set, changePhoto,state,clickbtn}
   },
 
   watch: {

@@ -11,6 +11,7 @@
 <script>
 import { useStore } from "vuex"
 import { computed } from "vue"
+import { useRouter } from "vue-router";
 import study1 from "@/assets/study1.png"
 import study2 from "@/assets/study2.png"
 import study3 from "@/assets/study3.jpg"
@@ -23,6 +24,7 @@ export default {
 
   setup(){
     const store = useStore()
+     const router = useRouter();
     const myStudyList = computed(()=> store.getters.myStudyList)
     // const openstudyList = computed(()=> store.getters.openstudyList)
     const openstudyList = store.getters.openstudyList;
