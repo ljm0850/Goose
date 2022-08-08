@@ -25,45 +25,46 @@ export default {
     const store = useStore()
     const myStudyList = computed(()=> store.getters.myStudyList)
     // const openstudyList = computed(()=> store.getters.openstudyList)
-    const openstudyList = store.getters.openstudyList
-    
-    // const state = reactive({
-    //   photo : ""
-    // })
-    
-    const fetchMyStudyList = function(studyId){
-      store.dispatch('myStudyList',studyId)
-    }
-    
-    // const changePhoto = ()=>{
-    //   if (props.item.image==='study1'){state.photo = study1}
-    //   else if (props.item.image==='study2'){state.photo = study2}
-    //   else if (props.item.image==="study3"){state.photo = study3}
-    // }
-    // changePhoto()
-    const open_set = function(){
-      console.log('시작')
-      console.log(openstudyList)
-      store.dispatch('saveOpenList')
-    }
-    
+    const openstudyList = store.getters.openstudyList;
+    const fetchMyStudyList = function (studyId) {
+      store.dispatch("myStudyList", studyId);
+    };
+    const open_set = function () {
+      console.log("시작");
+      console.log(openstudyList);
+      store.dispatch("saveOpenList");
+    };
+
+    const fetchStudyHome = async function (studyId) {
+      await store.dispatch("selectStudy", studyId)
+    };
+
+    const selectedStudy = computed(() => store.getters.selectedStudy);
+
+
+    const clickbtn = async function (studyId) {
+      // console.log(">mmm>>>>>>>>>", studyId)
+      await fetchStudyHome(studyId);
+      router.push({ name: "PublicStudyRoom" });
+    };
+
     // open_set()
 
     // const joinStudy = (studyId) => store.dispatch('joinStudy',studyId)
-    return {myStudyList,fetchMyStudyList,openstudyList,open_set}
+    return { myStudyList, fetchMyStudyList, openstudyList, open_set, clickbtn, selectedStudy  };
   },
 
   watch: {
     $route: {
       handler() {
         // this.open_set()
-        this.fetchMyStudyList()
-        this.open_set()
+        this.fetchMyStudyList();
+        this.open_set();
       },
-      immediate: true
-    }
-  }
-}
+      immediate: true,
+    },
+  },
+};
 </script>
 
 <style>

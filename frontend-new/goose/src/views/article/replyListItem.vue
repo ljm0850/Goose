@@ -3,7 +3,7 @@
   <ol class="m-0 p-0">
     <li class="list-group py-1">
             <ol v-for = "reply in replies" :key="reply.id">
-
+            
       <div class="bg-warning">{{reply.name}}</div>
     <ul class="list-group-item d-flex justify-content-between">
     {{reply.re_content}}
@@ -48,12 +48,11 @@ export default {
           state.isEditing = !state.isEditing
         }
         
-
         const reply_list = function(){
             // reply_page 값은 임의로 1 부여
             store.dispatch('fetchReplies', {article_pk:store.getters.article.id,reply_page:1} )
         }
-        reply_list()
+        // reply_list() 글 조회시 같이 패치되게 글 조회 함수에서 작동
 
         const loginUser = computed(() => store.getters.loginUser)
 
@@ -80,6 +79,7 @@ button.img-button {
         height: 24px;
         cursor: pointer;
 }
+
 .size {
           width: 24px;
         height: 24px;
