@@ -83,11 +83,17 @@
             <span class="accept-list">
               <button
                 id="listbutton"
-                v-if="isManager"
+                v-if="isManager && !isJoinList"
                 type="button"
                 class="button"
                 data-bs-toggle="modal"
                 data-bs-target="#studyJoinListModal"
+              >
+                참가 신청 리스트
+              </button>
+              <button id="listbutton2" v-if="isManager && isJoinList" type="button" class="button"
+                data-bs-toggle="modal" data-bs-target="#studyJoinListModal"
+                style="color:red"
               >
                 참가 신청 리스트
               </button>
@@ -117,6 +123,7 @@
         <div class="study-content">
           <div class="container">
             <h3 class="text-center fw-bold">공지사항</h3>
+            <hr>
             <notice />
           </div>
         </div>
@@ -141,9 +148,6 @@
   </div>
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-    Launch static backdrop modal
-  </button>
 
     <div class="callender-box">
       <callender />
@@ -348,7 +352,7 @@ export default {
       }
     };
     changePhoto();
-
+    const isJoinList = computed(()=>store.getters.isJoinList)
     return {
       selectedStudy,
       deleteStudy,
@@ -362,6 +366,7 @@ export default {
       clickbtn2,
       changePhoto,
       state,
+      isJoinList,
     };
   },
 
