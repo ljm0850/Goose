@@ -63,6 +63,7 @@
   display: none; /* Chrome, Safari, Opera*/
 }
 #session-header {
+  margin-top:15px;
   margin-bottom: 20px;
 }
 

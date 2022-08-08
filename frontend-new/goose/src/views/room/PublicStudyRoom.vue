@@ -66,7 +66,7 @@
                   @click="muteAudio()"
                 >
                   <i class="fa-solid fa-microphone"></i>
-                  <span class="footerBtnText">{{ audioMsg }}</span>
+                  <span class="footerBtnText">&nbsp{{ audioMsg }}</span>
                 </button>
                 <!-- 마이크 on/off 버튼 -->
               </div>
@@ -78,7 +78,7 @@
                   @click="muteAudio()"
                 >
                   <i class="fa-solid fa-microphone-slash"></i>
-                  <span class="footerBtnText">{{ audioMsg }}</span></button
+                  <span class="footerBtnText">&nbsp{{ audioMsg }}</span></button
                 ><!-- 마이크 on/off 버튼 -->
               </div>
 
@@ -91,7 +91,7 @@
                   @click="muteVideo()"
                 >
                   <i class="fa-solid fa-video"></i>
-                  <span class="footerBtnText">{{ videoMsg }}</span>
+                  <span class="footerBtnText">&nbsp{{ videoMsg }}</span>
                 </button>
               </div>
               <div v-else class="roomFun buttomMenu">
@@ -102,7 +102,7 @@
                   @click="muteVideo()"
                 >
                   <i class="fa-solid fa-video-slash"></i>
-                  <span class="footerBtnText">{{ videoMsg }}</span>
+                  <span class="footerBtnText">&nbsp{{ videoMsg }}</span>
                 </button>
               </div>
 
@@ -115,7 +115,7 @@
                   @click="asideRight = true"
                 >
                   <i class="fa-solid fa-comment-slash"></i>
-                  <span class="footerBtnText">채팅보기</span>
+                  <span class="footerBtnText">&nbsp채팅보기</span>
                 </b-button>
               </div>
               <div v-else class="buttomMenu">
@@ -126,7 +126,7 @@
                   @click="asideRight = false"
                 >
                   <i class="fa-solid fa-comment"></i>
-                  <span class="footerBtnText">채팅닫기</span>
+                  <span class="footerBtnText">&nbsp채팅닫기</span>
                 </b-button>
               </div>
 
@@ -139,7 +139,7 @@
                   @click="leaveSession"
                 >
                   <i class="fa-solid fa-door-closed"></i>
-                  <span class="footerBtnText">나가기</span>
+                  <span class="footerBtnText">&nbsp나가기</span>
                 </button>
                 <!-- 나가기 버튼 -->
               </div>
