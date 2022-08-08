@@ -15,9 +15,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <FullCalendar :options="calendarOptionsM" />
+          <div>      <FullCalendar :options="calendarOptionsM" /></div>
+    
         </div>
         <div class="modal-footer">
+           
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Close
           </button>
@@ -28,7 +30,7 @@
   
   <br>
   <div class="container box">
-    <FullCalendar :options="calendarOptionsW" />
+    <FullCalendar id="qwe" :options="calendarOptionsW" />
   </div>
   <!-- <div v-if="createModal" >
     <div >    
@@ -74,9 +76,12 @@ export default {
         selectable: true,
         dateClick: this.handleDateClick,
         eventClick: this.handleEventClick,
-        height: 500,
+        height: 750,
         locale: koLocale,
         timeZone: "local",
+        background:"black",
+        background_color: "#FF9900",
+               color:"black",
         events: JSON.parse(JSON.stringify(store.getters.events)),
       },
       calendarOptionsM: {
@@ -97,6 +102,7 @@ export default {
     handleDateClick: function (arg) {
       alert("date click! " + arg.dateStr);
       this.createModal=!this.createModal;
+            this.isModalVisible = true;
     },
     handleEventClick: function (arg) {
       console.log(arg.event);
@@ -179,5 +185,8 @@ outline-offset: 0;
     padding-top: 1rem;
     height:85%;
     border-radius: 10px;
+    }
+    #qwe{
+      background-color: black;
     }
 </style>
