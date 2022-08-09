@@ -1,10 +1,10 @@
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop">
-      <div class="modal">
+      <div class="modal" v-if="!modify">
         <header class="modal-header">
           <slot name="header">
-            캘린더 작성!{{ event.id }}
+            캘린더 확인{{ event.id }}
             <button type="button" class="btn-close" @click="close()">x</button>
           </slot>
         </header>
@@ -43,7 +43,60 @@
             >
               삭제
             </button>
+            <button
+              type="button"
+              class="btn-green"
+              @click="changeView()"
+              v-if="upk == event.user_pk"
+            >
+              수정
+            </button>
             <button type="button" class="btn-green" @click="close()">
+              닫기
+            </button>
+          </slot>
+        </footer>
+      </div>
+      <div class="modal" v-if="modify">
+        <header class="modal-header">
+          <slot name="header">
+            캘린더 수정{{ event.id }}
+            <button type="button" class="btn-close" @click="close()">x</button>
+          </slot>
+        </header>
+        <div class="modal-body">
+          <div class="input-Box">
+            <label class="form-label">제목</label>
+            <input type="text" v-model="updateInfo.title" />
+          </div>
+          <div class="input-Box">
+            <label class="form-label">내용</label>
+            <textarea v-model="updateInfo.content"></textarea>
+          </div>
+          <div class="input-Box">
+            <label class="form-label">시작 시간</label>
+            <input
+              id="start-time"
+              type="datetime-local"
+              v-model="updateInfo.start"
+            />
+          </div>
+          <div class="input-Box">
+            <label class="form-label">종료 시간</label>
+            <input type="datetime-local" v-model="updateInfo.end" />
+          </div>
+        </div>
+        <footer class="modal-footer">
+          <slot name="footer">
+            <button
+              type="button"
+              class="btn-green"
+              @click="updateCalendar(), close()"
+              v-if="upk == event.user_pk"
+            >
+              수정
+            </button>
+            <button type="button" class="btn-green" @click="changeView()">
               취소
             </button>
           </slot>
@@ -66,7 +119,31 @@ export default {
     // };
     // return { deleteCalendar };
 
-    return { upk };
+    // const selectedStudy = computed(() => store.getters.selectedStudy);
+    const updateInfo = reactive({
+      title: store.getters.event.title,
+      content: store.getters.event.content,
+      // start: store.getters.event.start.subString(0, 16),
+      // end: store.getters.event.end,
+      start: "",
+      end: "",
+      study_pk: store.getters.event.study_pk,
+      id: store.getters.event.id,
+    });
+
+    const updateCalendar = () => {
+      updateInfo.start = document.getElementById("start-time").value;
+      updateInfo.start += "+09:00";
+      if (updateInfo.end != "") updateInfo.end += "+09:00";
+      store.dispatch("updateCalendar", updateInfo);
+    };
+
+    return { upk, updateCalendar, updateInfo };
+  },
+  data() {
+    return {
+      modify: false,
+    };
   },
   computed: {
     event: function () {
@@ -77,6 +154,9 @@ export default {
   methods: {
     close: function () {
       this.$emit("close");
+    },
+    changeView: function () {
+      this.modify = !this.modify;
     },
 
     deleteCalendar: function () {

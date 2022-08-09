@@ -360,6 +360,34 @@ export default {
         });
     },
 
+    updateStudyArticle({ commit, getters }, updateInfo) {
+      axios({
+        url: rest.calendar.update_calendar(),
+        method: "PATCH",
+        headers: getters.authHeader,
+        data: updateInfo,
+        params: { id: updateInfo.id },
+      })
+        .then((res) => {
+          axios({
+            url: rest.calendar.calendar_list(updateInfo.study_pk),
+            method: "get",
+            headers: getters.authHeader,
+          })
+            .then((res) => {
+              console.log(2, res.data);
+              commit("SET_EVENTS", res.data);
+            })
+
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     async deleteCalendar({ commit, getters }, event) {
       await axios({
         url: rest.calendar.delete_calendar(),
