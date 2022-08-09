@@ -20,7 +20,6 @@
           <div class="input-Box">
             <label class="form-label">내용 : {{ event.content }}</label>
           </div>
-          {{ event}}
           <div v-if="isEvent" class="input-Box">
             <label class="form-label"
               >시작 시간 :
