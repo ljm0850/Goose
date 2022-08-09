@@ -335,6 +335,7 @@ export default {
     },
 
     async createCalendar({ commit, getters }, calendar) {
+      console.log("axios:", calendar.start);
       await axios({
         url: rest.calendar.create_calendar(),
         method: "post",
@@ -360,17 +361,17 @@ export default {
         });
     },
 
-    updateStudyArticle({ commit, getters }, updateInfo) {
+    updateCalendar({ commit, getters }, event) {
       axios({
         url: rest.calendar.update_calendar(),
         method: "PATCH",
         headers: getters.authHeader,
-        data: updateInfo,
-        params: { id: updateInfo.id },
+        data: event,
+        params: { id: event.id },
       })
         .then((res) => {
           axios({
-            url: rest.calendar.calendar_list(updateInfo.study_pk),
+            url: rest.calendar.calendar_list(event.study_pk),
             method: "get",
             headers: getters.authHeader,
           })

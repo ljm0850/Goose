@@ -67,23 +67,23 @@
         <div class="modal-body">
           <div class="input-Box">
             <label class="form-label">제목</label>
-            <input type="text" v-model="updateInfo.title" />
+            <input type="text" v-model="event.title" />
           </div>
           <div class="input-Box">
             <label class="form-label">내용</label>
-            <textarea v-model="updateInfo.content"></textarea>
+            <textarea v-model="event.content"></textarea>
           </div>
           <div class="input-Box">
             <label class="form-label">시작 시간</label>
             <input
               id="start-time"
               type="datetime-local"
-              v-model="updateInfo.start"
+              v-model="event.start"
             />
           </div>
           <div class="input-Box">
             <label class="form-label">종료 시간</label>
-            <input type="datetime-local" v-model="updateInfo.end" />
+            <input type="datetime-local" v-model="event.end" />
           </div>
         </div>
         <footer class="modal-footer">
@@ -96,7 +96,11 @@
             >
               수정
             </button>
-            <button type="button" class="btn-green" @click="changeView()">
+            <button
+              type="button"
+              class="btn-green"
+              @click="changeView(), close()"
+            >
               취소
             </button>
           </slot>
@@ -114,31 +118,8 @@ export default {
   setup() {
     const store = useStore();
     const upk = store.getters.loginUser.id;
-    // const deleteCalendar = () => {
-    //   // store.dispatch("deleteCalendar", event.id);
-    // };
-    // return { deleteCalendar };
 
-    // const selectedStudy = computed(() => store.getters.selectedStudy);
-    const updateInfo = reactive({
-      title: store.getters.event.title,
-      content: store.getters.event.content,
-      // start: store.getters.event.start.subString(0, 16),
-      // end: store.getters.event.end,
-      start: "",
-      end: "",
-      study_pk: store.getters.event.study_pk,
-      id: store.getters.event.id,
-    });
-
-    const updateCalendar = () => {
-      updateInfo.start = document.getElementById("start-time").value;
-      updateInfo.start += "+09:00";
-      if (updateInfo.end != "") updateInfo.end += "+09:00";
-      store.dispatch("updateCalendar", updateInfo);
-    };
-
-    return { upk, updateCalendar, updateInfo };
+    return { upk };
   },
   data() {
     return {
@@ -153,6 +134,7 @@ export default {
   },
   methods: {
     close: function () {
+      this.modify = false;
       this.$emit("close");
     },
     changeView: function () {
@@ -161,6 +143,12 @@ export default {
 
     deleteCalendar: function () {
       this.$store.dispatch("deleteCalendar", this.event);
+    },
+
+    updateCalendar: function () {
+      this.modify = false;
+      console.log(this.event.start);
+      this.$store.dispatch("updateCalendar", this.event);
     },
   },
 };
