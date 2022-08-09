@@ -174,9 +174,18 @@ export default {
     const passwordCheck = computed(()=>store.getters.passwordCheck)
     const pwcheck = ()=>{store.dispatch('passwordCheck',data.inputPassword)}
     const isStudyMember = computed(()=>store.getters.isStudyMember)
+    const resetPasswordCheck = ()=>{store.dispatch('resetPasswordCheck')}
     return {studyArticleList,selectedArticle,pageUp,pageDown,data,selectedStudy,
-    allClick,noticeClick,freeClick,btnActive,refresh,pwcheck,passwordCheck,isStudyMember}
-  }
+    allClick,noticeClick,freeClick,btnActive,refresh,pwcheck,passwordCheck,isStudyMember,resetPasswordCheck}
+  },
+
+  // watch: {
+  //   selectedStudy: {
+  //     handler() {
+  //       this.resetPasswordCheck();
+  //     },
+  //   },
+  // },
 }
 </script>
 

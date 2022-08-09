@@ -383,6 +383,7 @@ export default {
     const isStudyMember = computed(()=>store.getters.isStudyMember)
     const pwcheck = ()=>{
       store.dispatch('passwordCheck',state.inputPassword)}
+    const resetPasswordCheck = ()=>{ store.dispatch('resetPasswordCheck')}
     return {
       selectedStudy,
       deleteStudy,
@@ -398,7 +399,8 @@ export default {
       studyMemberList,
       pwcheck,
       isStudyMember,
-      passwordCheck
+      passwordCheck,
+      resetPasswordCheck
     };
   },
   methods: {
@@ -408,14 +410,15 @@ export default {
     },
   },
 
-  watch: {
-    selectedStudy: {
-      handler() {
-        this.changePhoto();
-        this.compiler = this.selectedStudy.category;
-      },
-    },
-  },
+  // watch: {
+  //   selectedStudy: {
+  //     handler() {
+  //       this.changePhoto();
+  //       this.compiler = this.selectedStudy.category;
+  //       this.resetPasswordCheck();
+  //     },
+  //   },
+  // },
 };
 </script>
 
