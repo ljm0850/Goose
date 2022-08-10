@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <div class="mx-5">
-        <h3 class="d-flex justify-content-center my-2">{{ article_log.title}}</h3>
-        <div class="d-flex  justify-content-between">
+        <h3 class="d-flex justify-content-center my-3 display-4">{{ article_log.title}}</h3>
+        <div class="d-flex  justify-content-between bg-warning">
             <p class="mx-2 my-1">스터디명: {{  study_log.title  }}</p>
             <p class="mx-2 my-1">분류: {{ article_log.category  }}</p>
             <p class="mx-2 my-1">모집 여부: {{ article_log.state  }}</p>
             <p class="mx-2 my-1">작성일자: {{  article_log.date  }}</p>
         </div>
-        <div class="content-detail">{{  article_log.content  }}</div>
+        <div class="content-detail my-0">{{  article_log.content  }}</div>
         <div>
             <!--스터디 페이지와 연결 // 스터디 페이지 완성 되었을 때 연결 -->
 
