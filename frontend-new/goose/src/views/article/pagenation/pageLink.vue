@@ -10,7 +10,7 @@
 
 
 <script>
-import { reactive,computed } from "vue";
+import { reactive } from "vue";
 import {  useStore  } from 'vuex'
 
 // 필터링 하고 페이지네이션 쓰면 풀리는 문제 해결해야함

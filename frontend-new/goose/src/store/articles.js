@@ -11,6 +11,7 @@ export default {
         replies: [], // 해당 게시물의 전체 댓글 조회 시 사용
         reply: {}, //개별 댓글의 CRUD
         total: [],
+        total_replies: [],
         // test: [],
         // myReplyList: [
         //     // id : 댓글단 글의 id가 들어감
@@ -29,6 +30,7 @@ export default {
         replies: state => state.replies,
         reply: state => state.reply,
         total: state => state.total,
+        total_replies: state => state.total_replies
         // test: state => state.test,
         // myReplyList: state => state.myReplyList,
         // pageIndex: state => state.pageIndex,
@@ -41,6 +43,7 @@ export default {
         SET_REPLIES: (state, replies) => state.replies = replies,
         SET_REPLY: (state, reply) => state.reply = reply,
         SET_TOTALPAGE: (state, total) => state.total = total,
+        SET_TOTALREPLIES: (state, total_replies) => state.total_replies = total_replies
         // SET_TEST: (state, test) => state.test = test,
         // RESET_MY_REPLY_LIST: (state) => state.myReplyList = [],
         // ADD_MY_REPLY_LIST: (state,replyList) => state.myReplyList.push(replyList),
@@ -127,8 +130,10 @@ export default {
             .then(res => {
                 console.log(res.data.title)
                 commit('SET_ARTICLE', res.data)})
+                
+
             .then(()=>{
-                dispatch('fetchReplies', {article_pk:getters.article.id,reply_page:1} ) // 댓글도 함께 조회 페이지 일단 1번 고정해뒀음
+                dispatch('fetchReplies', {article_pk:getters.article.id,reply_page:1} )
             })
             .catch(err => {
                 console.error(err.response)
@@ -245,6 +250,22 @@ export default {
                     articlePk:reply_data.article_pk,
                     page: 1}})
             .then(res => {
+                commit('SET_TOTALREPLIES',res.data.totalPages)
+                commit('SET_REPLIES',res.data.content)
+            })
+            .catch(err => console.error(err.response))
+        },
+
+        Repliesnation({  commit }, reply_data){
+            console.log(reply_data)
+            console.log('위')
+            axios.get(rest.articles_reply.reply_crud(),{
+                params:{
+                    articlePk:reply_data.articlePk,
+                    page: reply_data.page}})
+            .then(res => {
+                console.log(res.data.content)
+                commit('SET_TOTALREPLIES',res.data.totalPages)
                 commit('SET_REPLIES',res.data.content)
             })
             .catch(err => console.error(err.response))
