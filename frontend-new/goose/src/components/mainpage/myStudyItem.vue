@@ -6,10 +6,10 @@
         <h5 class="card-title fw-bold">{{item.title}}</h5>
         <p class="card-text">사용 언어:{{item.category}}</p>
         <div class="d-flex justify-content-end">
-      <button @click.prevent="selectStudy" class="button">스터디 홈</button>
-    </div> 
-  </div>
-</div>
+          <button @click.prevent="selectStudy" class="button">스터디 홈</button>
+        </div> 
+      </div>
+    </div>
 </div>
 
 
@@ -64,8 +64,7 @@ export default {
 
 <style scoped>
 .row{
-  width:100%;
-  height:100%
+   margin: 10px;
 }
 * {
   font-family: 'NanumSquare', sans-serif;
