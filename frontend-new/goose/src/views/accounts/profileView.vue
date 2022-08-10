@@ -17,11 +17,11 @@
                     <div class="info_data">
                         <div class="data">
                             <h4>Email</h4>
-                            <p>{{loginUser.email}}</p>
+                            <p style="font-size: 24px">{{loginUser.email}}</p>
                         </div>
                         <div class="data">
                         <h4>자기소개</h4>
-                            <p>{{loginUser.info}}</p>
+                            <p style="font-size: 16px">{{loginUser.info}}</p>
                     </div>
                     </div>
                 </div>

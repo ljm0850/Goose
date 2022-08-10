@@ -10,15 +10,12 @@
 
 
 <script>
-import { reactive } from "vue";
+import { reactive,computed } from "vue";
 import {  useStore  } from 'vuex'
 
 // 필터링 하고 페이지네이션 쓰면 풀리는 문제 해결해야함
 export default{
-  props: {
-    search: Object,
-  },
-    setup(props){
+    setup(){
         const store = useStore()
         const state = reactive({
             totalListItemCount: 0,
@@ -28,13 +25,14 @@ export default{
 
             pageCount: 0,
             startPageIndex: 1,
-            endPageIndex: store.getters.total,
+            endPageIndex: store.getters.total_replies,
         })
 
         const movePage = function(param){
             state.currentPageIndex = param
-            store.dispatch('fetchArticles',param)
-            console.log(props.search)
+            store.dispatch('Repliesnation',{'page':param,
+            'articlePk':store.getters.article.id})
+            state.endPageIndex = store.getters.total
         }
 
         const initUi = function()
