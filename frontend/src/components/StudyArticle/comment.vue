@@ -10,8 +10,6 @@
 </nav>
 <createComment />
 <!-- pagination -->
-<hr>
-
 </template>
 
 <script>
