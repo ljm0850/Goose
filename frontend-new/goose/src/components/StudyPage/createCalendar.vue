@@ -4,18 +4,20 @@
       <div class="modal">
         <header class="modal-header">
           <slot name="header">
-            캘린더 작성!
-            <button type="button" class="btn-close" @click="close()">x</button>
+            <h4>캘린더 작성</h4>
+            <button type="button" class="btn btn-close" @click="close()">
+              x
+            </button>
           </slot>
         </header>
         <div class="modal-body">
           <div class="input-Box">
             <label class="form-label">제목</label>
-            <input v-model="calendar.title" type="text" />
+            <input v-model="calendar.title" type="text" id="textea" />
           </div>
           <div class="input-Box">
             <label class="form-label">내용</label>
-            <textarea v-model="calendar.content"></textarea>
+            <textarea v-model="calendar.content" id="textea"></textarea>
           </div>
           <div class="input-Box">
             <label class="form-label">시작 시간</label>
@@ -30,12 +32,12 @@
           <slot name="footer">
             <button
               type="button"
-              class="btn-green"
+              class="btn btn-green"
               @click="createCalendar(), close()"
             >
               작성
             </button>
-            <button type="button" class="btn-green" @click="close()">
+            <button type="button" class="btn btn-green" @click="close()">
               취소
             </button>
           </slot>
@@ -93,6 +95,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#textea {
+  width: 14.3rem;
+}
+.form-label {
+  width: 5rem;
+  margin-left: 1rem;
+  margin-right: 2rem;
+}
 .modal-fade-enter,
 .modal-fade-leave-active {
   opacity: 0;
@@ -149,8 +159,7 @@ export default {
 
 .btn-close {
   border: none;
-  font-size: 20px;
-  padding: 20px;
+  font-size: 2rem;
   cursor: pointer;
   font-weight: bold;
   color: #4aae9b;
@@ -162,5 +171,8 @@ export default {
   background: #4aae9b;
   border: 1px solid #4aae9b;
   border-radius: 2px;
+}
+.btn {
+  border-radius: 5px;
 }
 </style>
