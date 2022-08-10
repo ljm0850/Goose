@@ -22,6 +22,8 @@ export default {
     const myStudyList = computed(()=> store.getters.myStudyList)
     const patchMyStudyList = ()=>{store.dispatch('myStudyList')}
     patchMyStudyList()
+    console.log("dddddddddddd")
+    console.log(myStudyList)
     return {myStudyList}
   }
 }

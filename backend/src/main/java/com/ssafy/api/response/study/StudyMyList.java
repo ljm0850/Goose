@@ -4,7 +4,7 @@ public interface StudyMyList {
 	Long getId();
 	String getTitle();
 	String getImage();
-	String getCategory();
 	String getUrl_conf();
+	String getCategory();
 
 }
