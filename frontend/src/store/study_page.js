@@ -310,10 +310,9 @@ export default {
         },
       })
       .then((res) => {
-        console.log("삭제")
         dispatch('saveStudyMemberList',getters.selectedStudy.id)
       })
-      .catch((err)=>console.log("에러내용:",err))
+      // .catch((err)=>console.log("에러내용:",err))
     },
 
     // 캘린더
