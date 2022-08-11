@@ -233,7 +233,6 @@ export default {
       })
       .then((res) => {
         let studyMemberList = []
-        commit("SET_STUDY_MEMBER_LIST",res.data)
         for (let member of res.data){
           axios({
             url: rest.user.get_user(member.user_id),
@@ -244,12 +243,14 @@ export default {
             if(res.data.info){member["info"]=res.data.info}
             else{member["info"]=""}
             studyMemberList.push(member)
+            console.log(studyMemberList)
             commit("SET_STUDY_MEMBER_LIST", studyMemberList);
+            console.log("?????",getters.studyMemberList)
+            dispatch("findStudyManager");
           })
         }
       })
       .then(() => {
-        dispatch("findStudyManager");
       });
     },
 
@@ -292,13 +293,13 @@ export default {
           headers: getters.authHeader,
           data: credential,
         })
-          .then((res) => {
-            dispatch("joinList");
-            dispatch("saveStudyMemberList", credential.study_pk);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        .then((res) => {
+          dispatch("joinList");
+          dispatch("saveStudyMemberList", credential.study_pk);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       }
     },
 
