@@ -3,8 +3,8 @@
     <div class="d-flex justify-content-between">
     <li class="fw-bold">이름: {{ item.name }},  id : {{ item.user_id }}</li>
     <div> 
-      <button class="accept" @click="joinAccept" type="button" >승인</button>
-      <button class="reject" @click="joinRefuse" type="button" >거절</button>
+      <button class="accept" @click.prevent="joinAccept" type="button" >승인</button>
+      <button class="reject" @click.prevent="joinRefuse" type="button" >거절</button>
     </div>  
     </div>
 </template>
