@@ -230,25 +230,9 @@ export default {
         headers: getters.authHeader,
       })
       .then((res) => {
-        let studyMemberList = []
-        commit("SET_STUDY_MEMBER_LIST",res.data)
-        for (let member of res.data){
-          axios({
-            url: rest.user.get_user(member.user_id),
-            method: "get",
-            params:{userId:member.user_id}
-          })
-          .then((res)=>{
-            if(res.data.info){member["info"]=res.data.info}
-            else{member["info"]=""}
-            studyMemberList.push(member)
-            commit("SET_STUDY_MEMBER_LIST", studyMemberList);
-          })
-        }
-      })
-      .then(() => {
+        commit("SET_STUDY_MEMBER_LIST", res.data);
         dispatch("findStudyManager");
-      });
+      })
     },
 
     joinList({ getters, dispatch }) {
@@ -290,13 +274,13 @@ export default {
           headers: getters.authHeader,
           data: credential,
         })
-          .then((res) => {
-            dispatch("joinList");
-            dispatch("saveStudyMemberList", credential.study_pk);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        .then((res) => {
+          dispatch("joinList");
+          dispatch("saveStudyMemberList", credential.study_pk);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       }
     },
 
@@ -315,7 +299,7 @@ export default {
       commit("SET_CHOICE_IMG", imgurl);
     },
 
-    dropOutStudy({ getters }, user_pk) {
+    dropOutStudy({ getters,dispatch }, user_pk) {
       axios({
         url: rest.study.study_member_out(),
         method: "delete",
@@ -324,10 +308,10 @@ export default {
           study_pk: getters.selectedStudy.id,
           user_pk: user_pk,
         },
-      });
-      // .then((res) => {
-      //   router.push({ name: "Home" });
-      // })
+      })
+      .then((res) => {
+        dispatch('saveStudyMemberList',getters.selectedStudy.id)
+      })
       // .catch((err)=>console.log("에러내용:",err))
     },
 

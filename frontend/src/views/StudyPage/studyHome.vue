@@ -30,6 +30,7 @@
               스터디 주소 : <span>{{ selectedStudy.url_conf }}</span>
             </div> -->
               <button
+                v-if="isStudyMember"
                 type="modal-button"
                 class="modal-button"
                 style="z-index: 2"
@@ -116,7 +117,7 @@
                   id="listbutton"
                   v-if="isManager && isJoinList"
                   type="button"
-                  class="button mx-2"
+                  class="button"
                   data-bs-toggle="modal"
                   data-bs-target="#studyJoinListModal"
                   style="color: red"
@@ -130,7 +131,7 @@
                   id="editbutton"
                   v-if="isManager"
                   type="button"
-                  class="button"
+                  class="button mx-1"
                   data-bs-toggle="modal"
                   data-bs-target="#updateStudyModal"
                 >
@@ -149,8 +150,15 @@
                 >
                   스터디 구성원
                 </button>
-                <miniMemberList />
+                <miniMemberList :studyMemberList="studyMemberList"/>
               </span>
+              <span><button
+          v-if="!isStudyMember && isLoggedIn"
+          @click="joinStudy"
+          class="button"
+        >
+          스터디 가입신청
+        </button></span>
               <!-- <div class="m-3">
             인원 : {{ selectedStudy.member }}/ {{ selectedStudy.maxmember }}
           </div> -->
@@ -205,13 +213,13 @@
         >
           스터디 탈퇴하기
         </button>
-        <button
+        <!-- <button
           v-if="!isStudyMember && isLoggedIn"
           @click="joinStudy"
           class="button"
         >
           스터디 가입신청
-        </button>
+        </button> -->
       </div>
       <div style="height: 50px"></div>
     </div>

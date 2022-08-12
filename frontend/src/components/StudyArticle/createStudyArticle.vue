@@ -7,7 +7,7 @@
     data-bs-toggle="modal"
     data-bs-target="#createStudyArticle"
   >
-    새 글
+    글 작성
   </button>
 
   <!-- Modal -->
@@ -60,6 +60,7 @@
                 class="form-control"
                 placeholder="글 제목"
                 v-model="credential.title"
+                maxlength="30"
               />
               <!-- <label for="studyArticleName"  class="form-label">글 제목</label> -->
             </div>

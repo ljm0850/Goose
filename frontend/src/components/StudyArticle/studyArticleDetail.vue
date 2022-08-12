@@ -1,6 +1,6 @@
 <template>
 <div class="modal fade" id="studyArticleDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h3 v-if="state.type==0" class="modal-title fw-bold" id="staticBackdropLabel">{{ article.title }}</h3>
@@ -18,20 +18,22 @@
             </div>
             <!-- 댓글 -->
           </div>
+          <div class="d-flex justify-content-end">
+            <button v-if="state.type==0 && isWriter" @click.prevent="typeChange" type="button" class="cus-btn-yellow mx-2">수정하기</button>
+            <button v-if="(isWriter || isStudyManager) && state.type==0" @click.prevent="[deleteArticle(),$emit('refresh')]" class="cus-btn-delete mx-2" data-bs-dismiss="modal">삭제하기</button>
+            
+          </div>
+
             <hr>
             <h4 class="fw-bold">댓글</h4>
             <comment/>
         </div>
         <!-- 업데이트 -->
-        <updateStudyArticle v-if="state.type==1" />
+        <div>
+          <updateStudyArticle v-if="state.type==1" @typeChange="typeChange()" />
+        </div>
 
 
-      </div>
-      <div class="modal-footer">
-        <!-- <button @click="typeReset" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-        <button v-if="isWriter && state.type==0" @click.prevent="[deleteArticle(),$emit('refresh')]" class="btn btn-warning" data-bs-dismiss="modal">삭제하기</button>
-        <button v-if="state.type==0 && isWriter" @click.prevent="typeChange" type="button" class="btn btn-primary">수정하기</button>
-        <button v-if="state.type!=0" @click.prevent="typeChange" type="button" class="btn btn-primary">돌아가기</button>
       </div>
     </div>
   </div>
@@ -68,9 +70,9 @@ export default {
           },1000)
         }
         
-        
+        const isStudyManager = computed(()=>store.getters.isStudyManager)
         const isWriter = computed(()=> store.getters.isArticleWriter)
-        return {article,state,typeChange,deleteArticle,isWriter,typeReset}
+        return {article,state,typeChange,deleteArticle,isWriter,typeReset,isStudyManager}
     }
 
 }
@@ -90,4 +92,26 @@ export default {
   font-weight: 500;
   font-size: 1.2rem
  }
+
+ .cus-btn-yellow {
+  background: #ffd700;
+  color: #000000;
+  cursor: pointer;
+  width: 100px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 80px 40px;
+}
+
+  .cus-btn-delete {
+  background: #E64848;
+  color: whitesmoke;
+  cursor: pointer;
+  width: 100px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 80px 40px;
+}
 </style>

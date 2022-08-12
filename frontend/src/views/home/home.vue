@@ -3,8 +3,8 @@
   <div>
     <div
       id="carouselExampleControlsNoTouching"
-      class="carousel slide"
-      data-bs-touch="false"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
     >
       <div class="carousel-inner">
         <div class="carousel-item active notice-item">
@@ -12,12 +12,10 @@
             <Notice />
           </div>
         </div>
-        <!-- <div class="carousel-item notice-item">
-          <Notice />
-        </div>
-        <div class="carousel-item notice-item">
-          <Notice />
-        </div> -->
+        <a href="https://troubled-juice-9fa.notion.site/Goose-22-08-11-32c64d6ced8a489db627972de5f5bac5">
+          <div class="carousel-item FAQ">
+         <FAQ />
+        </div></a> 
       </div>
       <button
         class="carousel-control-prev"
@@ -43,7 +41,7 @@
         <li>
           <button
             id="open-study"
-            class="btn btn-3 hover-border-3"
+            class="btn btn-3 hover-border-3 active"
             @click.prevent="hire_study"
           >
             공개 스터디
@@ -71,7 +69,7 @@
 import Notice from "@/components/mainpage/notice";
 import myStudyList from "@/components/mainpage/myStudyList.vue";
 import articleList from "./component/articleList.vue";
-
+import FAQ from '@/components/mainpage/FAQ.vue'
 import { useStore } from "vuex";
 import { reactive } from "vue";
 
@@ -80,11 +78,12 @@ export default {
     Notice,
     myStudyList,
     articleList,
+    FAQ,
   },
   setup() {
     const store = useStore();
     const state = reactive({
-      toggle: 0,
+      toggle: 1,
     });
 
     const hire_study = function () {
@@ -94,6 +93,7 @@ export default {
         document.getElementById("me-study").classList.remove("active");
       } else {
         state.toggle = 0;
+          document.getElementById("open-study").classList.remove("active");
       }
     };
 
@@ -102,7 +102,10 @@ export default {
         state.toggle = 2;
         document.getElementById("open-study").classList.remove("active");
         document.getElementById("me-study").classList.add("active");
-      } else state.toggle = 0;
+      } else {
+        document.getElementById("me-study").classList.remove("active");
+        state.toggle = 0;
+      }
     };
     if (store.getters.isLoggedIn) {
       store.dispatch("myStudyList");
@@ -131,6 +134,16 @@ export default {
   border: 1px solid #ffd700;
   display: flex;
   justify-content: center;
+}
+
+.FAQ {
+  width: 1600px;
+  height: 300px;
+  background-image: url('@/assets/케러셀2.png');
+  border: 1px solid #ffd700;
+  display: flex;
+  justify-content: center;
+  background-repeat: no-repeat;
 }
 ul[class="button-links"] {
   display: flex;
