@@ -9,7 +9,8 @@
       </div>
       <div class="fix">
         <h1 class="fw-bold text-center">단칼에 배우는 GOOSE</h1>
-        <h3 class="mt-4 text-center">GOOSE를 더욱 알차게 이용하고 싶다면 클릭!</h3>
+        <h4 class="mt-4 text-center fw-bold">GOOSE를 더욱 알차게 이용하고 싶다면</h4>
+        <h2 class="text-center red fw-bold">클릭!</h2>
       </div>
       </div>
     </div>
@@ -30,9 +31,10 @@ export default {
   font-family: "NanumSquare", sans-serif;
   }
   .fix{
-    margin-right: 180px;
-    margin-top: 80px;
+    margin-left: 100px;
+    margin-top: 100px;
   }
+
   #FAQ {
     font-weight: bold;
     color: #fff;
@@ -50,6 +52,10 @@ export default {
   .FAQ {
     width:220px;
     height:220px;
+  }
+
+  .red{
+    color: #ec610b;
   }
   .container {
     width: 100%
