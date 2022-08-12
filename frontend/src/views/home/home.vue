@@ -3,8 +3,9 @@
   <div>
     <div
       id="carouselExampleControlsNoTouching"
-      class="carousel slide"
-      data-bs-touch="false"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+
     >
       <div class="carousel-inner">
         <div class="carousel-item active notice-item">
