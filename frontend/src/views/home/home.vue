@@ -14,7 +14,10 @@
         </div>
         <a href="https://troubled-juice-9fa.notion.site/Goose-22-08-11-32c64d6ced8a489db627972de5f5bac5">
           <div class="carousel-item FAQ">
-         <FAQ />
+            <div class="d-flex justify-content-center">
+              <FAQ/>
+            </div>
+         
         </div></a> 
       </div>
       <button
