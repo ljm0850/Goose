@@ -1,6 +1,6 @@
 <template>
 <!-- <div class="d-flex justify-content-center"> -->
-  <div class="container justify-content-center">
+  <div class="justify-content-center">
     <div class="container ">
       <h1 class="fw-bold text-center">단칼에 배우는 GOOSE</h1>
       <h4 class="mt-4 text-center fw-bold">GOOSE를 더욱 알차게 이용하고 싶다면</h4>
