@@ -412,10 +412,14 @@ export default {
     async compile({ dispatch }, code) {
 
       await axios({
-        url: "/v1/execute",
-        // url: "https://cors-anywhere.herokuapp.com/https://api.jdoodle.com/v1/execute",
+        // url: "/v1/execute",
+        url: "https://cors-anywhere.herokuapp.com/https://api.jdoodle.com/v1/execute",
         // url: "https://api.jdoodle.com/v1/execute",
         method: "post",
+        // headers: {
+        //   'Access-Control-Allow_Origin': '*',
+        //   'Content-Type': 'application/json; charset = utf-8'
+        // },
         data: {
           clientId: "683c1c7ad02b383e183ce75fb4258278",
           clientSecret:
