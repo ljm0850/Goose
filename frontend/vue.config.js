@@ -17,7 +17,7 @@ module.exports = {
     open: true,
     proxy: {
       "/api/v1": {
-        target: "https://localhost:8080/",
+        target: "https://i7c209.p.ssafy.io:8080/",
       },
       "/v1/execute": {
         target: "https://api.jdoodle.com/",
