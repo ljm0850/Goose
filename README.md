@@ -92,4 +92,5 @@
 - [최용욱]([ID · GitHub](https://github.com/)) Frontend
 
 
-https://user-images.githubusercontent.com/86655589/184637703-0510878d-f4f0-4967-a2dd-3761be01a448.mp4
+#### 시연영상
+- https://user-images.githubusercontent.com/86655589/184637703-0510878d-f4f0-4967-a2dd-3761be01a448.mp4
