@@ -92,6 +92,9 @@ sudo letsencrypt certonly --standalone -d 제외한 도메인 이름
 # 가 발급경로
  ## ssl_certificate /etc/letsencrypt/live/도메인이름/fullchain.pem; 
  ## ssl_certificate_key /etc/letsencrypt/live/도메인이름/privkey.pem; 
+ 
+ # pem을 PKCS12 형식으로 변경
+openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -name airpageserver -CAfile chain.pem -caname root
 ```
 
 ##### (docker compose)

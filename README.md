@@ -3,6 +3,8 @@
 ![Goose-1-2](https://user-images.githubusercontent.com/86655589/184588991-bb65717d-ff72-40fc-8e3a-c8eb15819df4.png)
 >비대면 화상 스터디 플랫폼
 
+### 메인화면
+![메인홈](https://user-images.githubusercontent.com/86655589/184629331-e87e00d5-887a-4e07-8706-4d1d7eebeeb5.png)
 
 
 ## 프로젝트 개요
@@ -13,6 +15,7 @@
   - webRTC 기술을 사용해 비대면 화상 스터디 플랫폼 제작
   - 스터디 모집과 스터디 활동을 지원하는 스터디 플랫폼 목표
   - 서비스를 이용하는 사람들로 하여금 편리함과 유용함을 주는 서비스를 목표
+  - 모두가 편집에 관여할 수 있는 공유 판서 기능과 컴파일러 기능 목표
   
 
 - 와이어 프레임
@@ -70,7 +73,7 @@
 - OS: Windows10
 - Backend Framework: Spring Boot 2.4.5
 - Frontend Framework: Vue 3
-- DB: mysql  Ver 5.7.25
+- DB: mysql Ver 5.7.25
 - WAS: Gradle
 - JVM: openJDK (1.8.0_192)
 - Node.js: 14.17.0
