@@ -14,6 +14,7 @@
   - 스터디 모집과 스터디 활동을 지원하는 스터디 플랫폼 목표
   - 서비스를 이용하는 사람들로 하여금 편리함과 유용함을 주는 서비스를 목표
   
+
 - 와이어 프레임
 ![와이어 프레임](https://user-images.githubusercontent.com/86655589/184591676-be098f63-7a07-45b8-9504-15e97387f857.png)
 
@@ -37,22 +38,32 @@
 ### 비공개 스터디
 > 선별된 사람들로만 구성된 스터디
 - 다중 공유
+![다중공유](https://user-images.githubusercontent.com/86655589/184599253-53cc9fe8-e0fa-44aa-b0ec-9ea65eb2af98.gif)
 
 - 공유 판서
+( 시연 이미지 준비
 
 - 컴파일러
+![컴파일러](https://user-images.githubusercontent.com/86655589/184598488-ee3d09d9-55d2-4566-9bb8-508b29841073.gif)
 
 - 스톱워치
+![타이머](https://user-images.githubusercontent.com/86655589/184599763-33ef3ac7-511f-40b3-a8eb-f179001d7755.gif)
 
-- 마이크, 카메라 & 채팅
 
 
 ### 공개 스터디
 > 공개된 스터디, 비공개 스터디를 위한 만남의 장으로 활용가능
-- 강퇴 기능
+- 마이크, 카메라 & 채팅
+![채팅마이크](https://user-images.githubusercontent.com/86655589/184601420-d76bbf40-e8ac-4598-87af-4fb07c8afe03.gif)
 
-## 아키텍쳐
-- 아키텍쳐
+- 강퇴
+![강퇴](https://user-images.githubusercontent.com/86655589/184600601-61132c9f-a554-4740-882c-a90c7ee5af81.gif)
+
+
+
+## 아키텍처
+- 아키텍처
+( 이미지 준비
 
 
 ## 개발환경
