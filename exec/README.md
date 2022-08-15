@@ -20,6 +20,8 @@
 
 > **MySQL**
 >
+> version : 8.0.30
+>
 > username : goose
 >
 > password : goose7goose
@@ -58,7 +60,6 @@ export JAVA_HOME=/usr/lib/jvm/zulu-8-amd64
 java -version
 ```
 
-### Docker
 
 ##### docker
 
