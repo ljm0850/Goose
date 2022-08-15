@@ -133,7 +133,7 @@ $ vi .env
 # DOMAIN_OR_PUBLIC_IP : i7c209.p.ssafy.io:8080
 # OPENVIDU_SECRET : MY_GOOSEGOOSE
 # CERTIFICATE_TYPE : letsencrypt
-# LETSENCRYPT_EMAIL : dltmdwls96@naver.com
+# LETSENCRYPT_EMAIL : your@email
 # HTTP_PORT : 80
 # HTTPS_PORT : 4443
 # openvidu 실행
