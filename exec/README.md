@@ -105,6 +105,11 @@ sudo curl https://s3-eu-west-1.amazonaws.com/aws.openvidu.io/install_openvidu_la
 
 # .env 파일 수정
 vi .env
+```sh
+
+sudo curl https://s3-eu-west-1.amazonaws.com/aws.openvidu.io/install_openvidu_latest.sh | bash
+
+```
 
 # openvidu 서버 시작
 sudo ./openvidu start
