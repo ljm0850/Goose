@@ -92,7 +92,7 @@
 - [양승호]([ID · GitHub](https://github.com/)) Backend
 - [이승진]([lapera00 · GitHub](https://github.com/lapera00)) Backend
 - [이재민]([ID · GitHub](https://github.com/)) Frontend
-- [정관철]([ID · GitHub](https://github.com/)) Backend
+- [정관철]([MokokoDev · GitHub](https://github.com/MokokoDev)) Backend
 - [최용욱]([ID · GitHub](https://github.com/)) Frontend
 
 
