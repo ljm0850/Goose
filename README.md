@@ -1,8 +1,8 @@
 # GOOSE(구해줘요 스터디)
 
->비대면 화상 스터디 플랫폼
+>비대면 화상 스터디 코딩 특화 플랫폼 
 ![Goose-1-2](https://user-images.githubusercontent.com/86655589/184588991-bb65717d-ff72-40fc-8e3a-c8eb15819df4.png)
-
+>메인화면
 ![메인홈](https://user-images.githubusercontent.com/86655589/184629331-e87e00d5-887a-4e07-8706-4d1d7eebeeb5.png)
 
 ## 프로젝트 개요
