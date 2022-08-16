@@ -142,8 +142,9 @@ $ vi .env
 # HTTP_PORT : 80
 # HTTPS_PORT : 4443
 # openvidu 실행
-
 $ ./openvidu start
+# openvidu 종료
+$ ./openvidu stop
 
 # 인증서 발급 확인
 $ cd /opt/openvidu/certificates/live/도메인
