@@ -46,7 +46,7 @@
 ![다중공유](https://user-images.githubusercontent.com/86655589/184599253-53cc9fe8-e0fa-44aa-b0ec-9ea65eb2af98.gif)
 
 - 공유 판서
-![공유판서](https://user-images.githubusercontent.com/86655589/184777048-e55574a1-74d0-4118-adab-adc3dacbd0af.gif)
+![공유판서2](https://user-images.githubusercontent.com/86655589/184804050-9d157aeb-6e8f-4af8-a140-927a6b2f9819.gif)
 
 - 컴파일러
 ![컴파일러](https://user-images.githubusercontent.com/86655589/184598488-ee3d09d9-55d2-4566-9bb8-508b29841073.gif)
