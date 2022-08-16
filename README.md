@@ -88,12 +88,12 @@
 
 ## 팀원
 
-- [소정현]([ID · GitHub](https://github.com/)) 팀장 Frontend
-- [양승호]([ID · GitHub](https://github.com/)) Backend
+- [소정현]([gus7057@gmail.com · GitHub](https://github.com/sjhyun7057)) 팀장 Frontend
+- [양승호]([mayakpari · GitHub](https://github.com/mayakpari)) Backend
 - [이승진]([lapera00 · GitHub](https://github.com/lapera00)) Backend
-- [이재민]([ID · GitHub](https://github.com/)) Frontend
+- [이재민]([ljm0850 · GitHub](https://github.com/ljm0850)) Frontend
 - [정관철]([MokokoDev · GitHub](https://github.com/MokokoDev)) Backend
-- [최용욱]([ID · GitHub](https://github.com/)) Frontend
+- [최용욱]([qwe0274@naver.com  · GitHub](https://github.com/Ingyeon)) Frontend
 
 
 #### 시연영상
