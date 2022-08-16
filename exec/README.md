@@ -100,7 +100,7 @@ openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -n
 ##### docker compose
 
 ```sh
-# openvidu 설치
+# docker compose 설치
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 
