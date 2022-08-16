@@ -102,6 +102,8 @@ openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -n
 ```sh
 # docker compose 설치
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# 권한 설정
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### MySQL
