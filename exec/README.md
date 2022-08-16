@@ -61,7 +61,7 @@ java -version
 ```
 
 
-##### docker
+#### Docker
 
 ```sh
 # 패키지 설치
@@ -79,6 +79,14 @@ sudo service docker status
 # 도커 재실행
 sudo service docker restart
 ```
+#### Docker compose
+
+```sh
+# docker compose 설치
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# 권한 설정
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
 
 #### HTTPS 키 발급
 ```sh
@@ -92,22 +100,13 @@ sudo letsencrypt certonly --standalone -d 제외한 도메인 이름
 # 가 발급경로
  ## ssl_certificate /etc/letsencrypt/live/도메인이름/fullchain.pem; 
  ## ssl_certificate_key /etc/letsencrypt/live/도메인이름/privkey.pem; 
- 
+
  # pem을 PKCS12 형식으로 변경
 openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -name airpageserver -CAfile chain.pem -caname root
 ```
 
-##### docker compose
-
-```sh
-# docker compose 설치
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-# 권한 설정
-$ sudo chmod +x /usr/local/bin/docker-compose
-```
 
 ### MySQL
-
 ##### version : 8.0.30
 ```sh
 $ sudo apt-get install mysql-server

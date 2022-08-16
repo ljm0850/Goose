@@ -68,7 +68,8 @@
 
 ## 아키텍처
 - 아키텍처
-( 이미지 준비
+![1111](https://user-images.githubusercontent.com/86655589/184800962-77e8e8d0-553e-4289-b9a4-1b857b7b0b08.jpg)
+
 
 
 ## 개발환경
