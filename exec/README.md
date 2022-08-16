@@ -101,24 +101,8 @@ openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -n
 
 ```sh
 # openvidu 설치
-sudo curl https://s3-eu-west-1.amazonaws.com/aws.openvidu.io/install_openvidu_latest.sh | bash
-
-# .env 파일 수정
-vi .env
-```sh
-
-sudo curl https://s3-eu-west-1.amazonaws.com/aws.openvidu.io/install_openvidu_latest.sh | bash
-
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-
-# openvidu 서버 시작
-sudo ./openvidu start
-# openvidu 서버 종료
-sudo ./openvidu stop
-# openvidu 서버 재시작
-sudo ./openvidu restart
-```
-
 
 ### MySQL
 
