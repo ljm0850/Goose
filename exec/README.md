@@ -94,7 +94,7 @@ sudo apt-get install letsencrypt
 # nginx를 사용중이면 중지
 sudo systemctl stop nginx
 # 인증서 발급
-sudo letsencrypt certonly --standalone -d 제외한 도메인 이름
+sudo letsencrypt certonly --standalone -d 도메인 이름
 # 이메일 작성 Agree
 # 뉴스레터 N
 # 가 발급경로
@@ -113,7 +113,7 @@ $ sudo apt-get install mysql-server
 $ sudo mysql -u root -p
 > use mysql
 > select Host, User, authentication_string from user;
-> alter user 'root'@'localhost' identified with mysql_native_password by 'myy7goose';
+> alter user 'root'@'localhost' identified with mysql_native_password by 'my7goose';
 > FLUSH PRIVILEGES;
 > exit
 > sudo su
