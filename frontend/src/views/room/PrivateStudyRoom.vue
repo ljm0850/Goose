@@ -867,16 +867,20 @@ export default {
     },
 
     muteAudio() {
+      if(this.sharing == true){
       this.audioEnabled = !this.audioEnabled;
       this.audio = !this.audio;
       if (this.audio == true) this.audioMsg = "마이크 OFF";
       else this.audioMsg = "마이크 ON";
 
       this.publisher.publishAudio(this.audioEnabled);
+      }
     },
 
     muteAudio2() {
+      if(this.sharing == true){
       this.spublisher.publishAudio(this.audioEnabled);
+      }
     },
 
     updateMainVideoStreamManager(stream) {
