@@ -86,7 +86,7 @@
 - WebRTC: openVidu 2.20.0
 
 ## 배포환경
-- ecxc 참조
+- exec 참조
 
 ## 팀원
 
