@@ -13,7 +13,7 @@
             >
               <div>
                 <h3 id="session-time">
-                  {{ hours }} : {{ minutes }} : {{ seconds }} 
+                  {{ hours }} : {{ minutes }} : {{ seconds }}
                 </h3>
               </div>
 
@@ -378,7 +378,7 @@
       <button
         id="MonacoScroll"
         class="btn btn-large footerBtn"
-        style="background-color: #E6E6E6; color: #424242"
+        style="background-color: #e6e6e6; color: #424242"
         type="button"
         @click="scrollToDown()"
         v-if="this.scrollPosition < 500"
@@ -388,7 +388,7 @@
       <button
         id="MonacoScroll"
         class="btn btn-large footerBtn"
-        style="background-color: #E6E6E6; color: #424242"
+        style="background-color: #e6e6e6; color: #424242"
         type="button"
         @click="scrollToUp()"
         v-if="this.scrollPosition > 500"
@@ -559,6 +559,7 @@ export default {
     this.userId = jwt_decode(localStorage.getItem("token")).sub;
   },
   mounted() {
+    this.preventBack();
     window.addEventListener("beforeunload", this.unLoadEvent);
     window.addEventListener("scroll", this.updateScroll);
   },
@@ -566,6 +567,16 @@ export default {
     window.removeEventListener("beforeunload", this.unLoadEvent);
   },
   methods: {
+    preventBack: function () {
+      const thisObject = this;
+      history.pushState(null, null, location.href);
+      window.onbeforeunload = null;
+
+      window.onpopstate = function () {
+        alert("나가기 버튼을 이용해 주세요");
+        history.go(1);
+      };
+    },
     setCodestdin(stdin) {
       this.stdin = stdin;
       // console.log(">>>>emit check");
