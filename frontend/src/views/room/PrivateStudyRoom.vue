@@ -133,7 +133,7 @@
                   class="btn btn-large btn-danger footerBtn"
                   type="button"
                   id="buttonLeaveSession"
-                  @click="muteAudio()"
+                  @click="muteAudio(), muteAudio2()"
                 >
                   <i class="fa-solid fa-microphone"></i>
                   <span class="footerBtnText">{{ audioMsg }}</span>
@@ -864,6 +864,10 @@ export default {
       this.publisher.publishAudio(this.audioEnabled);
     },
 
+    muteAudio2() {
+      this.spublisher.publishAudio(this.audioEnabled);
+    },
+
     updateMainVideoStreamManager(stream) {
       this.mainOnOff = true;
       if (this.mainStreamManager === stream) return;
@@ -963,6 +967,7 @@ export default {
             this.spublisher = this.OVForScreenShare.initPublisher(undefined, {
               audioSource: true,
               videoSource: "screen",
+              publishAudio: this.audio, // Whether you want to start publishing with your audio unmuted or not
               publishVideo: true,
               resolution: "1280x720",
               frameRate: 30,

@@ -11,7 +11,7 @@
 					<!-- <i class="fa-solid fa-play" v-if="!play" @click="startTimer()"></i> -->
 					<!-- <i class="fa-solid fa-pause" v-else @click="stopTimer()"></i> -->
 				</div>
-				<p class="mb-1 ml-1">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+				<!-- <p class="mb-1 ml-1">{{ hours }} : {{ minutes }} : {{ seconds }}</p> -->
 		</div>
 	</div>
 </div>
@@ -71,13 +71,13 @@ export default {
 	},
 	created(){
 		// 타이머 receive
-		this.session.on('signal:study-timer', (event) => {	
-			var receiveTime = event.data.split("&$");
-			if(this.clientData == receiveTime[0]){ // 이 세션의 유저ID와 signal 보낸 유저ID가 같으면
-				this.time = Number(receiveTime[1]); // 받은 signal 시간으로 설정
-			}
-		})
-		this.startTimer();
+		// this.session.on('signal:study-timer', (event) => {	
+		// 	var receiveTime = event.data.split("&$");
+		// 	if(this.clientData == receiveTime[0]){ // 이 세션의 유저ID와 signal 보낸 유저ID가 같으면
+		// 		this.time = Number(receiveTime[1]); // 받은 signal 시간으로 설정
+		// 	}
+		// })
+		// this.startTimer();
 		
 	},
 	methods: {

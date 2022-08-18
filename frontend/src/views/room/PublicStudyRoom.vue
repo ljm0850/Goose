@@ -328,12 +328,23 @@ export default {
     // console.log(this.roomUrl)
   },
   mounted() {
+    this.preventBack();
     window.addEventListener("beforeunload", this.unLoadEvent);
   },
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.unLoadEvent);
   },
   methods: {
+    preventBack: function () {
+      const thisObject = this;
+      history.pushState(null, null, location.href);
+      window.onbeforeunload = null;
+
+      window.onpopstate = function () {
+        alert("나가기 버튼을 이용해 주세요")
+        history.go(1);
+      };
+    },
     unLoadEvent: function (event) {
       if (this.canLeaveSite) return;
 

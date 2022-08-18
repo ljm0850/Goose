@@ -19,7 +19,7 @@
 					<!-- <i class="fa-solid fa-play" v-if="!play" @click="startTimer()"></i> -->
 					<!-- <i class="fa-solid fa-pause" v-else @click="stopTimer()"></i> -->
 				</div>
-				<p class="mb-1 ml-1">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+				<!-- <p class="mb-1 ml-1">{{ hours }} : {{ minutes }} : {{ seconds }}</p> -->
 		</div>
 	</div>
 </div>
