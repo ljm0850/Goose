@@ -33,6 +33,7 @@
   - 서비스를 이용하는 사람들로 하여금 편리함과 유용함을 주는 서비스를 목표
   - 모두가 편집에 관여할 수 있는 공유 판서 기능과 컴파일러 기능 목표
 
+- UCC : https://www.youtube.com/watch?v=LHG5mYiPXpU
 - 회의록 (https://troubled-juice-9fa.notion.site/e37b292ec96245ae9100e847f122f8f0)
 - 와이어 프레임
   ![와이어 프레임](https://user-images.githubusercontent.com/86655589/184591676-be098f63-7a07-45b8-9504-15e97387f857.png)
