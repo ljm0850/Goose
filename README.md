@@ -9,6 +9,8 @@
 
 ## 목차
 
+[0.요약](#요약)
+
 [1. 프로젝트 개요](#프로젝트-개요)
 
 [2. 프로젝트 소개](#프로젝트-소개)
@@ -23,6 +25,38 @@
 
 [7.팀원](#팀원)
 
+## 요약
+
+### 문서
+
+- UCC : https://www.youtube.com/watch?v=LHG5mYiPXpU
+- 회의록 : https://troubled-juice-9fa.notion.site/e37b292ec96245ae9100e847f122f8f0
+
+### 프로젝트에서의 역할
+
+#### Frontend 담당
+
+- 개별 스터디 홈페이지
+- 스터디 게시판
+- GOOSE 홈페이지
+- Frontend 문제 해결
+
+### 기술 스택
+
+- Vue3(Vuex), Javascript, Axios
+- GitLab, Jira, Figma
+
+### 느낀점
+
+- 협업의 어려움이 무엇인지 깨달을 수 있었다.
+- 6명이 프로젝트를 진행하여 서로 의사소통이나 진행 점검 측면에서 Jira와 같은 이슈 추적 SW를 사용하는 이유에 대해 느낄 수 있었다.
+- 같이 프론트엔드를 진행하던 팀원들에게 설명을 하면서 같이 많이 배울 수 있었다.
+- 비동기 함수에 대해 잘 못 이해하고 있다는 것을 깨달았다.
+- 자신이 작성한 코드에 대한 책임감에 대해 생각할 계기가 되었다.
+- 추가 후기 : https://ljm0850.tistory.com/122
+
+
+
 ## 프로젝트 개요
 
 - **진행 기간** : **2022.07.11 ~ 2022.08.15(6주)**
@@ -33,11 +67,8 @@
   - 서비스를 이용하는 사람들로 하여금 편리함과 유용함을 주는 서비스를 목표
   - 모두가 편집에 관여할 수 있는 공유 판서 기능과 컴파일러 기능 목표
 
-- UCC : https://www.youtube.com/watch?v=LHG5mYiPXpU
-- 회의록 (https://troubled-juice-9fa.notion.site/e37b292ec96245ae9100e847f122f8f0)
 - 와이어 프레임
   ![와이어 프레임](https://user-images.githubusercontent.com/86655589/184591676-be098f63-7a07-45b8-9504-15e97387f857.png)
-
 - ERD
   ![erd](https://user-images.githubusercontent.com/86655589/184592347-b8b6a17a-62b9-4272-a5e8-e2c31e3e8365.png)
 
